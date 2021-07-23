@@ -1,0 +1,5 @@
+[include]
+  path = "linux.gitconfig"
+  path = "alias.gitconfig"
+  path = "identity.gitconfig"
+  path = "etc.gitconfig"

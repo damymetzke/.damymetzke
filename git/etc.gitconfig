@@ -1,0 +1,7 @@
+[core]
+    editor = vi
+    autocrlf = false
+[pull]
+    rebase = false
+[init]
+    defaultBranch = main

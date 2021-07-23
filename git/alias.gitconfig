@@ -1,0 +1,34 @@
+[alias]
+    ### Logging
+    # Simple graph log using 1 line
+    lg = log --graph --oneline --format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d\""
+    # Advanced log with more information but uses more lines
+    lgall = log --format="\"format:%C(#d596f3)%H%C(auto)%d%n%C(reset)Author:    %C(ul #fa4762)%aN%C(reset) %C(#75fdff)< %aE >%C(#fa4762)%nCommitter: %C(ul #fa4762)%cN%C(reset) %C(#75fdff)< %cE >%C(reset)%nDate:      %C(#ffe74d)%aD%n%C(#dbffe8)%s%n%C(#696a86).\""
+    # Log only the first parent and show description, compatible with GitHub pull request workflows
+    lgpr = log --first-parent --oneline --format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d%n        %C(#e8c030)%b\""
+    # Log only the first parent, useful for logging when writing features
+    lgft = log --first-parent --oneline --format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d\""
+
+    ### Workflow
+    # Fetch all from remote and prune
+    fch = fetch --all --prune
+    # Switch to latest main by pulling from remote, also fetches all other branches
+    tom = !git switch main && git fetch --all --prune && git pull
+    # Create branch and push it to remote
+    cr = !git switch -C $1 && git push --set-upstream origin
+    # Status
+    s = status
+    # Add everything and commit
+    c = !git add . && git commit -v \"$@\" && :
+    # Merge main into current branch after pulling
+    mm = !git pull origin main && git merge main -m \"Merge main into feature\"
+    # Interactive rebase
+    ir = rebase -i
+
+    ### Etc
+    # Show a commit
+    shw = show --format="\"%C(#d596f3)%H%nAuthor:    %C(ul #fa4762)%aN%C(reset) %C(#75fdff)< %aE >%nCommitter: %C(ul #fa4762)%cN%C(reset) %C(#75fdff)< %cE >%nDate:   %C(#ffe74d)%aD%n%n%C(#dbffe8)%s%n%n%C(#cfe3df)%b%n%n\""
+    # Show branches
+    br = branch -avv
+    # Show more information about branches
+    brall = for-each-ref --format="\"local:  %(color: #a4ce64)%(refname:lstrip=2)%(color: reset)%0aremote: %(color: #fa4762)%(upstream:lstrip=2)%(color: reset)%0acommit: %(color: #51aac8)%(subject)%(color: reset)%0a%(color: #606a86).\"" refs/heads
