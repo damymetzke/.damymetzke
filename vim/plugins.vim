@@ -9,6 +9,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'gruvbox-community/gruvbox'
   " Better Syntax Support
   Plug 'sheerun/vim-polyglot'
+  
+  " LSP = Language Server Protocol
+  Plug 'neovim/nvim-lspconfig'
+
   " File Explorer
   Plug 'scrooloose/NERDTree'
   " Auto pairs for '(' '[' '{'
@@ -26,9 +30,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'mattn/emmet-vim'
   " Git Gutter
   Plug 'airblade/vim-gitgutter'
-  " YouCompleteMe
-  Plug 'Valloric/YouCompleteMe'
   " Vim Fugitive (git)
   Plug 'tpope/vim-fugitive'
-  
-  call plug#end()
+  "To display current Git branch
+  Plug 'itchyny/vim-gitbranch'
+
+call plug#end()
