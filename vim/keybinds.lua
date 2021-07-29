@@ -32,3 +32,4 @@ vim.api.nvim_set_keymap("i", "<Left>", "<Esc>:echo \"No! Don't use the arrow key
 vim.api.nvim_set_keymap("i", "<Right>", "<Esc>:echo \"No! Don't use the arrow keys! Bad!\"<CR>a", {noremap = true, silent = false})
 vim.api.nvim_set_keymap("i", "<Up>", "<Esc>:echo \"No! Don't use the arrow keys! Bad!\"<CR>a", {noremap = true, silent = false})
 vim.api.nvim_set_keymap("i", "<Down>", "<Esc>:echo \"No! Don't use the arrow keys! Bad!\"<CR>a", {noremap = true, silent = false})
+

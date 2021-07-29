@@ -4,7 +4,7 @@ function! status#gitbranchstyled() abort
       if branch == ''
             return ''
       endif
-      return '[' . branch . ']'
+      return '(git:' . branch . ')'
 endfunction
 
 let g:lightline = {

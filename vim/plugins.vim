@@ -32,7 +32,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'airblade/vim-gitgutter'
   " Vim Fugitive (git)
   Plug 'tpope/vim-fugitive'
-  "To display current Git branch
+  " To display current Git branch
   Plug 'itchyny/vim-gitbranch'
 
 call plug#end()
