@@ -17,6 +17,9 @@ vim.api.nvim_set_keymap("n", "<leader>s", ":setlocal nospell! nospell?<CR>", {no
 -- Emmet
 vim.api.nvim_set_keymap("n", "<leader>m", "<C-y>", {noremap = true, silent = true})
 
+-- Pressing * in visual mode will expand using the current selection rather than the current word
+vim.api.nvim_set_keymap("v", "*", "y/<C-R>\"<CR>", {noremap = true, silent = true})
+
 -- Unbind arrow keys
 vim.api.nvim_set_keymap("n", "<Left>", ":echo \"No! Don't use the arrow keys! Bad!\"<CR>", {noremap = true, silent = false})
 vim.api.nvim_set_keymap("n", "<Right>", ":echo \"No! Don't use the arrow keys! Bad!\"<CR>", {noremap = true, silent = false})
