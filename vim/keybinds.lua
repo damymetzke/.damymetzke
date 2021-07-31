@@ -36,3 +36,28 @@ vim.api.nvim_set_keymap("i", "<Right>", "<Esc>:echo \"No! Don't use the arrow ke
 vim.api.nvim_set_keymap("i", "<Up>", "<Esc>:echo \"No! Don't use the arrow keys! Bad!\"<CR>a", {noremap = true, silent = false})
 vim.api.nvim_set_keymap("i", "<Down>", "<Esc>:echo \"No! Don't use the arrow keys! Bad!\"<CR>a", {noremap = true, silent = false})
 
+-- Fix Y by selecting rest of the line instead of entire line
+vim.api.nvim_set_keymap("n", "Y", "y$", {noremap = true, silent = true})
+
+-- Keep cursor centered when searching
+vim.api.nvim_set_keymap("n", "n", "nzzzv", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "N", "Nzzzv", {noremap = true, silent = true})
+
+-- Keep cursor centered when J
+vim.api.nvim_set_keymap("n", "J", "myJ`y", {noremap = true, silent = true})
+
+-- Undo break points
+vim.api.nvim_set_keymap("i", ",", ",<c-g>u", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", ".", ".<c-g>u", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", ";", ";<c-g>u", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", "?", "?<c-g>u", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", "!", "!<c-g>u", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", "|", "|<c-g>u", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", "/", "/<c-g>u", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("i", "\\", "\\<c-g>u", {noremap = true, silent = true})
+
+-- Move lines quickly
+vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>j", ":m .+1<CR>==", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>k", ":m .-2<CR>==", {noremap = true, silent = true})
