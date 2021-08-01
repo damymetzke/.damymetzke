@@ -13,7 +13,7 @@ git clone https://github.com/neovim/neovim.git
 
 # Install packages
 sudo apt update
-sudo apt install go
+sudo apt install autoconf automake cmake curl dh-autoreconf g++ gettext golang libcurl4-gnutls-dev libexpat1-dev libssl-dev libtool libtool-bin libz-dev ninja-build pkg-config unzip yarn
 
 # Install git
 cd $R_GEN/git
@@ -24,11 +24,15 @@ make install
 # Install gh
 cd $R_GEN/gh
 git checkout v1.13.1
-make install
+sudo make install
 
 # Install neovim
 cd $R_GEN/neovim
 git checkout nightly
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make install
+# Link "vi", "vim" and "nvim" to nvim executable
+ln -s $R_GEN/neovim/build/bin/nvim $HOME/bin/vi
+ln -s $R_GEN/neovim/build/bin/nvim $HOME/bin/vim
+ln -s $R_GEN/neovim/build/bin/nvim $HOME/bin/nvim
 
