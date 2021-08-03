@@ -7,3 +7,4 @@ source $CUSTOM_USER_CONFIG/vim/language.vim
 source $CUSTOM_USER_CONFIG/vim/status.vim
 luafile $CUSTOM_USER_CONFIG/vim/lsp.lua
 
+source $CUSTOM_USER_CONFIG/vim/languages/index.vim

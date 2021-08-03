@@ -7,7 +7,7 @@ These are settings for:
 - Git
 - Vim
 
-If you want to use this as a starting point for your own settings you shoud consider changing the name of the folder.
+If you want to use this as a starting point for your own settings you should consider changing the name of the folder.
 `/bash/exports.sh` exports the environment variable `$CUSTOM_USER_CONFIG`.
 Update this value to change the folder name.
 
