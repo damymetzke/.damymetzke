@@ -61,3 +61,9 @@ vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", {noremap = true, silent = 
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<Leader>j", ":m .+1<CR>==", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<Leader>k", ":m .-2<CR>==", {noremap = true, silent = true})
+
+-- Quickfix list traversal
+vim.api.nvim_set_keymap("n", "<Leader>qj", ":cnext<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>qk", ":cprevious<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>ql", ":clast<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>qh", ":cfirst<CR>", {noremap = true, silent = true})

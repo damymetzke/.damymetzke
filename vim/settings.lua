@@ -1,4 +1,5 @@
 -- Color scheme
+vim.api.nvim_set_var("gruvbox_guisp_fallback", "bg")
 vim.api.nvim_exec("colorscheme gruvbox", false)
 
 -- Indentation
