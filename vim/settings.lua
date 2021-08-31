@@ -56,5 +56,5 @@ vim.api.nvim_exec("autocmd BufWritePre *.php Prettier", false)
 vim.api.nvim_set_var("NERDTreeShowHidden", 1)
 
 -- Reset spelling when new buffer is opened
-vim.api.nvim_exec("autocmd BufEnter * setlocal nospell", false)
+vim.api.nvim_exec("autocmd FileType * setlocal nospell", false)
 

@@ -15,8 +15,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   " File Explorer
   Plug 'scrooloose/NERDTree'
-  " Auto pairs for '(' '[' '{'
-  Plug 'jiangmiao/auto-pairs'
   " Prettier
   Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
