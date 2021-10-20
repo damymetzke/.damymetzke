@@ -39,4 +39,5 @@ lspc.omnisharp.setup{
   on_attach = on_attach,
 }
 
+lspc.phpactor.setup{}
 
