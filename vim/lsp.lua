@@ -3,6 +3,9 @@ lspc = require "lspconfig"
 local pid = vim.fn.getpid()
 local omnisharp_bin = "/mnt/d/GitRepos/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe"
 
+-- Leader <space>
+vim.g.mapleader = " "
+
 local keybind_list = {
   {"gD", "<Cmd>lua vim.lsp.declaration()<CR>"},
   {"gd", "<Cmd>lua vim.lsp.buf.definition()<CR>"},

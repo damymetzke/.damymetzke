@@ -1,4 +1,5 @@
 source $CUSTOM_USER_CONFIG/vim/plugins.vim
+luafile $CUSTOM_USER_CONFIG/vim/nvimCmp.lua
 luafile $CUSTOM_USER_CONFIG/vim/settings.lua
 luafile $CUSTOM_USER_CONFIG/vim/wslSettings.lua
 luafile $CUSTOM_USER_CONFIG/vim/keybinds.lua
