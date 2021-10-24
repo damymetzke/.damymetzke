@@ -57,3 +57,11 @@ lspc.phpactor.setup{
   on_attach = on_attach,
 }
 
+lspc.tsserver.setup{
+  on_attach = on_attach,
+}
+
+lspc.vuels.setup{
+  on_attach = on_attach,
+}
+
