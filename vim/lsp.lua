@@ -1,8 +1,10 @@
 lspc = require "lspconfig"
+util = require "lspconfig/util"
 
 local pid = vim.fn.getpid()
-local omnisharp_bin = "/mnt/d/GitRepos/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe"
-
+-- local omnisharp_bin = "/home/dmetzke/omnisharp/run"
+local omnisharp_bin = "/mnt/d/Omnisharp/omnisharp.exe"
+-- local omnisharp_bin = "/mnt/d/OmnisharpOlder/omnisharp.exe"
 -- Leader <space>
 vim.g.mapleader = " "
 
@@ -36,11 +38,22 @@ local function on_attach(client, buffer_number)
 end
 
 vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("info")
+
+root = vim.api.nvim_exec("pwd", true)
+
+root = util.root_pattern"*.sln"(root) or util.root_pattern"*.csproj"(root) or root
+root = string.gsub(root, "/mnt/d/", "D:\\")
+root = string.gsub(root, "/", "\\")
 
 lspc.omnisharp.setup{
-  cmd = { omnisharp_bin, "--languageserver", "--verbose", "--hostPID", tostring(pid) },
+  -- cmd = { omnisharp_bin, "--languageserver", "--verbose", "--hostPID", tostring(pid), "-s", root, "&&", ":" },
+  cmd = { omnisharp_bin, "--languageserver",  "-s", root, "&&", ":" },
+  -- cmd = { omnisharp_bin, "--languageserver", "--verbose" },
   on_attach = on_attach,
 }
 
-lspc.phpactor.setup{}
+lspc.phpactor.setup{
+  on_attach = on_attach,
+}
 
