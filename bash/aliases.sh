@@ -7,6 +7,7 @@ alias cl='clear'
 alias ':q'='exit 0'
 alias codi='code-insiders'
 alias sail='./vendor/bin/sail'
+alias nv='nvim'
 
 laravel-create() {
   curl -s "https://laravel.build/$1" | bash
