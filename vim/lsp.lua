@@ -3,7 +3,7 @@ util = require "lspconfig/util"
 
 local pid = vim.fn.getpid()
 -- local omnisharp_bin = "/home/dmetzke/omnisharp/run"
-local omnisharp_bin = "/mnt/d/Omnisharp/omnisharp.exe"
+local omnisharp_bin = "/home/dmetzke/installed/omnisharp/run"
 -- local omnisharp_bin = "/mnt/d/OmnisharpOlder/omnisharp.exe"
 -- Leader <space>
 vim.g.mapleader = " "
@@ -47,9 +47,7 @@ root = string.gsub(root, "/mnt/d/", "D:\\")
 root = string.gsub(root, "/", "\\")
 
 lspc.omnisharp.setup{
-  -- cmd = { omnisharp_bin, "--languageserver", "--verbose", "--hostPID", tostring(pid), "-s", root, "&&", ":" },
-  cmd = { omnisharp_bin, "--languageserver",  "-s", root, "&&", ":" },
-  -- cmd = { omnisharp_bin, "--languageserver", "--verbose" },
+  cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) },
   on_attach = on_attach,
 }
 
