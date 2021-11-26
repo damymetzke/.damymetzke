@@ -9,6 +9,7 @@ local MOD_PRIMARY = "Mod1"
 local MOD_SECONDARY = "Mod4"
 local UTILITY_NAME = "utilities"
 local RUN_NAME = "run"
+local LAYOUT_NAME = "layout"
 local TAG_NAME = "tags"
 
 local utilityKeys = gears.table.join(
@@ -57,10 +58,92 @@ local runKeys = gears.table.join(
               {description = "run prompt", group = RUN_NAME})
     )
 
+local layoutKeys = gears.table.join(
+    -- Focus left
+    awful.key({ MOD_PRIMARY }, "h", function() awful.client.focus.bydirection("left") end,
+            { description = "Focus left", group = LAYOUT_NAME }),
+    -- Focus right
+    awful.key({ MOD_PRIMARY }, "l", function() awful.client.focus.bydirection("right") end,
+            { description = "Focus right", group = LAYOUT_NAME }),
+    -- Focus up
+    awful.key({ MOD_PRIMARY }, "k", function() awful.client.focus.bydirection("up") end,
+            { description = "Focus up", group = LAYOUT_NAME }),
+    -- Focus down
+    awful.key({ MOD_PRIMARY }, "j", function() awful.client.focus.bydirection("down") end,
+            { description = "Focus down", group = LAYOUT_NAME }),
+    -- Focus urgen
+    awful.key({ modkey }, "u", awful.client.urgent.jumpto,
+              {description = "Focus urgent", group = LAYOUT_NAME }),
+
+    -- Swap left
+    awful.key({ MOD_PRIMARY, "Shift" }, "h", function() awful.client.swap.bydirection("left") end,
+            { description = "Swap left", group = LAYOUT_NAME }),
+    -- Swap right
+    awful.key({ MOD_PRIMARY, "Shift" }, "l", function() awful.client.swap.bydirection("right") end,
+            { description = "Swap right", group = LAYOUT_NAME }),
+    -- Swap up
+    awful.key({ MOD_PRIMARY, "Shift" }, "k", function() awful.client.swap.bydirection("up") end,
+            { description = "Swap up", group = LAYOUT_NAME }),
+    -- Swap down
+    awful.key({ MOD_PRIMARY, "Shift" }, "j", function() awful.client.swap.bydirection("down") end,
+            { description = "Swap down", group = LAYOUT_NAME }),
+    -- Toggle to next layout
+    awful.key({ modkey }, "space", function () awful.layout.inc( 1) end,
+            { description = "Toggle to next layout", group = LAYOUT_NAME }),
+
+    -- Go to next screen, one button is enough as I ususally use up to 2 screens anyway
+    awful.key({ MOD_PRIMARY }, "Tab", function() awful.screen.focus_relative(1) end,
+            { description = "Focus next screen", group = LAYOUT_NAME })
+    )
+
+local tagKeys = {}
+for i = 1, 10 do
+    tagKeys = gears.table.join(tagKeys,
+        -- Focus tag N
+        awful.key({ MOD_PRIMARY }, "#" .. i + 9,
+            function ()
+                local screen = awful.screen.focused()
+                local tag = screen.tags[i]
+                if tag then
+                    tag:view_only()
+                end
+            end,
+            { description = "Focus tag " .. i, group = TAG_NAME }
+            ),
+
+        -- Toggle tag N
+        awful.key({ MOD_PRIMARY, "Control" }, "#" .. i + 9,
+            function ()
+                local screen = awful.screen.focused()
+                local tag = screen.tags[i]
+                if tag then
+                    awful.tag.viewtoggle(tag)
+                end
+            end,
+            { description = "Toggle tag " .. i, group = TAG_NAME }
+            ),
+
+        -- Move client to tag N
+        awful.key({ MOD_PRIMARY, "Shift" }, "#" .. i + 9,
+            function ()
+                if client.focus then
+                    local tag = client.focus.screen.tags[i]
+                    if tag then
+                        client.focus:move_to_tag(tag)
+                        tag:view_only()
+                    end
+                end
+            end,
+            { description = "Toggle tag " .. i, group = TAG_NAME }
+            )
+        )
+end
+
 
 root.keys( gears.table.join(
     globalkeys,
     utilityKeys,
     runKeys,
+    layoutKeys,
     tagKeys
 ))
