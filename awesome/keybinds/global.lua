@@ -18,7 +18,7 @@ local utilityKeys = gears.table.join(
 
     -- Lock screen
     awful.key({ MOD_SECONDARY}, "l",
-        function() awful.util.spawn("i3lock -i /home/dmetzke/Pictures/lock_screen.png") end,
+        function() awful.util.spawn("light-locker-command -l") end,
         {description="enable lock screen", group = UTILITY_NAME}),
 
     -- Main Menu
