@@ -96,54 +96,66 @@ local layoutKeys = gears.table.join(
             { description = "Focus next screen", group = LAYOUT_NAME })
     )
 
-local function getTagKeys(modifier, offset)
-    local result = {}
-    for i = 1, 10 do
-        result = gears.table.join(result,
+local function getTagKey(modifier, key, tagIndex)
+    return gears.table.join(
             -- Focus tag N
-            awful.key({ modifier }, "#" .. i + 9,
+            awful.key({ modifier }, key,
                 function ()
                     local screen = awful.screen.focused()
-                    local tag = screen.tags[i + offset]
+                    local tag = screen.tags[tagIndex]
                     if tag then
                         tag:view_only()
                     end
                 end,
-                { description = "Focus tag " .. i, group = TAG_NAME }
+                { description = "Focus tag", group = TAG_NAME }
                 ),
 
             -- Toggle tag N
-            awful.key({ modifier, "Control" }, "#" .. i + 9,
+            awful.key({ modifier, "Control" }, key,
                 function ()
                     local screen = awful.screen.focused()
-                    local tag = screen.tags[i + offset]
+                    local tag = screen.tags[tagIndex]
                     if tag then
                         awful.tag.viewtoggle(tag)
                     end
                 end,
-                { description = "Toggle tag " .. i, group = TAG_NAME }
+                { description = "Toggle tag", group = TAG_NAME }
                 ),
 
             -- Move client to tag N
-            awful.key({ modifier, "Shift" }, "#" .. i + 9,
+            awful.key({ modifier, "Shift" }, key,
                 function ()
                     if client.focus then
-                        local tag = client.focus.screen.tags[i + offset]
+                        local tag = client.focus.screen.tags[tagIndex]
                         if tag then
                             client.focus:move_to_tag(tag)
                             tag:view_only()
                         end
                     end
                 end,
-                { description = "Toggle tag " .. i, group = TAG_NAME }
+                { description = "Toggle tag", group = TAG_NAME }
                 )
             )
+end
+
+local function getTagKeys(modifier, offset)
+    local result = {}
+    for i = 1, 10 do
+        result = gears.table.join(result, getTagKey(modifier, "#" .. i + 9, i + offset))
     end
     return result
 end
 
 local tagKeys = getTagKeys(MOD_PRIMARY, 0)
-local globalTagKeys = getTagKeys(MOD_SECONDARY, 10)
+
+local globalTagKeys = gears.table.join(
+    getTagKeys(MOD_SECONDARY, 10),
+    getTagKey(MOD_SECONDARY, "m", 11),
+    getTagKey(MOD_SECONDARY, "s", 12),
+    getTagKey(MOD_SECONDARY, "k", 13),
+    getTagKey(MOD_SECONDARY, "w", 14),
+    getTagKey(MOD_SECONDARY, "p", 15)
+    )
 
 
 
