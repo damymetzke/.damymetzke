@@ -1,6 +1,6 @@
 " Alias for Laravel sail.
 " This will automatically split the window.
-command! -nargs=* Sail :bel split | execute "terminal" "sail <args>" | :startinsert
+command! -nargs=* Sail :bel split | execute "terminal" "./vendor/bin/sail <args>" | :startinsert
 
 " Runs "sail npm i" and "sail composer install".
 " This will automatically split the window.

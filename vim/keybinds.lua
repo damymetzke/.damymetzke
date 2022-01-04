@@ -7,6 +7,9 @@ vim.g.mapleader = " "
 -- Toggle NERDTree
 vim.api.nvim_set_keymap("n", "<leader>t", ":NERDTreeToggle<CR>", {noremap = true, silent = true})
 
+-- Makrdown Preview
+vim.api.nvim_set_keymap("n", "<Leader>m", ":MarkdownPreviewToggle<CR>", {noremap = true, silent = true})
+
 -- Open a new Bash instance.
 -- Will also load user profile.
 vim.api.nvim_set_keymap("n", "<leader>b", ":term NO_DEFAULT_SSH=0 bash -l<CR>a", {noremap = true, silent = true})
@@ -15,7 +18,7 @@ vim.api.nvim_set_keymap("n", "<leader>b", ":term NO_DEFAULT_SSH=0 bash -l<CR>a",
 vim.api.nvim_set_keymap("n", "<leader>s", ":setlocal nospell! nospell?<CR>", {noremap = true, silent = false})
 
 -- Emmet
-vim.api.nvim_set_keymap("n", "<leader>m", "<C-y>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>m", "<C-y>", {noremap = true, silent = true})
 
 -- Pressing * in visual mode will expand using the current selection rather than the current word
 vim.api.nvim_set_keymap("v", "*", "y/<C-R>\"<CR>", {noremap = true, silent = true})

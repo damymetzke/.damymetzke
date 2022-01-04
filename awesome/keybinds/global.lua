@@ -29,7 +29,14 @@ local utilityKeys = gears.table.join(
               {description = "reload awesome", group = UTILITY_NAME}),
     -- Quit
     awful.key({ MOD_PRIMARY, "Shift"   }, "q", awesome.quit,
-              {description = "quit awesome", group = UTILITY_NAME})
+              {description = "quit awesome", group = UTILITY_NAME}),
+    -- Toggle CapsLock 
+    awful.key( {"Shift" }, "Shift_R",
+        function() awful.util.spawn("xdotool key Caps_Lock") end,
+        {description = "Toggle CapsLock", group = UTILITY_NAME}),
+    awful.key( {"Shift" }, "Shift_L",
+        function() awful.util.spawn("xdotool key Caps_Lock") end,
+        {description = "Toggle CapsLock", group = UTILITY_NAME})
     )
 
 local runKeys = gears.table.join(
@@ -83,7 +90,7 @@ local layoutKeys = gears.table.join(
             { description = "Swap right", group = LAYOUT_NAME }),
     -- Swap up
     awful.key({ MOD_PRIMARY, "Shift" }, "k", function() awful.client.swap.bydirection("up") end,
-            { description = "Swap up", group = LAYOUT_NAME }),
+        { description = "Swap up", group = LAYOUT_NAME }),
     -- Swap down
     awful.key({ MOD_PRIMARY, "Shift" }, "j", function() awful.client.swap.bydirection("down") end,
             { description = "Swap down", group = LAYOUT_NAME }),
@@ -93,7 +100,13 @@ local layoutKeys = gears.table.join(
 
     -- Go to next screen, one button is enough as I ususally use up to 2 screens anyway
     awful.key({ MOD_PRIMARY }, "Tab", function() awful.screen.focus_relative(1) end,
-            { description = "Focus next screen", group = LAYOUT_NAME })
+            { description = "Focus next screen", group = LAYOUT_NAME }),
+
+    -- Resize master
+    awful.key({ MOD_PRIMARY, "Control" }, "j", function() awful.tag.incmwfact( 0.02) end,
+            { description = "Increase master size", group = LAYOUT_NAME }),
+    awful.key({ MOD_PRIMARY, "Control" }, "k", function() awful.tag.incmwfact( -0.02) end,
+            { description = "Decrease master size", group = LAYOUT_NAME })
     )
 
 local function getTagKey(modifier, key, tagIndex)

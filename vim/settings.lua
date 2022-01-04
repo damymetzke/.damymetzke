@@ -58,3 +58,6 @@ vim.api.nvim_set_var("NERDTreeShowHidden", 1)
 -- Reset spelling when new buffer is opened
 vim.api.nvim_exec("autocmd FileType * setlocal nospell", false)
 
+-- Markdown preview styling
+vim.api.nvim_set_var("mkdp_markdown_css", os.getenv("CUSTOM_USER_CONFIG") .. "/css/markdown_preview.css")
+
