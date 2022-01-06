@@ -8,7 +8,7 @@ alias ':q'='exit 0'
 alias codi='code-insiders'
 alias sail='./vendor/bin/sail'
 alias nv='nvim'
-alias spawnT='NO_DEFAULT_SSH=1 uxterm &'
+alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
 
 laravel-create() {
   curl -s "https://laravel.build/$1" | bash
