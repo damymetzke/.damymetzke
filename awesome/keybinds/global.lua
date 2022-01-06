@@ -18,7 +18,7 @@ local utilityKeys = gears.table.join(
 
     -- Lock screen
     awful.key({ MOD_SECONDARY}, "l",
-        function() awful.util.spawn("light-locker-command -l") end,
+        function() awful.util.spawn(os.getenv("HOME") .. "/bin/lock") end,
         {description="enable lock screen", group = UTILITY_NAME}),
 
     -- Main Menu
@@ -167,7 +167,9 @@ local globalTagKeys = gears.table.join(
     getTagKey(MOD_SECONDARY, "s", 12),
     getTagKey(MOD_SECONDARY, "k", 13),
     getTagKey(MOD_SECONDARY, "w", 14),
-    getTagKey(MOD_SECONDARY, "p", 15)
+    getTagKey(MOD_SECONDARY, "p", 15),
+    getTagKey(MOD_SECONDARY, "d", 16),
+    getTagKey(MOD_SECONDARY, "l", 17)
     )
 
 
