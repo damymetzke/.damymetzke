@@ -163,13 +163,13 @@ local tagKeys = getTagKeys(MOD_PRIMARY, 0)
 
 local globalTagKeys = gears.table.join(
     getTagKeys(MOD_SECONDARY, 10),
-    getTagKey(MOD_SECONDARY, "m", 11),
-    getTagKey(MOD_SECONDARY, "s", 12),
-    getTagKey(MOD_SECONDARY, "k", 13),
-    getTagKey(MOD_SECONDARY, "w", 14),
-    getTagKey(MOD_SECONDARY, "p", 15),
-    getTagKey(MOD_SECONDARY, "d", 16),
-    getTagKey(MOD_SECONDARY, "l", 17)
+    getTagKey(MOD_SECONDARY, "m", 11), -- Music
+    getTagKey(MOD_SECONDARY, "u", 12), -- soUnd
+    getTagKey(MOD_SECONDARY, "k", 13), -- Keepass
+    getTagKey(MOD_SECONDARY, "w", 14), -- Wifi
+    getTagKey(MOD_SECONDARY, "p", 15), -- Projection
+    getTagKey(MOD_SECONDARY, "d", 16), -- Discord
+    getTagKey(MOD_SECONDARY, "s", 17)  -- Slack
     )
 
 
