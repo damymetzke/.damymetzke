@@ -1,2 +1,14 @@
 font:
   size: 7.0
+  normal:
+    family: InputMono
+    style: Regular
+  bold:
+    family: InputMono
+    style: Bold
+  italic:
+    family: InputMono
+    style: Italic
+  bold_italic:
+    family: InputMono
+    style: BoldItalic
