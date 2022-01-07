@@ -1,5 +1,6 @@
-alias la='ls -aF'
-alias ll='ls -laF'
+alias ls='exa -F'
+alias la='exa -aF'
+alias ll='exa -laF'
 alias gini='git init'
 alias g-start='node ~/.dotfiles/scripts/gitStartup.js'
 alias g-pr='node ~/.dotfiles/scripts/gitPullRequest.js'
