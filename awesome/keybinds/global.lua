@@ -2,6 +2,7 @@ local gears = require("gears")
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
+local modeTags = require "utils.modeTags"
 require("awful.hotkeys_popup.keys")
 
 local global = {}
@@ -116,11 +117,7 @@ local function getTagKey(modifier, key, tagIndex)
             -- Focus tag N
             awful.key({ modifier }, key,
                 function ()
-                    local screen = awful.screen.focused()
-                    local tag = screen.tags[tagIndex]
-                    if tag then
-                        tag:view_only()
-                    end
+                    modeTags.focusTag(tagIndex)
                 end,
                 { description = "Focus tag", group = TAG_NAME }
                 ),
@@ -164,14 +161,29 @@ end
 local tagKeys = getTagKeys(MOD_PRIMARY, 0)
 
 local globalTagKeys = gears.table.join(
-    getTagKeys(MOD_SECONDARY, 10),
-    getTagKey(MOD_SECONDARY, "m", 11), -- Music
-    getTagKey(MOD_SECONDARY, "u", 12), -- soUnd
-    getTagKey(MOD_SECONDARY, "k", 13), -- Keepass
-    getTagKey(MOD_SECONDARY, "w", 14), -- Wifi
-    getTagKey(MOD_SECONDARY, "p", 15), -- Projection
-    getTagKey(MOD_SECONDARY, "d", 16), -- Discord
-    getTagKey(MOD_SECONDARY, "s", 17)  -- Slack
+    -- getTagKeys(MOD_SECONDARY, 10),
+    getTagKey(MOD_SECONDARY, "m", 21), -- Music
+    getTagKey(MOD_SECONDARY, "u", 22), -- soUnd
+    getTagKey(MOD_SECONDARY, "k", 23), -- Keepass
+    getTagKey(MOD_SECONDARY, "w", 24), -- Wifi
+    getTagKey(MOD_SECONDARY, "p", 25), -- Projection
+    getTagKey(MOD_SECONDARY, "d", 26), -- Discord
+    getTagKey(MOD_SECONDARY, "s", 27)  -- Slack
+    )
+
+local modeKeys = gears.table.join(
+    awful.key({ MOD_SECONDARY }, "1",
+        function()
+            modeTags.setMode(1)
+        end,
+        { description = "Set mode", group = TAG_NAME}
+        ),
+    awful.key({ MOD_SECONDARY }, "2",
+        function()
+            modeTags.setMode(2)
+        end,
+        { description = "Set mode", group = TAG_NAME}
+        )
     )
 
 
@@ -182,7 +194,8 @@ function global.setKeyBinds()
         runKeys,
         layoutKeys,
         tagKeys,
-        globalTagKeys
+        globalTagKeys,
+        modeKeys
     ))
 end
 
