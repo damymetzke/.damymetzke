@@ -6,6 +6,8 @@ local currentMode = 1
 local modes = {}
 local modesSize = 0
 
+local MOD_SECONDARY = "Mod4"
+
 local function tagFunction()
     return function ()
     end
@@ -20,6 +22,14 @@ function modeTags.addMode(name, tagsCallback, key)
         memory = {1},
         offset = 10 * (modesSize - 1)
     }
+
+    local modesIndex = modesSize
+    return awful.key({ MOD_SECONDARY }, key,
+        function ()
+            modeTags.setMode(modesIndex)
+        end,
+        { description = "Set mode", group = "modes"}
+    )
 end
 
 function modeTags.setMode(i)

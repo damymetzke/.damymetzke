@@ -9,9 +9,9 @@ function index.run()
 
     require "default" 
 
-    setupModes.run()
+    local modeKeys = setupModes.run()
 
-    keyGlobal.setKeyBinds()
+    keyGlobal.setKeyBinds(modeKeys)
     keyClient.setKeyBinds()
 
 

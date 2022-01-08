@@ -171,29 +171,7 @@ local globalTagKeys = gears.table.join(
     getTagKey(MOD_SECONDARY, "s", 27)  -- Slack
     )
 
-local modeKeys = gears.table.join(
-    awful.key({ MOD_SECONDARY }, "1",
-        function()
-            modeTags.setMode(1)
-        end,
-        { description = "Set mode", group = TAG_NAME}
-        ),
-    awful.key({ MOD_SECONDARY }, "2",
-        function()
-            modeTags.setMode(2)
-        end,
-        { description = "Set mode", group = TAG_NAME}
-        ),
-    awful.key({ MOD_SECONDARY }, "3",
-        function()
-            modeTags.setMode(3)
-        end,
-        { description = "Set mode", group = TAG_NAME}
-        )
-    )
-
-
-function global.setKeyBinds()
+function global.setKeyBinds(otherKeys)
     root.keys( gears.table.join(
         globalkeys,
         utilityKeys,
@@ -201,7 +179,7 @@ function global.setKeyBinds()
         layoutKeys,
         tagKeys,
         globalTagKeys,
-        modeKeys
+        otherKeys
     ))
 end
 
