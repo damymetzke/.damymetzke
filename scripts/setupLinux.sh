@@ -19,7 +19,7 @@ printf "[include]\n    path = \"$CUSTOM_USER_CONFIG/git/indexLinux.gitconfig\"\n
 echo "source $CUSTOM_USER_CONFIG/vim/index.vim" > $HOME/.config/nvim/init.vim
 
 # Link Awesome config
-echo 'dofile(os.getenv("HOME") .. "/.damymetzke/awesome/index.lua")' > $HOME/.config/awesome/rc.lua
+printf 'package.path = os.getenv("HOME") .. "/.damymetzke/awesome/?.lua;" .. package.path\nlocal index = require"index"\nindex.run()' > $HOME/.config/awesome/rc.lua
 
 # Link Alacritty config
 printf 'import:\n  - "~/.damymetzke/alacritty/index.yml"' > $HOME/.config/alacritty/alacritty.yml

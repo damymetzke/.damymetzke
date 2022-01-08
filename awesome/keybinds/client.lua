@@ -5,6 +5,8 @@ local menubar = require("menubar")
 local beautiful = require("beautiful")
 require("awful.hotkeys_popup.keys")
 
+local client = {}
+
 -- Constants
 local MOD_PRIMARY = "Mod1"
 local MOD_SECONDARY = "Mod4"
@@ -32,52 +34,56 @@ local clientKeys = gears.table.join(
               {description = "Focus master", group = CLIENT_NAME})
     )
 
-awful.rules.rules = {
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = clientKeys,
-                     buttons = clientbuttons,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
-    },
-    -- TODO: move elsewhere
-    -- Floating clients.
-    { rule_any = {
-        instance = {
-          "DTA",  -- Firefox addon DownThemAll.
-          "copyq",  -- Includes session name in class.
-          "pinentry",
-        },
-        class = {
-          "Arandr",
-          "Blueman-manager",
-          "Gpick",
-          "Kruler",
-          "MessageWin",  -- kalarm.
-          "Sxiv",
-          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-          "Wpa_gui",
-          "veromix",
-          "xtightvncviewer"},
+function client.setKeyBinds()
+  awful.rules.rules = {
+      { rule = { },
+        properties = { border_width = beautiful.border_width,
+                       border_color = beautiful.border_normal,
+                       focus = awful.client.focus.filter,
+                       raise = true,
+                       keys = clientKeys,
+                       buttons = clientbuttons,
+                       screen = awful.screen.preferred,
+                       placement = awful.placement.no_overlap+awful.placement.no_offscreen
+       }
+      },
+      -- TODO: move elsewhere
+      -- Floating clients.
+      { rule_any = {
+          instance = {
+            "DTA",  -- Firefox addon DownThemAll.
+            "copyq",  -- Includes session name in class.
+            "pinentry",
+          },
+          class = {
+            "Arandr",
+            "Blueman-manager",
+            "Gpick",
+            "Kruler",
+            "MessageWin",  -- kalarm.
+            "Sxiv",
+            "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+            "Wpa_gui",
+            "veromix",
+            "xtightvncviewer"},
 
-        -- Note that the name property shown in xprop might be set slightly after creation of the client
-        -- and the name shown there might not match defined rules here.
-        name = {
-          "Event Tester",  -- xev.
-        },
-        role = {
-          "AlarmWindow",  -- Thunderbird's calendar.
-          "ConfigManager",  -- Thunderbird's about:config.
-          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-        }
-      }, properties = { floating = true }},
+          -- Note that the name property shown in xprop might be set slightly after creation of the client
+          -- and the name shown there might not match defined rules here.
+          name = {
+            "Event Tester",  -- xev.
+          },
+          role = {
+            "AlarmWindow",  -- Thunderbird's calendar.
+            "ConfigManager",  -- Thunderbird's about:config.
+            "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+          }
+        }, properties = { floating = true }},
 
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
-}
+      -- Add titlebars to normal clients and dialogs
+      { rule_any = {type = { "normal", "dialog" }
+        }, properties = { titlebars_enabled = true }
+      },
+  }
+end
+
+return client

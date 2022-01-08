@@ -1,12 +1,18 @@
 local awful = require("awful")
--- package.path = package.path .. ";" .. os.getenv("HOME") .. "/.damymetzke/awesome"
+local keyGlobal = require "keybinds.global" 
+local keyClient = require "keybinds.client" 
 
--- require("default")
-dofile(os.getenv("HOME") .. "/.damymetzke/awesome/default.lua")
+local index = {}
 
-dofile(os.getenv("HOME") .. "/.damymetzke/awesome/keybinds/global.lua")
-dofile(os.getenv("HOME") .. "/.damymetzke/awesome/keybinds/client.lua")
+function index.run()
 
--- TODO: add this to a file
-awful.util.spawn("light-locker --late-locking --lock-on-lid --lock-on-suspend")
+    require "default" 
 
+    keyGlobal.setKeyBinds()
+    keyClient.setKeyBinds()
+
+    -- TODO: add this to a file
+    awful.util.spawn("light-locker --late-locking --lock-on-lid --lock-on-suspend")
+end
+
+return index

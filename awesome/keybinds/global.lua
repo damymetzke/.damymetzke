@@ -4,6 +4,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
 require("awful.hotkeys_popup.keys")
 
+local global = {}
+
 -- Constants
 local MOD_PRIMARY = "Mod1"
 local MOD_SECONDARY = "Mod4"
@@ -79,7 +81,7 @@ local layoutKeys = gears.table.join(
     awful.key({ MOD_PRIMARY }, "j", function() awful.client.focus.bydirection("down") end,
             { description = "Focus down", group = LAYOUT_NAME }),
     -- Focus urgen
-    awful.key({ modkey }, "u", awful.client.urgent.jumpto,
+    awful.key({ MOD_PRIMARY }, "u", awful.client.urgent.jumpto,
               {description = "Focus urgent", group = LAYOUT_NAME }),
 
     -- Swap left
@@ -95,7 +97,7 @@ local layoutKeys = gears.table.join(
     awful.key({ MOD_PRIMARY, "Shift" }, "j", function() awful.client.swap.bydirection("down") end,
             { description = "Swap down", group = LAYOUT_NAME }),
     -- Toggle to next layout
-    awful.key({ modkey }, "space", function () awful.layout.inc( 1) end,
+    awful.key({ MOD_PRIMARY }, "space", function () awful.layout.inc( 1) end,
             { description = "Toggle to next layout", group = LAYOUT_NAME }),
 
     -- Go to next screen, one button is enough as I ususally use up to 2 screens anyway
@@ -173,12 +175,15 @@ local globalTagKeys = gears.table.join(
     )
 
 
+function global.setKeyBinds()
+    root.keys( gears.table.join(
+        globalkeys,
+        utilityKeys,
+        runKeys,
+        layoutKeys,
+        tagKeys,
+        globalTagKeys
+    ))
+end
 
-root.keys( gears.table.join(
-    globalkeys,
-    utilityKeys,
-    runKeys,
-    layoutKeys,
-    tagKeys,
-    globalTagKeys
-))
+return global
