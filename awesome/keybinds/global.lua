@@ -183,6 +183,12 @@ local modeKeys = gears.table.join(
             modeTags.setMode(2)
         end,
         { description = "Set mode", group = TAG_NAME}
+        ),
+    awful.key({ MOD_SECONDARY }, "3",
+        function()
+            modeTags.setMode(3)
+        end,
+        { description = "Set mode", group = TAG_NAME}
         )
     )
 
