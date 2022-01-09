@@ -122,28 +122,10 @@ local function getTagKey(modifier, key, tagIndex)
                 { description = "Focus tag", group = TAG_NAME }
                 ),
 
-            -- Toggle tag N
-            awful.key({ modifier, "Control" }, key,
-                function ()
-                    local screen = awful.screen.focused()
-                    local tag = screen.tags[tagIndex]
-                    if tag then
-                        awful.tag.viewtoggle(tag)
-                    end
-                end,
-                { description = "Toggle tag", group = TAG_NAME }
-                ),
-
             -- Move client to tag N
             awful.key({ modifier, "Shift" }, key,
                 function ()
-                    if client.focus then
-                        local tag = client.focus.screen.tags[tagIndex]
-                        if tag then
-                            client.focus:move_to_tag(tag)
-                            tag:view_only()
-                        end
-                    end
+                    modeTags.moveClientToTag(tagIndex)
                 end,
                 { description = "Toggle tag", group = TAG_NAME }
                 )
@@ -159,17 +141,6 @@ local function getTagKeys(modifier, offset)
 end
 
 local tagKeys = getTagKeys(MOD_PRIMARY, 0)
-
-local globalTagKeys = gears.table.join(
-    -- getTagKeys(MOD_SECONDARY, 10),
-    getTagKey(MOD_SECONDARY, "m", 21), -- Music
-    getTagKey(MOD_SECONDARY, "u", 22), -- soUnd
-    getTagKey(MOD_SECONDARY, "k", 23), -- Keepass
-    getTagKey(MOD_SECONDARY, "w", 24), -- Wifi
-    getTagKey(MOD_SECONDARY, "p", 25), -- Projection
-    getTagKey(MOD_SECONDARY, "d", 26), -- Discord
-    getTagKey(MOD_SECONDARY, "s", 27)  -- Slack
-    )
 
 function global.setKeyBinds(otherKeys)
     root.keys( gears.table.join(

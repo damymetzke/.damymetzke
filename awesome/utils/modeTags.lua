@@ -119,6 +119,18 @@ function modeTags.focusTag(i)
     end
 end
 
+function modeTags.moveClientToTag(i)
+    local mode = modes[currentMode]
+
+    if client.focus then
+        local tag = client.focus.screen.tags[mode.offset + i]
+        if tag then
+            client.focus:move_to_tag(tag)
+            tag:view_only()
+        end
+    end
+end
+
 function modeTags.getModes()
     return modes
 end
