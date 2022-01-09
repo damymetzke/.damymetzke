@@ -19,6 +19,10 @@ local function tagFunction (name, properties)
         }, properties))
 end
 
+function modeTags.tagIsVisible(tag)
+    return tag.index > (currentMode - 1) * 10 and tag.index <= currentMode * 10
+end
+
 function modeTags.addMode(name, tagsCallback, key)
     key = key or ""
     modesSize = modesSize + 1
