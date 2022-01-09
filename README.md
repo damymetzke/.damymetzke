@@ -25,7 +25,7 @@ There are a number of modes defined, which are currently bound to Super+1, Super
 Each mode has their own set of tags, which changes which tags are used.
 Basically pressing alt+6 brings up a different tag depending on the active mode.
 
-> This is yet to be implemented
+> The content below is yet to be implemented
 
 Secondly the way multiple monitors are managed is slightly different than usual.
 Rather than switching between monitors, the configuration tries to enforce the use of a single *working* monitor.
