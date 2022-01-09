@@ -9,9 +9,9 @@ local modesSize = 0
 
 local MOD_SECONDARY = "Mod4"
 
-local function tagFunction (properties)
+local function tagFunction (name, properties)
     table.insert(modes[modesSize].tags, gears.table.crush({
-            name = "Tag #",
+            name = name,
             layout = awful.layout.suit.tile,
             master_fill_policy = "expand",
             gap_single_client = true,
