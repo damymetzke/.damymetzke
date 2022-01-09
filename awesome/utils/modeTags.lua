@@ -1,4 +1,5 @@
 local awful = require "awful"
+local gears = require "gears"
 
 local modeTags = {}
 
@@ -8,9 +9,14 @@ local modesSize = 0
 
 local MOD_SECONDARY = "Mod4"
 
-local function tagFunction()
-    return function ()
-    end
+local function tagFunction (properties)
+    table.insert(modes[modesSize].tags, gears.table.crush({
+            name = "Tag #",
+            layout = awful.layout.suit.tile,
+            master_fill_policy = "expand",
+            gap_single_client = true,
+            gap = 15,
+        }, properties))
 end
 
 function modeTags.addMode(name, tagsCallback, key)
@@ -18,10 +24,13 @@ function modeTags.addMode(name, tagsCallback, key)
     modesSize = modesSize + 1
     modes[modesSize] = {
         name = name,
-        tags = tagsCallback(tagFunction()),
+        tags = {},
         memory = {1},
-        offset = 10 * (modesSize - 1)
+        offset = 10 * (modesSize - 1),
+        numTags = 10,
     }
+
+    tagsCallback(tagFunction)
 
     local modesIndex = modesSize
     return awful.key({ MOD_SECONDARY }, key,
@@ -46,6 +55,10 @@ function modeTags.focusTag(i)
     if tag then
         tag:view_only()
     end
+end
+
+function modeTags.getModes()
+    return modes
 end
 
 return modeTags
