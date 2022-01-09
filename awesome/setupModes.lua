@@ -73,7 +73,14 @@ function setupModes.run()
                     layout = awful.layout.suit.tile,
                     gap = 4,
                 })
-        end, "3")
+        end, "3"),
+        
+        modeTags.addGlobal("Music", {}, "m"),
+        modeTags.addGlobal("Sound", {}, "u"),
+        modeTags.addGlobal("Keepass", {}, "k"),
+        modeTags.addGlobal("Project", {}, "p"),
+        modeTags.addGlobal("Discord", {}, "d"),
+        modeTags.addGlobal("Slack", {}, "s")
     )
 end
 

@@ -178,7 +178,6 @@ function global.setKeyBinds(otherKeys)
         runKeys,
         layoutKeys,
         tagKeys,
-        globalTagKeys,
         otherKeys
     ))
 end

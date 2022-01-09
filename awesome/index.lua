@@ -13,7 +13,7 @@ function index.run()
 
     local modeKeys = setupModes.run()
     awful.screen.connect_for_each_screen(function(screen)
-        setupTags.run(screen, modeTags.getModes())
+        setupTags.run(screen, modeTags.getModes(), modeTags.getGlobalTags())
     end)
 
     keyGlobal.setKeyBinds(modeKeys)

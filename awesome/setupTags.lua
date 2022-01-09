@@ -2,7 +2,7 @@ local awful = require "awful"
 
 local setupTags = {}
 
-function setupTags.run(screen, modes)
+function setupTags.run(screen, modes, globalTags)
     for modeI, mode in pairs(modes) do
         for i = 1, mode.numTags, 1 do
             if #(mode.tags) < i then
@@ -25,6 +25,17 @@ function setupTags.run(screen, modes)
                     })
             end
         end
+    end
+
+    for _, tag in pairs(globalTags) do
+        awful.tag.add(tag.name, {
+                layout = tag.layout,
+                master_fill_policy = tag.master_fill_policy,
+                gap_single_client = tag.gap_single_client,
+                gap = tag.gap,
+                screen = screen,
+                selected = (i == 1) and (modeI == 1),
+            })
     end
 end
 
