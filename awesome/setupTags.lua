@@ -11,6 +11,7 @@ function setupTags.run(screen, modes, globalTags)
                         master_fill_policy = "expand",
                         gap_single_client = true,
                         gap = 2,
+                        screen = screen,
                         selected = (i == 1) and (modeI == 1),
                     })
             else
