@@ -1,7 +1,12 @@
 local awful = require "awful"
 local gears = require "gears"
+local ModeCollection = require "utils.ModeCollection"
+local Mode = require "utils.Mode"
+local naughty = require "naughty"
 
 local modeTags = {}
+
+local modeCollection = ModeCollection:new()
 
 local currentMode = 1
 local modes = {}
@@ -11,42 +16,24 @@ local globalTags = {}
 
 local MOD_SECONDARY = "Mod4"
 
-local function tagFunction (name, properties)
-    table.insert(modes[modesSize].tags, gears.table.crush({
-            name = name,
-            layout = awful.layout.suit.tile,
-            master_fill_policy = "expand",
-            gap_single_client = true,
-            gap = 15,
-        }, properties))
+local function tagFunction (mode)
+    return function (name, properties)
+        mode:defineTag(name, properties)
+    end
 end
 
 function modeTags.tagIsVisible(tag)
-    if tag.index > (currentMode - 1) * 10 and tag.index <= currentMode * 10 then
-        return true
-    end
-
-    if tag.index > #(modes) * 10 then
-        return tag.selected or #tag:clients() > 0
-    end
-
-    return false
+    return modeCollection:tagIsVisible(tag)
 end
 
 function modeTags.addMode(name, tagsCallback, key)
-    key = key or ""
+    local newMode = Mode:new(nil, name, 10, key)
+    modeCollection:addMode(newMode)
+    tagsCallback(tagFunction(newMode))
+
     modesSize = modesSize + 1
-    modes[modesSize] = {
-        name = name,
-        tags = {},
-        memory = {1},
-        offset = 10 * (modesSize - 1),
-        numTags = 10,
-    }
-
-    tagsCallback(tagFunction)
-
     local modesIndex = modesSize
+
     return awful.key({ MOD_SECONDARY }, key,
         function ()
             modeTags.setMode(modesIndex)
@@ -83,14 +70,12 @@ function modeTags.addGlobal(name, properties, key)
 end
 
 function modeTags.setMode(i)
-    currentMode = i
-    local mode = modes[currentMode]
-    modeTags.focusTag(mode.memory[1])
+    modeCollection:focusMode(i)
 end
 
 function modeTags.focusGlobal(i)
     local screen = awful.screen.focused()
-    local index = #(modes) * 10 + i
+    local index = #(modeCollection.modes) * 10 + i
     local tag = screen.tags[index]
     if tag then
         tag:view_only()
@@ -98,7 +83,7 @@ function modeTags.focusGlobal(i)
 end
 
 function modeTags.moveClientToGlobal(i)
-    local index = #(modes) * 10 + i
+    local index = #(modeCollection.modes) * 10 + i
 
     if client.focus then
         local tag = client.focus.screen.tags[index]
@@ -110,19 +95,20 @@ function modeTags.moveClientToGlobal(i)
 end
 
 function modeTags.focusTag(i)
-    local screen = awful.screen.focused()
-    local mode = modes[currentMode]
-    mode.memory[1] = i
-    local tag = screen.tags[mode.offset + i]
+    local currentScreen = awful.screen.focused()
+    local mode = modeCollection.modes[modeCollection.currentMode]
+    mode.memory[currentScreen.index] = i
+    local tag = currentScreen.tags[mode.offset + i]
     if tag then
         tag:view_only()
     end
 end
 
 function modeTags.moveClientToTag(i)
-    local mode = modes[currentMode]
+    local mode = modeCollection.modes[modeCollection.currentMode]
 
     if client.focus then
+        mode.memory[client.focus.screen.index] = i
         local tag = client.focus.screen.tags[mode.offset + i]
         if tag then
             client.focus:move_to_tag(tag)
@@ -132,7 +118,7 @@ function modeTags.moveClientToTag(i)
 end
 
 function modeTags.getModes()
-    return modes
+    return modeCollection.modes
 end
 
 function modeTags.getGlobalTags()

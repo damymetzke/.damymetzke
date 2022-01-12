@@ -2,21 +2,21 @@ local awful = require "awful"
 local gears = require "gears"
 
 local Mode = {
-    name = "",
-    offset = 0,
-    numTags = 10,
-    tags = {},
-    memory = {},
+    offset = 0
 }
 
-function Mode:new(o, name, offset, numTags)
-    o is o or {}
+function Mode:new(o, name, numTags, key)
+    o = o or {}
     setmetatable(o, self)
     self.__index = self
 
-    self.name = name
-    self.offet = offset
-    self.numTags = numTags
+    o.name = name
+    o.numTags = numTags
+    o.key = key or ""
+    o.tags = {}
+    o.memory = {}
+
+    return o
 end
 
 function Mode:generateTags()
@@ -34,7 +34,7 @@ function Mode:defineTag(name, properties)
                 master_fill_policy = "expand",
                 gap_single_client = true,
                 gap = 5,
-        }))
+        }, properties))
 
     return true
 end

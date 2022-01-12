@@ -1,9 +1,12 @@
 local awful = require "awful"
 
+local naughty = require "naughty"
+
 local setupTags = {}
 
 function setupTags.run(screen, modes, globalTags)
     for modeI, mode in pairs(modes) do
+        naughty.notify({text = "" .. #mode.tags})
         for i = 1, mode.numTags, 1 do
             if #(mode.tags) < i then
                 awful.tag.add("" .. (i % 10), {
