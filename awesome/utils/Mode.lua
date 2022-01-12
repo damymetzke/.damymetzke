@@ -6,9 +6,7 @@ local Mode = {
     offset = 0,
     numTags = 10,
     tags = {},
-    memory = {
-        "1" = 1
-    },
+    memory = {},
 }
 
 function Mode:new(o, name, offset, numTags)
