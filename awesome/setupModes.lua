@@ -80,7 +80,8 @@ function setupModes.run()
         modeTags.addGlobal("Keepass", {}, "k"),
         modeTags.addGlobal("Project", {}, "p"),
         modeTags.addGlobal("Discord", {}, "d"),
-        modeTags.addGlobal("Slack", {}, "s")
+        modeTags.addGlobal("Slack", {}, "s"),
+        modeTags.getModeCollection():generateKeys()
     )
 end
 

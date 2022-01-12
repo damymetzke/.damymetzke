@@ -1,4 +1,10 @@
 local naughty = require "naughty"
+local awful = require "awful"
+local gears = require "gears"
+
+local MOD_SECONDARY = "Mod4"
+local MODE_NAME = "Mode"
+local GLOBAL_NAME = "Global"
 
 local ModeCollection = {
     modes = {},
@@ -32,8 +38,54 @@ function ModeCollection:addGlobalTag(name, key, properties)
                 master_fill_policy = "expand",
                 gap_single_client = true,
                 gap = 5,
-                globalIndex = #self.globalTags + 1
+                globalIndex = #self.globalTags + 1,
+                key = key,
         }, properties))
+end
+
+function ModeCollection:generateTags(currentScreen)
+    for i, mode in pairs(self.modes) do
+        mode:generateTags(currentScreen, i == 1)
+    end
+
+    for i, tag in pairs(self.globalTags) do
+        naughty.notify({text = "hey"})
+        awful.tag.add(tag.name, {
+                layout = tag.layout,
+                master_fill_policy = tag.master_fill_policy,
+                gap_single_client = tag.gap_single_client,
+                gap = tag.gap,
+                screen = currentScreen,
+                selected = false,
+            })
+    end
+end
+
+function ModeCollection:generateKeys()
+    local result = {}
+    for i, mode in pairs(self.modes) do
+        if mode.key == "" then
+            goto continue
+        end
+
+        result = gears.table.join(result, awful.key({ MOD_SECONDARY }, mode.key,
+            function ()
+                self:focusMode(i)
+            end,
+            { description = "Focus mode: '" .. mode.name .. "'", group = MODE_NAME }))
+
+        ::continue::
+    end
+
+    for i, tag in pairs(self.globalTags) do
+        result = gears.table.join(result, awful.key({ MOD_SECONDARY }, tag.key,
+            function ()
+                self:focusGlobalTag(i)
+            end,
+            { description = "Focus mode: '" .. tag.name .. "'", group = GLOBAL_NAME }))
+    end
+
+    return result
 end
 
 function ModeCollection:tagIsVisible(tag)
@@ -84,6 +136,15 @@ function ModeCollection:focusMode(i)
         end
     end
 
+end
+
+function ModeCollection:focusGlobalTag(i)
+    local focusedScreen = awful.screen.focused()
+    local index = self.endOffset + i
+    local tag = focusedScreen.tags[index]
+    if tag then
+        tag:view_only()
+    end
 end
 
 return ModeCollection

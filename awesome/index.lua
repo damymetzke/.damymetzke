@@ -12,8 +12,9 @@ function index.run()
     require "default" 
 
     local modeKeys = setupModes.run()
-    awful.screen.connect_for_each_screen(function(screen)
-        setupTags.run(screen, modeTags.getModes(), modeTags.getGlobalTags())
+    awful.screen.connect_for_each_screen(function(currentScreen)
+        -- setupTags.run(screen, modeTags.getModes(), modeTags.getGlobalTags())
+        modeTags.getModeCollection():generateTags(currentScreen)
     end)
 
     keyGlobal.setKeyBinds(modeKeys)

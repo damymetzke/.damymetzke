@@ -26,6 +26,10 @@ function modeTags.tagIsVisible(tag)
     return modeCollection:tagIsVisible(tag)
 end
 
+function modeTags.getModeCollection()
+    return modeCollection
+end
+
 function modeTags.addMode(name, tagsCallback, key)
     local newMode = Mode:new(nil, name, 10, key)
     modeCollection:addMode(newMode)
@@ -34,39 +38,12 @@ function modeTags.addMode(name, tagsCallback, key)
     modesSize = modesSize + 1
     local modesIndex = modesSize
 
-    return awful.key({ MOD_SECONDARY }, key,
-        function ()
-            modeTags.setMode(modesIndex)
-        end,
-        { description = "Set mode", group = "modes"}
-    )
+    return {}
 end
 
 function modeTags.addGlobal(name, properties, key)
-    table.insert(globalTags, gears.table.crush({
-                name = name,
-                layout = awful.layout.suit.tile,
-                master_fill_policy = "expand",
-                gap_single_client = true,
-                gap = 15,
-        }, properties))
-
-    local globalIndex = #(globalTags)
-    return gears.table.join(
-        awful.key({ MOD_SECONDARY }, key,
-            function ()
-                modeTags.focusGlobal(globalIndex)
-            end,
-            { description = "Focus global tag", group = "global tags"}
-            ),
-
-        awful.key({ MOD_SECONDARY, "Shift" }, key,
-            function ()
-                modeTags.moveClientToGlobal(globalIndex)
-            end,
-            { description = "Move client to global tag", group = TAG_NAME }
-            )
-        )
+    modeCollection:addGlobalTag(name, key, properties)
+    return {}
 end
 
 function modeTags.setMode(i)
