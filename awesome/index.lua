@@ -4,6 +4,7 @@ local keyClient = require "keybinds.client"
 local modeTags = require "utils.modeTags"
 local setupModes = require "setupModes"
 local setupTags = require "setupTags"
+local ModeCollection = require "utils.ModeCollection"
 
 local index = {}
 
@@ -11,13 +12,16 @@ function index.run()
 
     require "default" 
 
-    local modeKeys = setupModes.run()
+    local modeCollection = setupModes.run()
+
+    ModeCollection.setStupidGlobal(modeCollection)
+
     awful.screen.connect_for_each_screen(function(currentScreen)
         -- setupTags.run(screen, modeTags.getModes(), modeTags.getGlobalTags())
-        modeTags.getModeCollection():generateTags(currentScreen)
+        modeCollection:generateTags(currentScreen)
     end)
 
-    keyGlobal.setKeyBinds(modeKeys)
+    keyGlobal.setKeyBinds(modeCollection:generateKeys())
     keyClient.setKeyBinds()
 
 

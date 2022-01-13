@@ -140,15 +140,12 @@ local function getTagKeys(modifier, offset)
     return result
 end
 
-local tagKeys = getTagKeys(MOD_PRIMARY, 0)
-
 function global.setKeyBinds(otherKeys)
     root.keys( gears.table.join(
         globalkeys,
         utilityKeys,
         runKeys,
         layoutKeys,
-        tagKeys,
         otherKeys
     ))
 end

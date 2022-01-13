@@ -1,6 +1,5 @@
 local gears = require "gears"
 local awful = require "awful"
-local modeTags = require "utils.modeTags"
 
 local Mode = require "utils.Mode"
 local ModeCollection = require "utils.ModeCollection"
@@ -77,7 +76,7 @@ function setupModes.run()
             gap = 4,
         })
 
-    local result = modeTags.getModeCollection()
+    local result = ModeCollection:new()
     result:addMode(normalMode)
     result:addMode(webDevMode)
     result:addMode(gameDevMode)
@@ -107,7 +106,7 @@ function setupModes.run()
             gap = 8,
         })
 
-    result:generateKeys()
+    return result
 end
 
 return setupModes

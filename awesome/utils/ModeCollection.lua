@@ -3,8 +3,10 @@ local awful = require "awful"
 local gears = require "gears"
 
 local MOD_SECONDARY = "Mod4"
+local MOD_PRIMARY = "Mod1"
 local MODE_NAME = "Mode"
 local GLOBAL_NAME = "Global"
+local TAG_NAME = "Global"
 
 local ModeCollection = {
     modes = {},
@@ -12,6 +14,16 @@ local ModeCollection = {
     endOffset = 0,
     currentMode = 1,
 }
+
+local stupidGlobal = nil
+
+function ModeCollection.setStupidGlobal(value)
+    stupidGlobal = value
+end
+
+function ModeCollection.stupidGlobal()
+    return stupidGlobal
+end
 
 function ModeCollection:new(o)
     o = o or {}
@@ -22,6 +34,10 @@ function ModeCollection:new(o)
     o.globalTags = {}
 
     return o
+end
+
+function ModeCollection:getCurrentMode()
+    return self.modes[self.currentMode]
 end
 
 function ModeCollection:addMode(mode)
@@ -82,7 +98,15 @@ function ModeCollection:generateKeys()
             function ()
                 self:focusGlobalTag(i)
             end,
-            { description = "Focus mode: '" .. tag.name .. "'", group = GLOBAL_NAME }))
+            { description = "Focus global tag: '" .. tag.name .. "'", group = GLOBAL_NAME }))
+    end
+
+    for i = 1, 10 do
+        result = gears.table.join(result, awful.key({ MOD_PRIMARY }, "#" .. i + 9,
+            function ()
+                self:focusTag(i)
+            end,
+            { description = "Focus tag", group = TAG_NAME }))
     end
 
     return result
@@ -136,6 +160,15 @@ function ModeCollection:focusMode(i)
         end
     end
 
+end
+
+function ModeCollection:focusTag(i)
+    local focusedScreen = awful.screen.focused()
+    local index = self:getCurrentMode().offset + i
+    local tag = focusedScreen.tags[index]
+    if tag then
+        tag:view_only()
+    end
 end
 
 function ModeCollection:focusGlobalTag(i)
