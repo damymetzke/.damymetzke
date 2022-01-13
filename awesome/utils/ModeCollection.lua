@@ -94,19 +94,33 @@ function ModeCollection:generateKeys()
     end
 
     for i, tag in pairs(self.globalTags) do
-        result = gears.table.join(result, awful.key({ MOD_SECONDARY }, tag.key,
+        result = gears.table.join(result,
+            awful.key({ MOD_SECONDARY }, tag.key,
             function ()
                 self:focusGlobalTag(i)
             end,
-            { description = "Focus global tag: '" .. tag.name .. "'", group = GLOBAL_NAME }))
+            { description = "Focus global tag: '" .. tag.name .. "'", group = GLOBAL_NAME }),
+            awful.key({ MOD_SECONDARY, "Shift" }, tag.key,
+            function ()
+                self:moveClientToGlobalTag(i)
+            end,
+            { description = "Move client to global tag: '" .. tag.name .. "'", group = GLOBAL_NAME })
+        )
     end
 
     for i = 1, 10 do
-        result = gears.table.join(result, awful.key({ MOD_PRIMARY }, "#" .. i + 9,
+        result = gears.table.join(result,
+            awful.key({ MOD_PRIMARY }, "#" .. i + 9,
             function ()
                 self:focusTag(i)
             end,
-            { description = "Focus tag", group = TAG_NAME }))
+            { description = "Focus tag", group = TAG_NAME }),
+            awful.key({ MOD_PRIMARY, "Shift" }, "#" .. i + 9,
+            function ()
+                self:moveClientToTag(i)
+            end,
+            { description = "Move client to tag", group = TAG_NAME })
+        )
     end
 
     return result
@@ -171,12 +185,36 @@ function ModeCollection:focusTag(i)
     end
 end
 
+function ModeCollection:moveClientToTag(i)
+    local index = self:getCurrentMode().offset + i
+
+    if client.focus then
+        local tag = client.focus.screen.tags[index]
+        if tag then
+            client.focus:move_to_tag(tag)
+            tag:view_only()
+        end
+    end
+end
+
 function ModeCollection:focusGlobalTag(i)
     local focusedScreen = awful.screen.focused()
     local index = self.endOffset + i
     local tag = focusedScreen.tags[index]
     if tag then
         tag:view_only()
+    end
+end
+
+function ModeCollection:moveClientToGlobalTag(i)
+    local index = self.endOffset + i
+
+    if client.focus then
+        local tag = client.focus.screen.tags[index]
+        if tag then
+            client.focus:move_to_tag(tag)
+            tag:view_only()
+        end
     end
 end
 
