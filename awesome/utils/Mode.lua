@@ -42,6 +42,7 @@ function Mode:generateTags(currentScreen, isFirstTag)
                     layout = tag.layout,
                     master_fill_policy = tag.master_fill_policy,
                     gap_single_client = tag.gap_single_client,
+                    master_width_factor = tag.master_width_factor,
                     gap = tag.gap,
                     screen = currentScreen,
                     selected = (i == 1) and isFirstTag
@@ -59,6 +60,7 @@ function Mode:defineTag(name, properties)
                 name = name,
                 layout = awful.layout.suit.tile,
                 master_fill_policy = "expand",
+                master_width_factor = 0.5,
                 gap_single_client = true,
                 gap = 5,
         }, properties))

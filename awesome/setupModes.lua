@@ -45,8 +45,9 @@ function setupModes.run()
             gap = 4,
         })
     webDevMode:defineTag("Plan Board", {
-            layout = awful.layout.suit.tile.top,
+            layout = awful.layout.suit.tile.bottom,
             gap = 4,
+            master_width_factor = 0.8,
         })
 
     local gameDevMode = Mode:new(nil, "Game Development", 10, "3")
@@ -72,8 +73,9 @@ function setupModes.run()
             gap = 4,
         })
     gameDevMode:defineTag("Plan Board", {
-            layout = awful.layout.suit.tile.top,
+            layout = awful.layout.suit.tile.bottom,
             gap = 4,
+            master_width_factor = 0.8,
         })
 
     local result = ModeCollection:new()
