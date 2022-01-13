@@ -2,87 +2,112 @@ local gears = require "gears"
 local awful = require "awful"
 local modeTags = require "utils.modeTags"
 
+local Mode = require "utils.Mode"
+local ModeCollection = require "utils.ModeCollection"
+
 local setupModes = {}
 
 function setupModes.run()
-    return gears.table.join(
-        modeTags.addMode("Normal", function(defineTag)
-            defineTag("Terminal", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Browser", {
-                    layout = awful.layout.suit.max.fullscreen,
-                    gap = 0,
-                })
-            defineTag("Games", {
-                    layout = awful.layout.suit.max,
-                    gap = 0,
-                })
-        end, "1"),
+    local normalMode = Mode:new(nil, "Normal", 10, "1")
 
-        modeTags.addMode("Web Development", function(defineTag)
-            defineTag("Terminal", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Browser", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Dev Browser", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Dev console", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Server", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Plan Board", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-        end, "2"),
+    normalMode:defineTag("Terminal", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    normalMode:defineTag("Browser", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    normalMode:defineTag("Games", {
+            layout = awful.layout.suit.max,
+            gap = 0,
+        })
 
-        modeTags.addMode("Game Development", function(defineTag)
-            defineTag("Terminal", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Browser", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Game Instance", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Editor", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Editor Terminal", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-            defineTag("Plan board", {
-                    layout = awful.layout.suit.tile,
-                    gap = 4,
-                })
-        end, "3"),
-        
-        modeTags.addGlobal("Music", {}, "m"),
-        modeTags.addGlobal("Sound", {}, "u"),
-        modeTags.addGlobal("Keepass", {}, "k"),
-        modeTags.addGlobal("Project", {}, "p"),
-        modeTags.addGlobal("Discord", {}, "d"),
-        modeTags.addGlobal("Slack", {}, "s"),
-        modeTags.getModeCollection():generateKeys()
-    )
+    local webDevMode = Mode:new(nil, "Web Development", 10, "2")
+
+    webDevMode:defineTag("Terminal", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    webDevMode:defineTag("Browser", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    webDevMode:defineTag("Dev Browser", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    webDevMode:defineTag("Dev Console", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    webDevMode:defineTag("Server", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    webDevMode:defineTag("Plan Board", {
+            layout = awful.layout.suit.tile.top,
+            gap = 4,
+        })
+
+    local gameDevMode = Mode:new(nil, "Game Development", 10, "3")
+
+    gameDevMode:defineTag("Terminal", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    gameDevMode:defineTag("Browser", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    gameDevMode:defineTag("Game Instance", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    gameDevMode:defineTag("Editor", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    gameDevMode:defineTag("Editor Terminal", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    gameDevMode:defineTag("Plan Board", {
+            layout = awful.layout.suit.tile.top,
+            gap = 4,
+        })
+
+    local result = modeTags.getModeCollection()
+    result:addMode(normalMode)
+    result:addMode(webDevMode)
+    result:addMode(gameDevMode)
+
+    result:addGlobalTag("Slack", "s", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Discord", "d", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Music", "m", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Sound", "u", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Bluetooth", "b", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Keepass", "k", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+
+    result:generateKeys()
 end
 
 return setupModes
