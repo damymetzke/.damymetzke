@@ -1,4 +1,3 @@
-local naughty = require "naughty"
 local awful = require "awful"
 local gears = require "gears"
 
@@ -65,7 +64,6 @@ function ModeCollection:generateTags(currentScreen)
     end
 
     for i, tag in pairs(self.globalTags) do
-        naughty.notify({text = "hey"})
         awful.tag.add(tag.name, {
                 layout = tag.layout,
                 master_fill_policy = tag.master_fill_policy,

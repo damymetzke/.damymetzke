@@ -1,8 +1,6 @@
 local awful = require "awful"
 local gears = require "gears"
 
-local naughty = require "naughty"
-
 local MOD_SECONDARY = "Mod4"
 local MODE_NAME = "Mode"
 
@@ -36,7 +34,6 @@ function Mode:generateTags(currentScreen, isFirstTag)
                     selected = (i == 1) and isFirstTag,
                 })
         else
-            naughty.notify({text = "" .. #self.tags .. " - " .. i})
             local tag = self.tags[i]
             awful.tag.add(tag.name, {
                     layout = tag.layout,
