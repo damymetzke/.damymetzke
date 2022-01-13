@@ -23,6 +23,8 @@ function index.run()
 
     -- TODO: add this to a file
     awful.util.spawn("light-locker --late-locking --lock-on-lid --lock-on-suspend")
+
+    awful.util.spawn(os.getenv("HOME") .. "/.local/share/damymetzke/startup")
 end
 
 return index
