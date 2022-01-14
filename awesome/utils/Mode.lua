@@ -42,7 +42,7 @@ function Mode:generateTags(currentScreen, isFirstTag)
                     master_width_factor = tag.master_width_factor,
                     gap = tag.gap,
                     screen = currentScreen,
-                    selected = (i == 1) and isFirstTag
+                    selected = (i == 1) and isFirstTag,
                 })
         end
     end
@@ -60,9 +60,36 @@ function Mode:defineTag(name, properties)
                 master_width_factor = 0.5,
                 gap_single_client = true,
                 gap = 5,
+                currentScreen = 1,
         }, properties))
 
     return true
+end
+
+function Mode:focusTag(i)
+    local index = self.offset + i
+    local focusedScreen = awful.screen.focused()
+    local focusTag = focusedScreen.tags[index]
+    focusTag:view_only()
+    if not(focusedScreen.index == self.tags[i].currentScreen) then
+        local fromTag = nil
+        for currentScreen in screen do
+            if currentScreen.index == self.tags[i].currentScreen then
+                fromTag = currentScreen.tags[index]
+                break
+            end
+        end
+
+        if fromTag == nil then
+            focusTag:view_only()
+            return
+        end
+
+        self.tags[i].currentScreen = focusedScreen.index
+        focusTag:swap(fromTag)
+        fromTag:view_only()
+        focusTag.selected = false
+    end
 end
 
 return Mode

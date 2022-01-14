@@ -175,12 +175,7 @@ function ModeCollection:focusMode(i)
 end
 
 function ModeCollection:focusTag(i)
-    local focusedScreen = awful.screen.focused()
-    local index = self:getCurrentMode().offset + i
-    local tag = focusedScreen.tags[index]
-    if tag then
-        tag:view_only()
-    end
+    self:getCurrentMode():focusTag(i)
 end
 
 function ModeCollection:moveClientToTag(i)
