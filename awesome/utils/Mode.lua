@@ -89,23 +89,17 @@ function Mode:focusTag(i)
     self:calculateTags()
 end
 
-local naughty = require "naughty"
-
 function Mode:calculateTags()
     local i = 0
     local exemptTag = 0
     local lockSwapTag = 0
-    naughty.notify({
-            text = "" .. #self.lockedTags,
-            timeout = 20,
-        })
     for currentScreen in screen do
         if i == 0 then
             self:moveTagToScreen(self.tagOrder[1], currentScreen)
             if self:tagIsLocked(self.tagOrder[1]) then
                 exemptTag = self.tagOrder[1]
                 i = self:getNextFreeTag(1)
-                lockSwapTag = i
+                lockSwapTag = self.tagOrder[i]
             else
                 i = 1
             end
@@ -161,7 +155,7 @@ end
 
 function Mode:getNextFreeTag(i)
     local j = i + 1
-    while self:tagIsLocked(j) do
+    while self:tagIsLocked(self.tagOrder[j]) do
         j = j + 1
     end
     return j
