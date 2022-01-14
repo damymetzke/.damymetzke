@@ -18,12 +18,14 @@ function Mode:new(o, name, numTags, key)
     o.key = key or ""
     o.tags = {}
     o.tagMemory = {}
+    o.tagOrder = {}
     o.memory = {}
 
     for i = 1, numTags, 1 do
         table.insert(o.tagMemory, {
                 currentScreen = 1,
             })
+        table.insert(o.tagOrder, i)
     end
 
     return o
@@ -73,11 +75,32 @@ function Mode:defineTag(name, properties)
 end
 
 function Mode:focusTag(i)
+    for j, tagIndex in pairs(self.tagOrder) do
+        if tagIndex == i then
+            for k = j - 1, 1, -1 do
+                local swap = self.tagOrder[k]
+                self.tagOrder[k] = self.tagOrder[k + 1]
+                self.tagOrder[k + 1] = swap
+            end
+            break
+        end
+    end
+    self:calculateTags()
+end
+
+function Mode:calculateTags()
+    local i = 1
+    for currentScreen in screen do
+        self:moveTagToScreen(self.tagOrder[i], currentScreen)
+        i = i + 1
+    end
+end
+
+function Mode:moveTagToScreen(i, moveToScreen)
     local index = self.offset + i
-    local focusedScreen = awful.screen.focused()
-    local focusTag = focusedScreen.tags[index]
+    local focusTag = moveToScreen.tags[index]
     focusTag:view_only()
-    if not(focusedScreen.index == self.tagMemory[i].currentScreen) then
+    if not(moveToScreen.index == self.tagMemory[i].currentScreen) then
         local fromTag = nil
         for currentScreen in screen do
             if currentScreen.index == self.tagMemory[i].currentScreen then
@@ -91,7 +114,7 @@ function Mode:focusTag(i)
             return
         end
 
-        self.tagMemory[i].currentScreen = focusedScreen.index
+        self.tagMemory[i].currentScreen = moveToScreen.index
         focusTag:swap(fromTag)
         fromTag:view_only()
         focusTag.selected = false
