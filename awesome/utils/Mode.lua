@@ -19,6 +19,7 @@ function Mode:new(o, name, numTags, key)
     o.tags = {}
     o.tagMemory = {}
     o.tagOrder = {}
+    o.lockedTags = {}
     o.memory = {}
 
     for i = 1, numTags, 1 do
@@ -88,11 +89,39 @@ function Mode:focusTag(i)
     self:calculateTags()
 end
 
+local naughty = require "naughty"
+
 function Mode:calculateTags()
-    local i = 1
+    local i = 0
+    local exemptTag = 0
+    local lockSwapTag = 0
+    naughty.notify({
+            text = "" .. #self.lockedTags,
+            timeout = 20,
+        })
     for currentScreen in screen do
-        self:moveTagToScreen(self.tagOrder[i], currentScreen)
-        i = i + 1
+        if i == 0 then
+            self:moveTagToScreen(self.tagOrder[1], currentScreen)
+            if self:tagIsLocked(self.tagOrder[1]) then
+                exemptTag = self.tagOrder[1]
+                i = self:getNextFreeTag(1)
+                lockSwapTag = i
+            else
+                i = 1
+            end
+        else
+            local lockedTag = self.lockedTags[currentScreen.index]
+            if lockedTag then
+                if lockedTag == exemptTag then
+                    self:moveTagToScreen(lockSwapTag, currentScreen)
+                else
+                    self:moveTagToScreen(lockedTag, currentScreen)
+                end
+            else
+                i = self:getNextFreeTag(i)
+                self:moveTagToScreen(self.tagOrder[i], currentScreen)
+            end
+        end
     end
 end
 
@@ -119,6 +148,33 @@ function Mode:moveTagToScreen(i, moveToScreen)
         fromTag:view_only()
         focusTag.selected = false
     end
+end
+
+function Mode:tagIsLocked(i)
+    for _, tagIndex in pairs(self.lockedTags) do
+        if tagIndex == i then
+            return true
+        end
+    end
+    return false
+end
+
+function Mode:getNextFreeTag(i)
+    local j = i + 1
+    while self:tagIsLocked(j) do
+        j = j + 1
+    end
+    return j
+end
+
+function Mode:lockCurrentTagToScreen(i)
+    self.lockedTags[i] = self.tagOrder[1]
+    self:calculateTags()
+end
+
+function Mode:unlockScreen(i)
+    self.lockedTags[i] = nil
+    self:calculateTags()
 end
 
 return Mode

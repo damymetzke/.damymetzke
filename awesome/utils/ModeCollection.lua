@@ -125,6 +125,22 @@ function ModeCollection:generateKeys()
         )
     end
 
+    -- Tag locking
+    for i = 2, 10, 1 do
+        result = gears.table.join(result,
+            awful.key({ MOD_PRIMARY, MOD_SECONDARY }, "#" .. i + 9,
+                function()
+                    self:getCurrentMode():lockCurrentTagToScreen(i)
+                end
+                ),
+            awful.key({ "Shift", MOD_SECONDARY }, "#" .. i + 9,
+                function()
+                    self:getCurrentMode():unlockScreen(i)
+                end
+                )
+            )
+    end
+
     return result
 end
 
