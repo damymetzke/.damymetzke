@@ -60,7 +60,11 @@ end
 
 function ModeCollection:generateTags(currentScreen)
     for i, mode in pairs(self.modes) do
-        mode:generateTags(currentScreen, i == 1)
+        if i == 1 then
+            mode:generateTags(currentScreen, currentScreen.index)
+        else
+            mode:generateTags(currentScreen, 0)
+        end
     end
 
     for i, tag in pairs(self.globalTags) do
@@ -164,15 +168,7 @@ function ModeCollection:focusMode(i)
     end
 
     -- Set the tags
---    for currentScreen in screen do
---        local index = mode.memory[currentScreen.index]
---        local tag = currentScreen.tags[index + mode.offset]
---        if tag then
---            tag:view_only()
---        end
---    end
     self:getCurrentMode():calculateTags()
-
 end
 
 function ModeCollection:focusTag(i)

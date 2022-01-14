@@ -31,7 +31,7 @@ function Mode:new(o, name, numTags, key)
     return o
 end
 
-function Mode:generateTags(currentScreen, isFirstTag)
+function Mode:generateTags(currentScreen, expectedIndex)
     for i = 1, self.numTags, 1 do
         if #self.tags < i then
             awful.tag.add("" .. (i % 10), {
@@ -40,7 +40,7 @@ function Mode:generateTags(currentScreen, isFirstTag)
                     gap_single_client = true,
                     gap = 2,
                     screen = currentScreen,
-                    selected = (i == 1) and isFirstTag,
+                    selected = i == expectedIndex
                 })
         else
             local tag = self.tags[i]
@@ -51,7 +51,7 @@ function Mode:generateTags(currentScreen, isFirstTag)
                     master_width_factor = tag.master_width_factor,
                     gap = tag.gap,
                     screen = currentScreen,
-                    selected = (i == 1) and isFirstTag,
+                    selected = i == expectedIndex
                 })
         end
     end
