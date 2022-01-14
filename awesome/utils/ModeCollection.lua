@@ -164,13 +164,14 @@ function ModeCollection:focusMode(i)
     end
 
     -- Set the tags
-    for currentScreen in screen do
-        local index = mode.memory[currentScreen.index]
-        local tag = currentScreen.tags[index + mode.offset]
-        if tag then
-            tag:view_only()
-        end
-    end
+--    for currentScreen in screen do
+--        local index = mode.memory[currentScreen.index]
+--        local tag = currentScreen.tags[index + mode.offset]
+--        if tag then
+--            tag:view_only()
+--        end
+--    end
+    self:getCurrentMode():calculateTags()
 
 end
 
