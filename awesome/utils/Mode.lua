@@ -169,7 +169,7 @@ end
 
 function Mode:lockCurrentTagToScreen(i)
     self.lockedTags[i] = self.tagOrder[1]
-    self:calculateTags()
+    self:focusTag(self.tagOrder[2])
 end
 
 function Mode:unlockScreen(i)
