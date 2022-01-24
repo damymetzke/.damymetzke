@@ -1,5 +1,9 @@
 -- FZF (ctrl+p)
-vim.api.nvim_set_keymap("n", "<C-p>", ":FZF<CR>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<C-p>", ":FZF<CR>", {noremap = true, silent = true})
+
+-- Telescope (ctrl+p)
+vim.api.nvim_set_keymap("n", "<C-p>", ":Telescope find_files<CR>", {noremap = true, silent = true})
+
 
 -- Leader <space> 
 vim.g.mapleader = " "

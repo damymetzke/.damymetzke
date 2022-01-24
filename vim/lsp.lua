@@ -63,3 +63,6 @@ lspc.vuels.setup{
   on_attach = on_attach,
 }
 
+lspc.rust_analyzer.setup{
+  on_attach = on_attach,
+}

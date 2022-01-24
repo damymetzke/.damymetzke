@@ -19,9 +19,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php'] }
+
   " Fzf
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'junegunn/fzf.vim'
+
+  " Telescope
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+
   " Lightline
   Plug 'itchyny/lightline.vim'
   " Emmet
@@ -42,5 +48,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   " Markdown Preview
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+  " Trouble
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'folke/trouble.nvim'
+
+  " Todos
+  Plug 'folke/todo-comments.nvim'
 
 call plug#end()

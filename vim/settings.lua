@@ -2,6 +2,9 @@
 vim.api.nvim_set_var("gruvbox_guisp_fallback", "bg")
 vim.api.nvim_exec("colorscheme gruvbox", false)
 
+-- term gui colors
+vim.o.termguicolors = 1
+
 -- Indentation
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
