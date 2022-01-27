@@ -37,7 +37,7 @@ local function on_attach(client, buffer_number)
 
 end
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 -- vim.lsp.set_log_level("info")
 
 root = vim.api.nvim_exec("pwd", true)
