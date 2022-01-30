@@ -1,6 +1,8 @@
 -- Color scheme
 vim.api.nvim_set_var("gruvbox_guisp_fallback", "bg")
+vim.api.nvim_set_var("gruvbox_transparent_bg", 1)
 vim.api.nvim_exec("colorscheme gruvbox", false)
+vim.api.nvim_exec("hi! Normal ctermbg=NONE guibg=NONE", false)
 
 -- term gui colors
 vim.o.termguicolors = 1

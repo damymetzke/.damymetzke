@@ -1,3 +1,4 @@
 import:
   - ~/.damymetzke/alacritty/font.yml
   - ~/.damymetzke/alacritty/shell.yml
+  - ~/.damymetzke/alacritty/window.yml
