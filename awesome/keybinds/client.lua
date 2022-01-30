@@ -44,7 +44,7 @@ function client.setKeyBinds()
                        keys = clientKeys,
                        buttons = clientbuttons,
                        screen = awful.screen.preferred,
-                       placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                       placement = awful.placement.no_overlap+awful.placement.no_offscreen,
        }
       },
       -- TODO: move elsewhere
@@ -81,7 +81,7 @@ function client.setKeyBinds()
 
       -- Add titlebars to normal clients and dialogs
       { rule_any = {type = { "normal", "dialog" }
-        }, properties = { titlebars_enabled = true }
+        }, properties = { titlebars_enabled = false }
       },
   }
 end
