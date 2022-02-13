@@ -93,8 +93,10 @@ function Mode:calculateTags()
     local i = 0
     local exemptTag = 0
     local lockSwapTag = 0
+    local actualOrder = {}
     for currentScreen in screen do
         if i == 0 then
+            table.insert(actualOrder, self.tagOrder[i])
             self:moveTagToScreen(self.tagOrder[1], currentScreen)
             if self:tagIsLocked(self.tagOrder[1]) then
                 exemptTag = self.tagOrder[1]
@@ -107,14 +109,27 @@ function Mode:calculateTags()
             local lockedTag = self.lockedTags[currentScreen.index]
             if lockedTag then
                 if lockedTag == exemptTag then
+                    table.insert(actualOrder, lockSwapTag)
                     self:moveTagToScreen(lockSwapTag, currentScreen)
                 else
+                    table.insert(actualOrder, lockedTag)
                     self:moveTagToScreen(lockedTag, currentScreen)
                 end
             else
                 i = self:getNextFreeTag(i)
+                table.insert(actualOrder, self.tagOrder[i])
                 self:moveTagToScreen(self.tagOrder[i], currentScreen)
             end
+        end
+    end
+
+    -- There seems to be an issue where multiple tags get selected unser specific conditions.
+    -- This might be a fix, but I cannot be sure currently as I only have one screen available.
+    for currentScreen in screen do
+        local focusTagIndex = actualOrder[currentScreen.index]
+        local focusTag = currentScreen.tags[focusTagIndex]
+        if not(focusTag == nil) then
+            focusTag:view_only()
         end
     end
 end
