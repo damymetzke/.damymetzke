@@ -193,12 +193,25 @@ end
 
 function ModeCollection:moveClientToTag(i)
     local index = self:getCurrentMode().offset + i
+    local screenIndex = self:getCurrentMode().tagMemory[i].currentScreen
+    local currentScreen = nil
+
+    for possibleScreen in screen do
+        if possibleScreen.index == screenIndex then
+            currentScreen = possibleScreen
+            break
+        end
+    end
+
+    if currentScreen == nil then
+        return
+    end
 
     if client.focus then
-        local tag = client.focus.screen.tags[index]
+        local tag = currentScreen.tags[index]
         if tag then
             client.focus:move_to_tag(tag)
-            tag:view_only()
+            self:focusTag(i)
         end
     end
 end
