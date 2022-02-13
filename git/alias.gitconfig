@@ -58,3 +58,6 @@ remote: %(color: #fa4762)%(upstream:lstrip=2)%(color: reset)%0a\
 commit: %(color: #51aac8)%(subject)%(color: reset)%0a\
 %(color: #606a86).\"" refs/heads
 
+    # Create a PR using the GitHub CLI (gh)
+    # Primarily here so it can be overridden 
+    pr = !gh pr create
