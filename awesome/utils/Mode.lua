@@ -138,25 +138,34 @@ function Mode:moveTagToScreen(i, moveToScreen)
     local index = self.offset + i
     local focusTag = moveToScreen.tags[index]
     focusTag:view_only()
-    if not(moveToScreen.index == self.tagMemory[i].currentScreen) then
-        local fromTag = nil
-        for currentScreen in screen do
-            if currentScreen.index == self.tagMemory[i].currentScreen then
-                fromTag = currentScreen.tags[index]
-                break
+    if moveToScreen.index == self.tagMemory[i].currentScreen then
+        return
+    end
+
+    local fromTag = nil
+    for currentScreen in screen do
+        if currentScreen.index == self.tagMemory[i].currentScreen then
+            fromTag = currentScreen.tags[index]
+            break
+        end
+    end
+
+    for currentScreen in screen do
+        if not(currentScreen.index == self.tagMemory[i].currentScreen) then
+            local clients = currentScreen.tags[index]
+            for client in clients do
+                client:move_to_tag(fromTag)
             end
         end
-
-        if fromTag == nil then
-            focusTag:view_only()
-            return
-        end
-
-        self.tagMemory[i].currentScreen = moveToScreen.index
-        focusTag:swap(fromTag)
-        fromTag:view_only()
-        focusTag.selected = false
     end
+
+    if fromTag == nil then
+        return
+    end
+
+    self.tagMemory[i].currentScreen = moveToScreen.index
+    focusTag:swap(fromTag)
+    focusTag.selected = false
 end
 
 function Mode:tagIsLocked(i)
