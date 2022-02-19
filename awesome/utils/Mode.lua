@@ -35,7 +35,7 @@ end
 function Mode:generateTags(currentScreen, expectedIndex)
     for i = 1, self.numTags, 1 do
         if #self.tags < i then
-            awful.tag.add("" .. (i % 10), {
+            local tagInstance = awful.tag.add("" .. (i % 10), {
                     layout = awful.layout.suit.tile,
                     master_fill_policy = "expand",
                     gap_single_client = true,
@@ -45,7 +45,7 @@ function Mode:generateTags(currentScreen, expectedIndex)
                 })
         else
             local tag = self.tags[i]
-            awful.tag.add(tag.name, {
+            local tagInstance = awful.tag.add(tag.name, {
                     layout = tag.layout,
                     master_fill_policy = tag.master_fill_policy,
                     gap_single_client = tag.gap_single_client,
@@ -55,6 +55,32 @@ function Mode:generateTags(currentScreen, expectedIndex)
                     selected = i == expectedIndex
                 })
         end
+
+        -- TODO: Implement this without the performance hits.
+        -- Code for rounded corners for clients.
+        -- Sadly the performance impact is too great.
+        -- Initialization takes several seconds instead of a moment.
+        -- New clients also have a slight delay when created.
+        -- Lasty a fullscreen toggle takes about 2 seconds instead of almost instantly.
+--      client.connect_signal("manage", function (newClient)
+--          if newClient.fullscreen or newClient.maximized then
+--              newClient.shape = gears.shape.rect
+--          else
+--              newClient.shape = function(cr, width, height)
+--                  gears.shape.rounded_rect(cr, width, height, 5)
+--              end
+--          end
+--      end)
+
+--      client.connect_signal("property::fullscreen", function (newClient)
+--          if newClient.fullscreen or newClient.maximized then
+--              newClient.shape = gears.shape.rect
+--          else
+--              newClient.shape = function(cr, width, height)
+--                  gears.shape.rounded_rect(cr, width, height, 5)
+--              end
+--          end
+--      end)
     end
 end
 

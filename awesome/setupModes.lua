@@ -77,11 +77,39 @@ function setupModes.run()
             gap = 4,
             master_width_factor = 0.8,
         })
+    gameDevMode:defineTag("Visual", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    gameDevMode:defineTag("Audio", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
 
+    local documentMode = Mode:new(nil, "Documents", 10, "4")
+
+    documentMode:defineTag("Terminal", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    documentMode:defineTag("Browser", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    documentMode:defineTag("Document", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    documentMode:defineTag("Present", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    
     local result = ModeCollection:new()
     result:addMode(normalMode)
     result:addMode(webDevMode)
     result:addMode(gameDevMode)
+    result:addMode(documentMode)
 
     result:addGlobalTag("Slack", "s", {
             layout = awful.layout.suit.tile,
