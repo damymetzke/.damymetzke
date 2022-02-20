@@ -14,22 +14,22 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font          = "sans 8"
+theme.font          = "Input Mono 10"
 
-theme.bg_normal     = xrdb.background
-theme.bg_focus      = xrdb.color12
-theme.bg_urgent     = xrdb.color9
+theme.bg_normal     = "#808736"
+theme.bg_focus      = "#b8bb26"
+theme.bg_urgent     = "#cc241d"
 theme.bg_minimize   = xrdb.color8
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = xrdb.foreground
-theme.fg_focus      = theme.bg_normal
-theme.fg_urgent     = theme.bg_normal
+theme.fg_normal     = "#000000"
+theme.fg_focus      = "#000000"
+theme.fg_urgent     = "#000000"
 theme.fg_minimize   = theme.bg_normal
 
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
-theme.border_normal = xrdb.color0
+theme.border_normal = "#808736"
 theme.border_focus  = theme.bg_focus
 theme.border_marked = xrdb.color10
 
