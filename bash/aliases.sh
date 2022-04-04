@@ -11,6 +11,7 @@ alias codi='code-insiders'
 alias sail='./vendor/bin/sail'
 alias nv='nvim'
 alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
+alias store='echo $(pwd) > ~/.local/share/damymetzke/stored'
 
 laravel-create() {
   curl -s "https://laravel.build/$1" | bash

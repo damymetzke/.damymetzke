@@ -7,3 +7,5 @@ fi
 
 # Let user know custom profile is loaded
 printf "\e[0;4;96mDamy Metzke\e[0m custom profile loaded!\n\n"
+
+cd $(cat ~/.local/share/damymetzke/stored)

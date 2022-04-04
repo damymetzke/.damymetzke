@@ -66,3 +66,16 @@ lspc.vuels.setup{
 lspc.rust_analyzer.setup{
   on_attach = on_attach,
 }
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspc.cssls.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lspc.tailwindcss.setup{
+  on_attach = on_attach,
+}
+
