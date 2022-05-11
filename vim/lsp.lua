@@ -66,3 +66,10 @@ lspc.vuels.setup{
 lspc.rust_analyzer.setup{
   on_attach = on_attach,
 }
+
+lspc.gopls.setup{
+  on_attach = on_attach,
+}
+lspc.cssls.setup{
+  on_attach = on_attach,
+}

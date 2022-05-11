@@ -1,6 +1,6 @@
 " Display current Git branch within brackets 
 function! status#gitbranchstyled() abort
-      let branch = gitbranch#name()
+      let branch = system('git symbolic-ref --short HEAD 2>/dev/null | tr -d "\n"')
       if branch == ''
             return ''
       endif

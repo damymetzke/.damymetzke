@@ -1,4 +1,4 @@
-local cmp = require'cmp'
+local cmp = require 'cmp'
 
   cmp.setup({
     snippet = {
@@ -7,7 +7,7 @@ local cmp = require'cmp'
         require('luasnip').lsp_expand(args.body)
       end,
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -28,7 +28,8 @@ local cmp = require'cmp'
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
-    },
+    }),
+
     sources = {
       { name = 'nvim_lsp' },
 
