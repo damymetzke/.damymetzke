@@ -8,7 +8,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Theme
   Plug 'gruvbox-community/gruvbox'
   " Better Syntax Support
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
   
   " LSP = Language Server Protocol
   Plug 'neovim/nvim-lspconfig'
@@ -55,5 +55,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   " Todos
   Plug 'folke/todo-comments.nvim'
+
+  " Tree Sitter
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+  " Harpoon
+  Plug 'ThePrimeagen/harpoon'
 
 call plug#end()

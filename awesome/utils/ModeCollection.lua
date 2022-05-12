@@ -1,6 +1,8 @@
 local awful = require "awful"
 local gears = require "gears"
 
+local tesseract = require "damymetzke.tesseract.tesseract"
+
 local MOD_SECONDARY = "Mod4"
 local MOD_PRIMARY = "Mod1"
 local MODE_NAME = "Mode"
@@ -42,6 +44,7 @@ end
 function ModeCollection:addMode(mode)
     table.insert(self.modes, mode)
     mode.offset = self.endOffset
+    mode.manager.tag_offset = self.endOffset
     self.endOffset = self.endOffset + 10
     return true
 end
@@ -59,12 +62,16 @@ function ModeCollection:addGlobalTag(name, key, properties)
 end
 
 function ModeCollection:generateTags(currentScreen)
+    local cube_sizes = {}
+
     for i, mode in pairs(self.modes) do
         if i == 1 then
             mode:generateTags(currentScreen, currentScreen.index)
         else
             mode:generateTags(currentScreen, 0)
         end
+
+        cube_sizes[i] = mode.numTags
     end
 
     for i, tag in pairs(self.globalTags) do
@@ -77,6 +84,8 @@ function ModeCollection:generateTags(currentScreen)
                 selected = false,
             })
     end
+
+    self.tesseract = tesseract.new(cube_sizes)
 end
 
 function ModeCollection:generateKeys()
@@ -130,12 +139,12 @@ function ModeCollection:generateKeys()
         result = gears.table.join(result,
             awful.key({ MOD_PRIMARY, MOD_SECONDARY }, "#" .. i + 9,
                 function()
-                    self:getCurrentMode():lockCurrentTagToScreen(i)
+                    self.tesseract:join_current_square_to_screen(i)
                 end
                 ),
             awful.key({ "Shift", MOD_SECONDARY }, "#" .. i + 9,
                 function()
-                    self:getCurrentMode():unlockScreen(i)
+                    self.tesseract:disjoin_screen(i)
                 end
                 )
             )
@@ -145,62 +154,21 @@ function ModeCollection:generateKeys()
 end
 
 function ModeCollection:tagIsVisible(tag)
-    mode = self.modes[self.currentMode]
-    if tag.index > mode.offset and tag.index <= mode.offset + mode.numTags then
-        return true
-    end
-
-    if tag.index > self.endOffset then
-        return tag.selected or #tag:clients() > 0
-    end
-
-    return false
+    return self.tesseract:square_is_visible(tag.index)
 end
 
 function ModeCollection:focusMode(i)
     self.currentMode = i
-    local mode = self.modes[i]
-    local screensWithNoMemory = {}
-    local usedIndexes = {}
-
-    -- Get all screens with no memory
-    for currentScreen in screen do
-        local nextIndex = mode.memory[currentScreen.index]
-        if nextIndex then
-            usedIndexes[nextIndex] = true
-        else
-            table.insert(screensWithNoMemory, currentScreen)
-        end
-    end
-
-    -- Create memory for new screens
-    for _, currentScreen in pairs(screensWithNoMemory) do
-        local j = 1
-        while usedIndexes[j] do
-            j = j + 1
-        end
-        usedIndexes[j] = true
-        mode.memory[currentScreen.index] = j
-    end
-
-    -- Set the tags
-    self:getCurrentMode():calculateTags()
+    self.tesseract:focus_mode(i)
 end
 
 function ModeCollection:focusTag(i)
-    self:getCurrentMode():focusTag(i)
+    self.tesseract:focus_square(i)
 end
 
 function ModeCollection:moveClientToTag(i)
-    local index = self:getCurrentMode().offset + i
-
-    if client.focus then
-        local tag = client.focus.screen.tags[index]
-        if tag then
-            client.focus:move_to_tag(tag)
-            tag:view_only()
-        end
-    end
+    self.tesseract:move_current_dot_to_square(i)
+    --client.focus:move_to_tag(tag)
 end
 
 function ModeCollection:focusGlobalTag(i)

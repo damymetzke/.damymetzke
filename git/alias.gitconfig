@@ -26,7 +26,7 @@ Date:      %C(#ffe74d)%aD%n\
     # Switch to latest main by pulling from remote, also fetches all other branches
     tom = !git switch main && git fetch --all --prune && git pull
     # Create branch and push it to remote
-    cr = !git switch -C $1 && git push --set-upstream origin
+    cr = !git switch -C $@ && git push --set-upstream origin $1 && :
     # Status
     s = status
     # Commit

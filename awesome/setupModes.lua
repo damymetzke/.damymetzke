@@ -77,8 +77,36 @@ function setupModes.run()
             gap = 4,
             master_width_factor = 0.8,
         })
+    gameDevMode:defineTag("Visual", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    gameDevMode:defineTag("Audio", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
 
-    local presentationMode = Mode:new(nil, "Presentation", 10, "4")
+    local documentMode = Mode:new(nil, "Documents", 10, "4")
+
+    documentMode:defineTag("Terminal", {
+            layout = awful.layout.suit.tile,
+            gap = 4,
+        })
+    documentMode:defineTag("Browser", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    documentMode:defineTag("Document", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    documentMode:defineTag("Present", {
+            layout = awful.layout.suit.max.fullscreen,
+            gap = 0,
+        })
+    
+    local presentationMode = Mode:new(nil, "Presentation", 10, "5")
+
 
     for i = 1,7 do
         presentationMode:defineTag("Present " .. i, {
@@ -86,7 +114,6 @@ function setupModes.run()
                 gap = 0,
             })
     end
-
 
     for i = 1,2 do
         presentationMode:defineTag("Reference " .. i, {
@@ -100,13 +127,12 @@ function setupModes.run()
             gap = 4,
         })
 
-
-
     local result = ModeCollection:new()
     result:addMode(normalMode)
     result:addMode(webDevMode)
     result:addMode(gameDevMode)
     result:addMode(presentationMode)
+    result:addMode(documentMode)
 
     result:addGlobalTag("Slack", "s", {
             layout = awful.layout.suit.tile,
