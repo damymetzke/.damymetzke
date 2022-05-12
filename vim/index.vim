@@ -1,3 +1,6 @@
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+
 source $CUSTOM_USER_CONFIG/vim/plugins.vim
 luafile $CUSTOM_USER_CONFIG/vim/trouble.lua
 luafile $CUSTOM_USER_CONFIG/vim/todo.lua

@@ -79,3 +79,6 @@ lspc.tailwindcss.setup{
   on_attach = on_attach,
 }
 
+lspc.pyright.setup{
+  on_attach = on_attach,
+}

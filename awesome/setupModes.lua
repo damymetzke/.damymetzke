@@ -78,10 +78,35 @@ function setupModes.run()
             master_width_factor = 0.8,
         })
 
+    local presentationMode = Mode:new(nil, "Presentation", 10, "4")
+
+    for i = 1,7 do
+        presentationMode:defineTag("Present " .. i, {
+                layout = awful.layout.suit.fair,
+                gap = 0,
+            })
+    end
+
+
+    for i = 1,2 do
+        presentationMode:defineTag("Reference " .. i, {
+                layout = awful.layout.suit.fair,
+                gap = 4,
+            })
+    end
+
+    presentationMode:defineTag("Terminal", {
+            layout = awful.layout.suit.fair,
+            gap = 4,
+        })
+
+
+
     local result = ModeCollection:new()
     result:addMode(normalMode)
     result:addMode(webDevMode)
     result:addMode(gameDevMode)
+    result:addMode(presentationMode)
 
     result:addGlobalTag("Slack", "s", {
             layout = awful.layout.suit.tile,
@@ -104,6 +129,10 @@ function setupModes.run()
             gap = 8,
         })
     result:addGlobalTag("Keepass", "k", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Email", "e", {
             layout = awful.layout.suit.tile,
             gap = 8,
         })
