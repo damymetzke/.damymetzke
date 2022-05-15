@@ -92,7 +92,7 @@ function Mode:defineTag(name, properties)
     end
 
     table.insert(self.tags, gears.table.crush({
-                name = name,
+                name = '[' .. name .. ']',
                 layout = awful.layout.suit.tile,
                 master_fill_policy = "expand",
                 master_width_factor = 0.5,
