@@ -4,6 +4,27 @@ vim.api.nvim_set_var("gruvbox_transparent_bg", 1)
 vim.api.nvim_exec("colorscheme gruvbox", false)
 vim.api.nvim_exec("hi! Normal ctermbg=NONE guibg=NONE", false)
 
+local redItalic = vim.api.nvim_get_hl_by_name("GruvboxRed", 0)
+redItalic.italic = 1;
+
+local orangeItalic = vim.api.nvim_get_hl_by_name("GruvboxOrange", 0)
+orangeItalic.italic = 1;
+
+local blueItalic = vim.api.nvim_get_hl_by_name("GruvboxBlue", 0)
+blueItalic.italic = 1;
+
+local aquaItalic = vim.api.nvim_get_hl_by_name("GruvboxAqua", 0)
+aquaItalic.italic = 1;
+
+vim.api.nvim_set_hl(0, "DiagnosticError", redItalic)
+vim.api.nvim_set_hl(0, "DiagnosticWarn", orangeItalic)
+vim.api.nvim_set_hl(0, "DiagnosticInfo", blueItalic)
+vim.api.nvim_set_hl(0, "DiagnosticHint", aquaItalic)
+
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {
+  link = "GruvboxOrangeUnderline"
+})
+
 -- term gui colors
 vim.o.termguicolors = 1
 
