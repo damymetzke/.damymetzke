@@ -21,11 +21,11 @@ local keybind_list = {
   {"<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>"},
   {"<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>"},
   {"gr", "<cmd>lua vim.lsp.buf.references()<CR>"},
-  {"<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>"},
+  {"<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>"},
   {"[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>"},
   {"]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>"},
   {"<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>"},
-  {"<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>"},
+  {"<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>"},
 }
 
 -- Keybinds
@@ -88,5 +88,9 @@ lspc.gopls.setup{
 }
 
 lspc.cssls.setup{
+  on_attach = on_attach,
+}
+
+lspc.taplo.setup{
   on_attach = on_attach,
 }

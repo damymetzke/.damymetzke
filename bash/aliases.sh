@@ -13,6 +13,10 @@ alias nv='nvim'
 alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
 alias store='echo $(pwd) > ~/.local/share/damymetzke/stored'
 
+rep() {
+  cd $(repo go $@)
+}
+
 laravel-create() {
   curl -s "https://laravel.build/$1" | bash
 }

@@ -3,6 +3,7 @@
     autocrlf = false
 [pull]
     rebase = false
+    ff = true
 [init]
     defaultBranch = main
 [merge]
