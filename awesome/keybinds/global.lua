@@ -60,10 +60,10 @@ local runKeys = gears.table.join(
               {description = "lua execute prompt", group = RUN_NAME}),
 
     -- Run terminal
-    awful.key({ MOD_PRIMARY }, "Return", function () awful.spawn("alacritty -e tmux new -s root") end,
+    awful.key({ MOD_PRIMARY }, "Return", function () awful.spawn("bash -c \"WINIT_X11_SCALE_FACTOR=1 alacritty -e tmux new -s root\"") end,
               {description = "open a terminal", group = RUN_NAME}),
     -- Attach terminal
-    awful.key({ MOD_PRIMARY, "Shift" }, "Return", function () awful.spawn("alacritty -e tmux new -t root") end,
+    awful.key({ MOD_PRIMARY, "Shift" }, "Return", function () awful.spawn("bash -c \"WINIT_X11_SCALE_FACTOR=1 alacritty -e tmux new -t root\"") end,
               {description = "open a terminal", group = RUN_NAME}),
 
     -- Run prompt

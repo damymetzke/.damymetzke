@@ -1,5 +1,5 @@
 font:
-  size: 7.0
+  size: 9.0
   normal:
     family: InputMono
     style: Regular
@@ -12,12 +12,14 @@ font:
   bold_italic:
     family: InputMono
     style: BoldItalic
+  scale_with_dpi: false
 shell:
   program: /bin/bash
   args:
     - --login
   env:
     TERM: xterm-256color
+    WINIT_X11_SCALE_FACTOR: "0"
 window:
   opacity: 0.90
 colors:

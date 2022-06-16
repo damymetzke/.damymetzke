@@ -94,3 +94,12 @@ lspc.cssls.setup{
 lspc.taplo.setup{
   on_attach = on_attach,
 }
+
+lspc.java_language_server.setup{
+  on_attach = on_attach,
+  cmd = { "~/source_installs/java-language-server/lang_server_linux.sh" },
+}
+
+lspc.texlab.setup{
+  on_attach = on_attach,
+}
