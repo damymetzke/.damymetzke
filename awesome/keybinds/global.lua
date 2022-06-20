@@ -66,6 +66,9 @@ local runKeys = gears.table.join(
     awful.key({ MOD_PRIMARY, "Shift" }, "Return", function () awful.spawn("bash -c \"WINIT_X11_SCALE_FACTOR=1 alacritty -e tmux new -t root\"") end,
               {description = "open a terminal", group = RUN_NAME}),
 
+    awful.key({ MOD_PRIMARY }, "e", function () awful.spawn("vivaldi") end,
+              {description = "open the web browser", group = RUN_NAME}),
+
     -- Run prompt
     awful.key({ MOD_PRIMARY }, "r", function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = RUN_NAME})
