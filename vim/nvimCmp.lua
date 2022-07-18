@@ -32,9 +32,23 @@ local luasnip = require 'luasnip'
 
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      -- ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
       ['<C-l>'] = cmp.mapping.confirm({ select = true }),
+      ['<C-j>'] = cmp.mapping(function(fallback)
+        if luasnip.jumpable(1) then
+          luasnip.jump(1)
+        else
+          fallback()
+        end
+      end),
+      ['<C-k>'] = cmp.mapping(function(fallback)
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end),
     }),
 
     sources = {
