@@ -126,7 +126,7 @@ function cube:apply_tag_order()
   end
 
   -- Move cursor to the primary screen
-  awful.screen.focus(self.screens[1].index)
+  -- awful.screen.focus(self.screens[1].index)
   
   -- FIXME: Forcefully focus the client on the primary screen
 end

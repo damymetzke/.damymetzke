@@ -62,4 +62,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Harpoon
   Plug 'ThePrimeagen/harpoon'
 
+  " Java LSP
+  Plug 'mfussenegger/nvim-jdtls'
+
 call plug#end()
