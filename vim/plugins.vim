@@ -28,8 +28,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 
-  " Lightline
-  Plug 'itchyny/lightline.vim'
+  " Lualine
+  Plug 'nvim-lualine/lualine.nvim'
   " Emmet
   Plug 'mattn/emmet-vim'
   " Git Gutter
