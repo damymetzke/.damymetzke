@@ -11,6 +11,7 @@ luafile $CUSTOM_USER_CONFIG/vim/settings.lua
 luafile $CUSTOM_USER_CONFIG/vim/wslSettings.lua
 luafile $CUSTOM_USER_CONFIG/vim/keybinds.lua
 luafile $CUSTOM_USER_CONFIG/vim/harpoon.lua
+luafile $CUSTOM_USER_CONFIG/vim/litee.lua
 source $CUSTOM_USER_CONFIG/vim/commands.vim
 source $CUSTOM_USER_CONFIG/vim/language.vim
 source $CUSTOM_USER_CONFIG/vim/status.vim

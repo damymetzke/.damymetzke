@@ -65,4 +65,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Java LSP
   Plug 'mfussenegger/nvim-jdtls'
 
+  " GH.nvim
+  Plug 'ldelossa/litee.nvim'
+  Plug 'ldelossa/gh.nvim'
+
 call plug#end()
