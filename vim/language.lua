@@ -1,4 +1,4 @@
-vim.api.nvim_create_augroup("filetypedetect", { clear = true })
+vim.api.nvim_create_augroup("manualfiletypedetect", { clear = true })
 
 vim.api.nvim_create_autocmd(
   {
@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd(
     "BufRead",
   },
   {
-    group = 'filetypedetect',
+    group = 'manualfiletypedetect',
     pattern = { '*.blade.php' },
     command = ':set filetype=blade',
   })

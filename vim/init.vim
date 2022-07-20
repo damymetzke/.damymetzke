@@ -16,5 +16,3 @@ luafile $CUSTOM_USER_CONFIG/vim/commands.lua
 luafile $CUSTOM_USER_CONFIG/vim/luaLine.lua
 luafile $CUSTOM_USER_CONFIG/vim/language.lua
 luafile $CUSTOM_USER_CONFIG/vim/lsp.lua
-
-source $CUSTOM_USER_CONFIG/vim/languages/index.vim

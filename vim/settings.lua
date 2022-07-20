@@ -90,7 +90,17 @@ vim.api.nvim_exec("autocmd BufWritePre *.php Prettier", false)
 vim.api.nvim_set_var("NERDTreeShowHidden", 1)
 
 -- Reset spelling when new buffer is opened
-vim.api.nvim_exec("autocmd FileType * setlocal nospell", false)
+vim.api.nvim_create_augroup("spell_set", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "spell_set",
+    callback = function()
+      if vim.b.should_spell == true then
+        vim.wo.spell = true
+      else  
+        vim.wo.spell = false
+      end
+    end
+})
 
 -- Markdown preview styling
 vim.api.nvim_set_var("mkdp_markdown_css", os.getenv("CUSTOM_USER_CONFIG") .. "/css/markdown_preview.css")
