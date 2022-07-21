@@ -52,7 +52,10 @@ return require('packer').startup(function()
   }
 
   -- Snippet engine
-  use 'L3MON4D3/LuaSnip'
+  use {
+    'L3MON4D3/LuaSnip',
+    config = require'config/luasnip',
+  }
 
   use {
     "folke/trouble.nvim",

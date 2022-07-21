@@ -5,7 +5,6 @@ lua require'pack'
 luafile $CUSTOM_USER_CONFIG/vim/treeSitter.lua
 luafile $CUSTOM_USER_CONFIG/vim/trouble.lua
 luafile $CUSTOM_USER_CONFIG/vim/todo.lua
-luafile $CUSTOM_USER_CONFIG/vim/snippets.lua
 luafile $CUSTOM_USER_CONFIG/vim/nvimCmp.lua
 luafile $CUSTOM_USER_CONFIG/vim/settings.lua
 luafile $CUSTOM_USER_CONFIG/vim/keybinds.lua
