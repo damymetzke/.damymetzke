@@ -48,7 +48,8 @@ return require('packer').startup(function()
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
       {'saadparwaiz1/cmp_luasnip'}
-    }
+    },
+    config = require'config/nvimcmp',
   }
 
   -- Snippet engine
