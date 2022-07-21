@@ -38,3 +38,16 @@ vim.api.nvim_create_user_command(
   {nargs="*"}
 )
 
+-- Wrapper for Work Buddy
+vim.api.nvim_create_user_command(
+  'Work',
+    run_command_in_terminal("work"),
+  {nargs="*"}
+)
+
+-- Wrapper for Repo
+vim.api.nvim_create_user_command(
+  'Repo',
+    run_command_in_terminal("repo"),
+  {nargs="*"}
+)
