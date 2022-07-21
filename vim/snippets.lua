@@ -17,6 +17,14 @@ snip.add_snippets("java", {
       snip.text_node({");"}),
     }
   ),
+  snip.snippet(
+    {trig="psvm"},
+    {
+      snip.text_node({"public static void main(String[] args) {", ""}),
+      snip.insert_node(0),
+      snip.text_node({"", "}"}),
+    }
+  ),
 })
 
 snip.add_snippets("rust", {
