@@ -11,7 +11,10 @@ return require('packer').startup(function()
   use 'gruvbox-community/gruvbox'
 
   -- LSP configuration
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    config = require'config/lspconfig',
+  }
 
   -- File explorer
   use 'scrooloose/NERDTree'
@@ -26,7 +29,8 @@ return require('packer').startup(function()
   -- Status line
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = require'config/lualine',
   }
 
   -- Emmet expansion
