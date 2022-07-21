@@ -8,7 +8,6 @@ luafile $CUSTOM_USER_CONFIG/vim/todo.lua
 luafile $CUSTOM_USER_CONFIG/vim/snippets.lua
 luafile $CUSTOM_USER_CONFIG/vim/nvimCmp.lua
 luafile $CUSTOM_USER_CONFIG/vim/settings.lua
-luafile $CUSTOM_USER_CONFIG/vim/wslSettings.lua
 luafile $CUSTOM_USER_CONFIG/vim/keybinds.lua
 luafile $CUSTOM_USER_CONFIG/vim/commands.lua
 luafile $CUSTOM_USER_CONFIG/vim/language.lua
