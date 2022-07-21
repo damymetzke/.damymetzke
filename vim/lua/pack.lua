@@ -71,9 +71,15 @@ return require('packer').startup(function()
   -- Java LSP support
   use 'mfussenegger/nvim-jdtls'
 
+  use {
+    'ldelossa/litee.nvim',
+    config = require'config/litee',
+  }
+
   -- Gh commands from within vim
   use {
     'ldelossa/gh.nvim',
-    requires = {{ 'ldelossa/litee.nvim' }}
+    requires = {{ 'ldelossa/litee.nvim' }},
+    config = require'config/gh',
   }
 end)
