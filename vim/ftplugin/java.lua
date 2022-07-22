@@ -37,26 +37,9 @@ local java_config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   cmd = {
-
-    'java',
-
-    '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-    '-Dosgi.bundles.defaultStartLevel=4',
-    '-Declipse.product=org.eclipse.jdt.ls.core.product',
-    '-Dlog.protocol=true',
-    '-Dlog.level=ALL',
-    '-Xms1g',
-    '--add-modules=ALL-SYSTEM',
-    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-
-    '-jar', '/home/dmetzke/manual-installs/jdt/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-
-
-    '-configuration', '/home/dmetzke/manual-installs/jdt/config_linux',
-
-
-    '-data', '/home/dmetzke/tmp/dumb_java_data_directory/' .. project_name,
+    'bash',
+    '/home/dmetzke/manual-installs/jdt/run-nvim.sh',
+    project_name,
   },
   -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.
