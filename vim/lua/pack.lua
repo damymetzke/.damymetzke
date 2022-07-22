@@ -73,6 +73,7 @@ return require('packer').startup(function()
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    config = require'config/nvim_treesitter',
   }
 
   -- Java LSP support
