@@ -17,13 +17,17 @@ return require('packer').startup(function()
   }
 
   -- File explorer
-  use 'scrooloose/NERDTree'
+  use {
+    'scrooloose/NERDTree',
+    config = require'config/nerdtree',
+  }
 
   -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.0',
     requires = {{ 'nvim-lua/plenary.nvim' }},
+    config = require'config/telescope',
   }
 
   -- Status line
