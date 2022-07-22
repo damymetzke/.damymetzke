@@ -64,7 +64,10 @@ return require('packer').startup(function()
   }
 
   -- Todo comments
-  use 'folke/todo-comments.nvim'
+  use {
+    'folke/todo-comments.nvim',
+    config = require'config/todo_comments',
+  }
 
   -- Treesitter for better syntax highlighting
   use {
