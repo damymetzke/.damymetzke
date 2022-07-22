@@ -1,3 +1,6 @@
+-- Color support
+vim.opt.termguicolors = true
+
 -- Color scheme
 vim.api.nvim_set_var("gruvbox_guisp_fallback", "bg")
 vim.api.nvim_set_var("gruvbox_transparent_bg", 1)
