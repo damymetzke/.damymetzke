@@ -61,11 +61,13 @@ return require('packer').startup(function()
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
+    config = require'config/trouble',
   }
 
   -- Todo comments
   use {
     'folke/todo-comments.nvim',
+    requires = {{ 'nvim-lua/plenary.nvim' }},
     config = require'config/todo_comments',
   }
 
