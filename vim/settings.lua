@@ -27,7 +27,6 @@ vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {
 })
 
 -- Comments
-
 local commentItalic = vim.api.nvim_get_hl_by_name("Comment", 0)
 commentItalic.italic = 1;
 
@@ -81,11 +80,6 @@ vim.bo.undofile = true
 -- Spell check language
 vim.o.spelllang = "en_us"
 
--- Prettier
-vim.api.nvim_set_var("prettier#autoformat_config_present", 1)
-vim.api.nvim_set_var("prettier#autoformat_require_pragma", 0)
-vim.api.nvim_exec("autocmd BufWritePre *.php Prettier", false)
-
 -- Hidden files in NERDTree
 vim.api.nvim_set_var("NERDTreeShowHidden", 1)
 
@@ -101,7 +95,4 @@ vim.api.nvim_create_autocmd("FileType", {
       end
     end
 })
-
--- Markdown preview styling
-vim.api.nvim_set_var("mkdp_markdown_css", os.getenv("CUSTOM_USER_CONFIG") .. "/css/markdown_preview.css")
 
