@@ -101,6 +101,13 @@ return require('packer').startup(function()
     config = require'config/gh',
   }
 
+  -- HTTP request client
+  use {
+    "NTBBloodbath/rest.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = require'config.rest_nvim',
+  }
+
   -- Finish bootstrap
   if packer_bootstrap then
     require('packer').sync()
