@@ -7,6 +7,10 @@ vim.api.nvim_set_var("gruvbox_transparent_bg", 1)
 vim.api.nvim_exec("colorscheme gruvbox", false)
 vim.api.nvim_exec("hi! Normal ctermbg=NONE guibg=NONE", false)
 
+-- Only one 
+vim.opt.laststatus = 4
+vim.api.nvim_set_hl(0, "WinSeparator", {bg="none"})
+
 -- Lsp messages
 local redItalic = vim.api.nvim_get_hl_by_name("GruvboxRed", 0)
 redItalic.italic = 1;
