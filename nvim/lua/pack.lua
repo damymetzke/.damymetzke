@@ -17,13 +17,13 @@ return require('packer').startup(function()
   -- LSP configuration
   use {
     'neovim/nvim-lspconfig',
-    config = require'config/lspconfig',
+    config = require'config.lspconfig',
   }
 
   -- File explorer
   use {
     'scrooloose/NERDTree',
-    config = require'config/nerdtree',
+    config = require'config.nerdtree',
   }
 
   -- Fuzzy finder
@@ -31,14 +31,14 @@ return require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     tag = '0.1.0',
     requires = {{ 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-ui-select.nvim' }},
-    config = require'config/telescope',
+    config = require'config.telescope',
   }
 
   -- Status line
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = require'config/lualine',
+    config = require'config.lualine',
   }
 
   -- Emmet expansion
@@ -57,33 +57,33 @@ return require('packer').startup(function()
       {'hrsh7th/cmp-nvim-lsp'},
       {'saadparwaiz1/cmp_luasnip'}
     },
-    config = require'config/nvimcmp',
+    config = require'config.nvimcmp',
   }
 
   -- Snippet engine
   use {
     'L3MON4D3/LuaSnip',
-    config = require'config/luasnip',
+    config = require'config.luasnip',
   }
 
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = require'config/trouble',
+    config = require'config.trouble',
   }
 
   -- Todo comments
   use {
     'folke/todo-comments.nvim',
     requires = {{ 'nvim-lua/plenary.nvim' }},
-    config = require'config/todo_comments',
+    config = require'config.todo_comments',
   }
 
   -- Treesitter for better syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-    config = require'config/nvim_treesitter',
+    config = require'config.nvim_treesitter',
   }
 
   -- Java LSP support
@@ -91,14 +91,14 @@ return require('packer').startup(function()
 
   use {
     'ldelossa/litee.nvim',
-    config = require'config/litee',
+    config = require'config.litee',
   }
 
   -- Gh commands from within vim
   use {
     'ldelossa/gh.nvim',
     requires = {{ 'ldelossa/litee.nvim' }},
-    config = require'config/gh',
+    config = require'config.gh',
   }
 
   -- HTTP request client
