@@ -17,7 +17,7 @@ return require('packer').startup(function()
   -- LSP configuration
   use {
     'neovim/nvim-lspconfig',
-    config = require'config.lspconfig',
+    config = require'config.nvim_lspconfig',
   }
 
   -- File explorer
@@ -31,14 +31,14 @@ return require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     tag = '0.1.0',
     requires = {{ 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-ui-select.nvim' }},
-    config = require'config.telescope',
+    config = require'config.telescope_nvim',
   }
 
   -- Status line
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = require'config.lualine',
+    config = require'config.lualine_nvim',
   }
 
   -- Emmet expansion
@@ -57,7 +57,7 @@ return require('packer').startup(function()
       {'hrsh7th/cmp-nvim-lsp'},
       {'saadparwaiz1/cmp_luasnip'}
     },
-    config = require'config.nvimcmp',
+    config = require'config.nvim_cmp',
   }
 
   -- Snippet engine
@@ -69,14 +69,14 @@ return require('packer').startup(function()
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = require'config.trouble',
+    config = require'config.trouble_nvim',
   }
 
   -- Todo comments
   use {
     'folke/todo-comments.nvim',
     requires = {{ 'nvim-lua/plenary.nvim' }},
-    config = require'config.todo_comments',
+    config = require'config.todo_comments_nvim',
   }
 
   -- Treesitter for better syntax highlighting
@@ -91,14 +91,14 @@ return require('packer').startup(function()
 
   use {
     'ldelossa/litee.nvim',
-    config = require'config.litee',
+    config = require'config.litee_nvim',
   }
 
   -- Gh commands from within vim
   use {
     'ldelossa/gh.nvim',
     requires = {{ 'ldelossa/litee.nvim' }},
-    config = require'config.gh',
+    config = require'config.gh_nvim',
   }
 
   -- HTTP request client
