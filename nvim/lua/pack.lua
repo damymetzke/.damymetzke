@@ -56,7 +56,8 @@ return require('packer').startup(function()
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
       {'hrsh7th/cmp-nvim-lua'},
-      {'saadparwaiz1/cmp_luasnip'}
+      {'saadparwaiz1/cmp_luasnip'},
+      {'onsails/lspkind.nvim'}
     },
     config = require'config.nvim_cmp',
   }
