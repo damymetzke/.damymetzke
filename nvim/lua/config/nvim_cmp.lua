@@ -33,17 +33,16 @@ return function()
 
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
         ['<S-Esc>'] = cmp.mapping.close(),
-        ['<Space>'] = cmp.mapping.confirm({ select = false }),
-        ['<C-j>'] = cmp.mapping(function(fallback)
+        ['<C-Space>'] = cmp.mapping.confirm({ select = false }),
+        ['<C-n>'] = cmp.mapping(function(fallback)
           if luasnip.jumpable(1) then
             luasnip.jump(1)
           else
             fallback()
           end
         end),
-        ['<C-k>'] = cmp.mapping(function(fallback)
+        ['<C-l>'] = cmp.mapping(function(fallback)
           if luasnip.jumpable(-1) then
             luasnip.jump(-1)
           else
@@ -54,6 +53,7 @@ return function()
 
       sources = {
         { name = 'luasnip' },
+        { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
       }
     })

@@ -55,6 +55,7 @@ return require('packer').startup(function()
     'hrsh7th/nvim-cmp',
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lua'},
       {'saadparwaiz1/cmp_luasnip'}
     },
     config = require'config.nvim_cmp',
