@@ -1,5 +1,5 @@
 return function()
-  local luasnip = require"luasnip"
+  local luasnip = require'luasnip'
 
   local add = luasnip.add_snippets
   local snippet = luasnip.snippet
@@ -7,6 +7,7 @@ return function()
   local t = luasnip.text_node
   local i = luasnip.insert_node
   local f = luasnip.function_node
+  local fmt = require'luasnip.extras.fmt'.fmt
 
   add("java", {
     snippet(
@@ -39,33 +40,44 @@ return function()
     -- Create a match block
     -- TODO: Automatically insert match arms when possible
     snippet(
-      {trig=".match"},
-      {
-        t({"match "}),
-        i(1),
-        t({" {", ""}),
-        i(0),
-        t({"", "}"}),
-      }
+      "match",
+        fmt(
+          [[
+            match {} {{
+              {}
+            }}
+          ]],
+          {
+            i(1),
+            i(0),
+          }
+        )
     ),
     -- Create an impl block with a `new` function
+    -- TODO: Create a more comprehensive snippet
     snippet(
-      {trig="impl:new"},
-      {
-        t({"impl "}),
-        i(1),
-        t({" {", "  pub fn new("}),
-        i(2),
-        t({") -> Self {", "  "}),
-        f(
-          function(args, snip, user_arg_1) return args[1][1] end,
-          {1},
-          { user_args = {""}}
-        ),
-        t({" {", "    "}),
-        i(0),
-        t({"", "  }", "}"}),
-      }
+      "impl:new",
+      fmt(
+        [[
+          impl {} {{
+            pub fn new({}) -> Self {{
+              {} {{
+                {}
+              }}
+            }}
+          }}
+        ]],
+        {
+          i(1),
+          i(2),
+          f(
+            function(args, snip, user_arg_1) return args[1][1] end,
+            {1},
+            { user_args = {""}}
+          ),
+          i(0),
+        }
+      )
     ),
   })
 end
