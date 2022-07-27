@@ -33,6 +33,9 @@ vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", {
   link = "GruvboxOrangeUnderline"
 })
 
+-- Custom background
+vim.api.nvim_set_hl(0, "NonEditor", {bg="#302e36"})
+
 -- Comments
 local commentItalic = vim.api.nvim_get_hl_by_name("Comment", 0)
 commentItalic.italic = 1;
