@@ -1,63 +1,70 @@
 return function()
-  local snip = require"luasnip"
+  local luasnip = require"luasnip"
 
-  snip.add_snippets("java", {
-    snip.snippet(
+  local add = luasnip.add_snippets
+  local snippet = luasnip.snippet
+
+  local t = luasnip.text_node
+  local i = luasnip.insert_node
+  local f = luasnip.function_node
+
+  add("java", {
+    snippet(
       {trig="sout"},
       {
-        snip.text_node({"System.out.println("}),
-        snip.insert_node(1),
-        snip.text_node({");"}),
+        t({"System.out.println("}),
+        i(1),
+        t({");"}),
       }
     ),
-    snip.snippet(
+    snippet(
       {trig="serr"},
       {
-        snip.text_node({"System.err.println("}),
-        snip.insert_node(1),
-        snip.text_node({");"}),
+        t({"System.err.println("}),
+        i(1),
+        t({");"}),
       }
     ),
-    snip.snippet(
+    snippet(
       {trig="psvm"},
       {
-        snip.text_node({"public static void main(String[] args) {", ""}),
-        snip.insert_node(0),
-        snip.text_node({"", "}"}),
+        t({"public static void main(String[] args) {", ""}),
+        i(0),
+        t({"", "}"}),
       }
     ),
   })
 
-  snip.add_snippets("rust", {
+  add("rust", {
     -- Create a match block
     -- TODO: Automatically insert match arms when possible
-    snip.snippet(
+    snippet(
       {trig=".match"},
       {
-        snip.text_node({"match "}),
-        snip.insert_node(1),
-        snip.text_node({" {", ""}),
-        snip.insert_node(0),
-        snip.text_node({"", "}"}),
+        t({"match "}),
+        i(1),
+        t({" {", ""}),
+        i(0),
+        t({"", "}"}),
       }
     ),
     -- Create an impl block with a `new` function
-    snip.snippet(
+    snippet(
       {trig="impl:new"},
       {
-        snip.text_node({"impl "}),
-        snip.insert_node(1),
-        snip.text_node({" {", "  pub fn new("}),
-        snip.insert_node(2),
-        snip.text_node({") -> Self {", "  "}),
-        snip.function_node(
+        t({"impl "}),
+        i(1),
+        t({" {", "  pub fn new("}),
+        i(2),
+        t({") -> Self {", "  "}),
+        f(
           function(args, snip, user_arg_1) return args[1][1] end,
           {1},
           { user_args = {""}}
         ),
-        snip.text_node({" {", "    "}),
-        snip.insert_node(0),
-        snip.text_node({"", "  }", "}"}),
+        t({" {", "    "}),
+        i(0),
+        t({"", "  }", "}"}),
       }
     ),
   })
