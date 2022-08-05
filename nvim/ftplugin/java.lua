@@ -40,6 +40,7 @@ local java_config = {
     'bash',
     '/home/dmetzke/manual-installs/jdt/run-nvim.sh',
     project_name,
+    '-data', '/home/dmetzke/tmp/dumb_java_data_directory/' .. project_name,
   },
   -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.
