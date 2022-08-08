@@ -1,8 +1,2 @@
 [include]
-  path = "linux.gitconfig"
-  path = "alias.gitconfig"
-  path = "identity.gitconfig"
-  path = "etc.gitconfig"
-  # This is for configuration that should not be in the repository
-  # This could be used for overriding configuration specific to a organization
-  path = "~/.config/damymetzke/.gitconfig"
+  path = "index.gitconfig"
