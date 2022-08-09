@@ -104,15 +104,8 @@ return require('packer').startup(function()
   }
 
   -- HTTP request client
-  --
-  -- Important: this is a fork maintained by a random person.
-  -- This is because the original repo has a bug and it seems development has stopped.
-  -- See: https://github.com/NTBBloodbath/rest.nvim/issues/114
-  -- I manually checked the commit, and there is no malicious code.
-  -- However it would be ill adviced to blindly trust this person, so I locked the commit.
   use {
-    "teto/rest.nvim",
-    commit = "753c4e597b595d42912af04fc02a92fc19af77d2",
+    "rest-nvim/rest.nvim",
     requires = { "nvim-lua/plenary.nvim" },
     config = require'config.rest_nvim',
   }
