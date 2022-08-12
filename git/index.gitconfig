@@ -4,4 +4,6 @@
   path = "etc.gitconfig"
   # This is for configuration that should not be in the repository
   # This could be used for overriding configuration specific to a organization
+  path = "local/.gitconfig"
+  # This is the old version of the path above 
   path = "~/.config/damymetzke/.gitconfig"
