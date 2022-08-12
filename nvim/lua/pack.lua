@@ -23,6 +23,9 @@ return require('packer').startup(function()
   -- File explorer
   use {
     'scrooloose/NERDTree',
+    keys = {
+      {"n", "<leader>t"},
+    },
     config = require'config.nerdtree',
   }
 
@@ -89,7 +92,15 @@ return require('packer').startup(function()
   }
 
   -- Java LSP support
-  use 'mfussenegger/nvim-jdtls'
+  use {
+    'mfussenegger/nvim-jdtls',
+    -- This crrently triggers *after* ftplugin files
+    -- Because of this it doesn't work
+    -- The better option is probably to use a require in ftplugin
+    -- Then use the module key here to load the plugin
+    -- TODO: Figure out how to do this
+    -- ft = { "java" },
+  }
 
   use {
     'ldelossa/litee.nvim',
@@ -100,6 +111,8 @@ return require('packer').startup(function()
   use {
     'ldelossa/gh.nvim',
     requires = {{ 'ldelossa/litee.nvim' }},
+    -- NOTE: This won't work as well if the plugin author changes the commands.
+    --       Perhaps it would make sense to programatically generate this list.
     cmd = {
       'GH',
       'GHOpenPR',
@@ -141,6 +154,7 @@ return require('packer').startup(function()
   use {
     "rest-nvim/rest.nvim",
     requires = { "nvim-lua/plenary.nvim" },
+    ft = {'http'},
     config = require'config.rest_nvim',
   }
 
