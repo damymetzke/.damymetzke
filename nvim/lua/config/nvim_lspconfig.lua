@@ -9,7 +9,7 @@ return function()
   -- Leader <space>
   vim.g.mapleader = " "
 
-  on_attach = require'share.lsp_keybinds'
+  local on_attach = require'share.lsp_keybinds'
 
   -- vim.lsp.set_log_level("debug")
   -- vim.lsp.set_log_level("info")
