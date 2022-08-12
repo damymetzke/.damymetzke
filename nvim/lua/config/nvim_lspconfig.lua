@@ -26,7 +26,7 @@ return function()
     {"[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>"},
     {"]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>"},
     {"<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>"},
-    {"<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>"},
+    {"<leader>f", "<cmd>lua vim.lsp.buf.formatting({ async = true })<CR>"},
   }
 
   -- Keybinds
