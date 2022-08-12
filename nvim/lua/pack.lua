@@ -94,12 +94,7 @@ return require('packer').startup(function()
   -- Java LSP support
   use {
     'mfussenegger/nvim-jdtls',
-    -- This crrently triggers *after* ftplugin files
-    -- Because of this it doesn't work
-    -- The better option is probably to use a require in ftplugin
-    -- Then use the module key here to load the plugin
-    -- TODO: Figure out how to do this
-    -- ft = { "java" },
+    module = { "share.jdtls" },
   }
 
   use {
