@@ -55,6 +55,10 @@ vim.bo.expandtab = true
 vim.o.smartindent = true
 vim.bo.smartindent = true
 
+-- 80 character 'limit'
+vim.o.colorcolumn = "80"
+vim.wo.colorcolumn = "80"
+
 -- Text wrap
 vim.o.wrap = false
 vim.wo.wrap = false
