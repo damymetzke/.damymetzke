@@ -1,4 +1,10 @@
-local map = require'util/map'
+-- `map` is used to create a key map.
+local map = require'util.map'
+-- `bind` will define the keys of a key map, but not the implementation.
+-- The implementation can be defined somewhere else, at any time.
+-- This is primarily used to support lazy loading plugins,
+-- while keeping all key bindings in a single file
+local bind = require'util.bridge_map'.bind
 
 -- Leader <space> 
 vim.g.mapleader = " "
@@ -37,3 +43,12 @@ map("n", "<Leader>qj", ":cnext<CR>")
 map("n", "<Leader>qk", ":cprevious<CR>")
 map("n", "<Leader>ql", ":clast<CR>")
 map("n", "<Leader>qh", ":cfirst<CR>")
+
+-- NERDTree
+bind("nerdtree:toggle", "n", "<leader>t")
+
+-- rest.nvim
+bind("rest_nvim:make_request", "n", "<leader>hr")
+
+-- telescope.nvim
+bind("telescope_nvim:open", "n", "<C-p>")

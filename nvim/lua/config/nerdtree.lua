@@ -1,6 +1,6 @@
 return function()
-  local map = require'util/map'
+  local impl = require'util.bridge_map'.implement
 
   -- Toggle NERDTree
-  map("n", "<leader>t", ":NERDTreeToggle<CR>")
+  impl("nerdtree:toggle", ":NERDTreeToggle<CR>")
 end

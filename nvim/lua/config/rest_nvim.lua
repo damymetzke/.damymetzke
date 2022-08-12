@@ -1,5 +1,5 @@
 return function()
-  local map = require'util.map'
+  local impl = require'util.bridge_map'.implement
 
   require'rest-nvim'.setup({
     result_split_horizontal = true,
@@ -18,6 +18,5 @@ return function()
     yank_dry_run = true,
   })
 
-  -- 
-  map("n", "<Leader>hr", "<Plug>RestNvim")
+  impl("rest_nvim:make_request", "<Plug>RestNvim")
 end

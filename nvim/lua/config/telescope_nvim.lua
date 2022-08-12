@@ -1,9 +1,6 @@
 return function()
-  local map = require'util/map'
   local telescope = require'telescope'
-
-  -- Open telescope
-  map("n", "<C-p>", ":Telescope find_files hidden=true<CR>")
+  local impl = require'util.bridge_map'.implement
 
   telescope.setup {
     extensions = {
@@ -15,4 +12,7 @@ return function()
   }
 
   telescope.load_extension("ui-select")
+
+  -- Open telescope
+  impl("telescope_nvim:open", ":Telescope find_files hidden=true<CR>")
 end
