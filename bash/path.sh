@@ -8,5 +8,5 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Include snap
-export PATH="$PATH:/snap/bin"
+# Include snap and cargo
+export PATH="$PATH:/snap/bin:/home/dmetzke/.cargo/bin"

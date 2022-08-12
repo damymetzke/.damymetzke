@@ -20,6 +20,6 @@ rep() {
   cd $(repo path $@)
 }
 
-laravel-create() {
-  curl -s "https://laravel.build/$1" | bash
-}
+# laravel-create() {
+#   curl -s "https://laravel.build/$1" | bash
+# }
