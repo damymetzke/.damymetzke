@@ -129,6 +129,24 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+
+-- Create a battery widged
+battery_widget = wibox.widget.textbox()
+battery_widget:set_text("__%")
+
+battery_widget_timer = timer({timeout = 3})
+battery_widget_timer:connect_signal(
+  "timeout",
+  function()
+    fperc = assert(io.popen("display_power", "r"))
+    local perc = fperc:read("*a")
+    battery_widget:set_text(perc)
+    fperc:close()
+  end
+)
+
+battery_widget_timer:start()
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock(" %a %b %d |---| %I:%M %p")
 
@@ -236,6 +254,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            battery_widget,
             mytextclock,
             s.mylayoutbox,
         },
