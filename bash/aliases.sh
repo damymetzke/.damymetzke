@@ -17,7 +17,7 @@ alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
 alias store='echo $(pwd) > ~/.local/share/damymetzke/stored'
 
 rep() {
-  cd $(repo path $@)
+  cd $(repo -otext path $@)
 }
 
 # laravel-create() {
