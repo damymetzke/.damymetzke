@@ -1,0 +1,5 @@
+git_protocol: ssh
+prompt: enabled
+pager: less
+aliases:
+  me: issue list --assignee=@me
