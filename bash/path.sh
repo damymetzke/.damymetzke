@@ -9,4 +9,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Include snap and cargo
-export PATH="$PATH:/snap/bin:/home/dmetzke/.cargo/bin"
+export PATH="$PATH:/snap/bin:/home/dmetzke/.cargo/bin:/home/dmetzke/go/bin"
+
+# Include this bin directory
+export PATH="$PATH:$CUSTOM_USER_CONFIG/bin"
