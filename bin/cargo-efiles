@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cargo c --message-format=short 2>&1\
+ | awk -F':' '/^src/ {print $1}'\
+ | uniq -c\
+ | sort -k1 -n -r

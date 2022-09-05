@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cargo --color=always c 2>&1 | sed '60,$ d'
