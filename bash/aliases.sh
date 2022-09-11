@@ -16,6 +16,9 @@ alias nv='nvim'
 alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
 alias store='echo $(pwd) > ~/.local/share/damymetzke/stored'
 
+# Automatically fix typos
+eval "$(thefuck --alias)"
+
 rep() {
   cd $(repo -otext path $@)
 }
