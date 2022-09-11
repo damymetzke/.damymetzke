@@ -10,7 +10,7 @@
 Committer: %C(ul #fa4762)%cN%C(reset) %C(#75fdff)< %cE >%C(reset)%n\
 Date:      %C(#ffe74d)%aD%n\
 %C(#dbffe8)%s%n\
-%C(#696a86).\""
+%C(#696a86)────────────────────────────────────────\""
 
     # Log only the first parent and show description, compatible with GitHub pull request workflows
     lgpr = log --first-parent --oneline \
