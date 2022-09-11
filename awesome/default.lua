@@ -148,7 +148,7 @@ battery_widget_timer:connect_signal(
 battery_widget_timer:start()
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %a %b %d |---| %I:%M %p")
+mytextclock = wibox.widget.textclock(" %a %b %d ├───┤ %I:%M %p")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
