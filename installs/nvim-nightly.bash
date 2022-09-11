@@ -1,7 +1,7 @@
 echo "Installing Neovim nightly"
 
 # Clone repository
-git clone https://github.com/neovim/neovim.git ~/tmp/local_installs/neovim
+git clone --depth=1 https://github.com/neovim/neovim.git ~/tmp/local_installs/neovim
 cd ~/tmp/local_installs/neovim
 
 # Checkout nightly
