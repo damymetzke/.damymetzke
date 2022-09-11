@@ -1,0 +1,5 @@
+#!/bin/bash
+
+printf "#!%s\n\n\n" "$2" > $1
+chmod u+x $1
+nvim $1 +

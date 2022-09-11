@@ -1,0 +1,7 @@
+#!/bin/bash
+
+touch ~/Documents/time-store
+
+echo $(($(cat ~/Documents/time-store) + $1)) > ~/Documents/time-store
+
+cat ~/Documents/time-store

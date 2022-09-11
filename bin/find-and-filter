@@ -1,0 +1,42 @@
+#!/bin/env node
+
+const { exec } = require('node:child_process');
+
+async function read(stream) {
+  const chunks = [];
+  for await (const chunk of stream) chunks.push(chunk); 
+  return Buffer.concat(chunks).toString('utf8');
+}
+
+function replace(value) {
+  return new Promise((resolve)=>{
+    exec(`bash -c 'printf "${value[0]}" | ${process.argv[3]}'`, {}, (_, stdout, stderr) => {
+      if(stderr.length !== 0) {
+        console.error(stderr);
+      }
+
+      resolve([value[0], stdout]);
+    });
+  });
+}
+
+async function run() {
+  const search = new RegExp(process.argv[2], "g");
+
+  const input = await read(process.stdin);
+  const occurences = new Set(input.matchAll(search));
+
+  const outputs = [];
+  for (const occurence of occurences) {
+    outputs.push(replace(occurence));
+  }
+
+  const results = new Map(await Promise.all(outputs));
+
+  const output = input.replace(search, value => results.get(value));
+  console.log(output);
+}
+
+run();
+
+

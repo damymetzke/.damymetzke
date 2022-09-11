@@ -1,0 +1,14 @@
+#!/bin/bash
+
+hash=$(pwd | sha1sum | awk '{ print $1 }')
+basedir="$HOME/scratch-pad/$hash"
+
+mkdir -p $basedir
+
+files=""
+for i in "$@"; do
+  files="$files $basedir/$i"
+done
+echo $files
+
+nvim $files

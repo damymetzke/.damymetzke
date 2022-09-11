@@ -1,0 +1,10 @@
+#!/bin/bash
+
+termdown -T "Working" 25m\
+  && notify-send "25 minutes have passed, take a break if you can" -t 0\
+  && espeak "25 minutes have passed, take a break if you can"\
+  && termdown -T "Grace" 5m\
+  && notify-send "30 minutes have passed, take a break now" -t 0\
+  && espeak "30 minutes have passed, take a break now"
+
+  

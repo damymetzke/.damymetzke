@@ -1,0 +1,4 @@
+#!/bin/bash
+
+find-and-filter 2>/dev/null '#\d+'\
+  'xargs gh issue view --json title,number -t "#{{.number}}: {{.title}}"'

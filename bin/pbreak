@@ -1,0 +1,5 @@
+#!/bin/bash
+
+termdown -T "Break" 5m\
+  && notify-send "5 minutes have passed, back to work" -t 0\
+  && espeak "5 minutes have passed, back to work"\
