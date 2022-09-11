@@ -45,7 +45,7 @@ map("n", "<Leader>ql", ":clast<CR>")
 map("n", "<Leader>qh", ":cfirst<CR>")
 
 -- NERDTree
-bind("nerdtree:toggle", "n", "<leader>t")
+bind("filetree:toggle", "n", "<leader>t")
 
 -- rest.nvim
 bind("rest_nvim:make_request", "n", "<leader>hr")

@@ -39,6 +39,13 @@ return function()
 
   lspc.rust_analyzer.setup{
     on_attach = on_attach,
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          command = "clippy"
+        },
+      }
+    }
   }
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()

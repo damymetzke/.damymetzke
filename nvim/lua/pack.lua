@@ -21,12 +21,25 @@ return require('packer').startup(function()
   }
 
   -- File explorer
+--  use {
+--    'scrooloose/NERDTree',
+--    keys = {
+--      {"n", "<leader>t"},
+--    },
+--    config = require'config.nerdtree',
+--  }
+
+  -- File explorer
   use {
-    'scrooloose/NERDTree',
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly',
     keys = {
       {"n", "<leader>t"},
     },
-    config = require'config.nerdtree',
+    config = require'config.nvim_tree_lua',
   }
 
   -- Fuzzy finder
@@ -43,8 +56,7 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = require'config.lualine_nvim',
   }
-
-  -- Emmet expansion
+-- Emmet expansion
   use 'mattn/emmet-vim'
 
   -- See which lines are changed in git repository when editing files
