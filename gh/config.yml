@@ -2,4 +2,5 @@ git_protocol: ssh
 prompt: enabled
 pager: less
 aliases:
-  me: issue list --assignee=@me
+    me: issue list --assignee=@me
+    issue-pretty: '!gh-issue-pretty $1'
