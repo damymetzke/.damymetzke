@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Start a pomo timer.
+# You will be notified once after 25 minutes,
+# and a second time after a total of 30 minuts.
+
 termdown -T "Working" 25m\
   && notify-send "25 minutes have passed, take a break if you can" -t 0\
   && espeak "25 minutes have passed, take a break if you can"\

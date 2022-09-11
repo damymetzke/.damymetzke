@@ -1,5 +1,10 @@
 #!/bin/env node
 
+// Go through a string, using a regex to find occurrences.
+// Each unique occurrence will be piped into a bash script.
+// The output will then replace th occurrence.
+// Usage: find-and-filter {regex-pattern} {bash-filter}
+
 const { exec } = require('node:child_process');
 
 async function read(stream) {

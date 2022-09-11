@@ -1,3 +1,6 @@
 #!/bin/bash
 
+# Extends gh
+# Displays gh issue with references to other issues replaced by their title.
+
 gh issue view $1 | insert-gh-issue-titles

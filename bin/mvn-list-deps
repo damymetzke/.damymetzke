@@ -1,3 +1,6 @@
 #!/bin/bash
 
+# Extends mvn
+# List dependencies
+
 ./mvnw dependency:list -DoutputFile=>(cat) -q -f pom.xml | sed '1,2d' | sed 's/ (optional)/_(optional)/g'

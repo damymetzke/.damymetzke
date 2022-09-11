@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Create a new file which:
+# - Has a shebang with a set executable
+# - Is set to be executable by the owning user
+# - Is automatically opened by neovim
+# Usage: mkbin {path} {executable}
+
 printf "#!%s\n\n\n" "$2" > $1
 chmod u+x $1
 nvim $1 +

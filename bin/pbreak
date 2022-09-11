@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Start a pomo-break of 5 minutes
+
 termdown -T "Break" 5m\
   && notify-send "5 minutes have passed, back to work" -t 0\
   && espeak "5 minutes have passed, back to work"\

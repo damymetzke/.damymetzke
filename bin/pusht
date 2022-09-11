@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Add a number to `~/documents/timer-store`.
+# This is meant to be a number of minutes.
+
 touch ~/Documents/time-store
 
 echo $(($(cat ~/Documents/time-store) + $1)) > ~/Documents/time-store
