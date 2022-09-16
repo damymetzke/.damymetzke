@@ -16,6 +16,15 @@ return function()
     },
     renderer = {
       group_empty = true,
+      icons = {
+        glyphs = {
+          git = {
+            unstaged = "~",
+            untracked = "!",
+            renamed = "",
+          }
+        },
+      },
     },
     filters = {
       dotfiles = true,
