@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Extends mvn
+# Will call ./mvnw, if the script exists.
+# Otherwise it will call mvn.
+
+

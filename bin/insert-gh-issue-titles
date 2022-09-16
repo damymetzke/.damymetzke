@@ -3,4 +3,4 @@
 # Replaces occurences of '#N' with the title of an issue
 
 find-and-filter 2>/dev/null '#\d+'\
-  'xargs gh issue view --json title,number -t "#{{.number}}: {{.title}}"'
+  'xargs gh issue view --json title,number -t "#{{.number}}: \x1b[34;1m {{.title}}\x1b[0m"' | xargs -0 -I {} printf "{}"

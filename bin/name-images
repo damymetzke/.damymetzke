@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Go through a list of images and open up nomacs for each of them.
+# Then you can give a name and the file will be renamed.
+
+for i in "$@"
+do
+  nomacs $i >/dev/null 2>/dev/null
+  read new_name
+  mv $i $new_name.${i##*.}
+done
