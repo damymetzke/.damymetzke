@@ -16,6 +16,10 @@ alias nv='nvim'
 alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
 alias store='echo $(pwd) > ~/.local/share/damymetzke/stored'
 
+gtspad() {
+  pushd "$(spad-dir)"
+}
+
 # Automatically fix typos
 eval "$(thefuck --alias)"
 
