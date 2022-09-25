@@ -1,0 +1,53 @@
+#!/bin/env node
+
+// Work similar to xargs, but extracts title and body.
+// The title is the first non-empty line.
+// The body is the next non-empty line until the EOF.
+
+const { exec } = require('node:child_process');
+const [, , command] = process.argv;
+
+
+async function read(stream) {
+  const chunks = [];
+  for await (const chunk of stream) chunks.push(chunk);
+  return Buffer.concat(chunks).toString('utf8');
+}
+
+(async () => {
+  const input = (await read(process.stdin)).split("\n");
+
+  let title = "";
+  let body = "";
+
+  for (line of input) {
+    if (body !== "") {
+      body += line + "\n";
+      continue;
+    }
+
+    if (/^\s*$/.test(line)) {
+      continue;
+    }
+
+    if (title == "") {
+      title = line;
+      continue;
+    }
+
+    body = line + "\n";
+  }
+
+  const newCommand = command.replace("{title}", title).replace("{body}", body);
+  await new Promise((resolve) => {
+    exec(`bash -c '${newCommand}'`, {}, (_, stdout, stderr) => {
+      if (stderr.length !== 0) {
+        console.error(stderr);
+      }
+
+      console.log(stdout);
+
+      resolve();
+    });
+  });
+})();

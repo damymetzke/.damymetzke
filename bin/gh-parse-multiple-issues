@@ -1,0 +1,3 @@
+#!/bin/bash
+
+args-insert-title-body 'gh create-issue-list "{title}" "{body}"'

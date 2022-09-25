@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Take a screenshot and place it in the `~/screenshots` directory.
+
+mkdir -p ~/screenshots
+cd ~/screenshots
+
+scrot $(increment-name .png)

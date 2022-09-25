@@ -1,0 +1,9 @@
+#! /bin/bash
+
+# Print out the current 'scratch pad directory'.
+# The scratch spad directory is located under `~/scratch-pad/{hash}`.
+# Where hash is a hash of the current working directory.
+
+hash=$(pwd | sha1sum | awk '{ print $1 }')
+
+echo "$HOME/scratch-pad/$hash"

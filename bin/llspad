@@ -7,4 +7,4 @@
 hash=$(pwd | sha1sum | awk '{ print $1 }')
 basedir="$HOME/scratch-pad/$hash"
 
-exa -la $basedir
+exa -la "$(spad-dir)"

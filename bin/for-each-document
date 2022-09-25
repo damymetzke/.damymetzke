@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Usage: for-each-document {command}.
+# Pipe each document into a new instance of the given command.
+# Documents are seperated by 3 dashes '---'.
+
+lines=""
+
+while IFS= read -r string; do
+  if [[ $string =~ \s*---\s* ]]
+  then
+    bash -c "printf '%s' \"$lines\" | $1"
+    lines=""
+  else
+    lines=$(printf "%s\n%s" "$lines" "$string")
+  fi
+done
+
+bash -c "printf '%s' \"$lines\" | $1"
+

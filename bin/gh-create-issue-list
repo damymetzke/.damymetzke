@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Create a GitHub issue, then collect it in a markdown file.
+# The markdown file will be `"$(spad-dir)/issues.md"`.
+# You can repeatedly call this, then past the issue list in a tracking issue.
+
+gh issue create --title="$1" --body="$2" --label=enhancement | awk -F'/' '{print "- [ ] #" $(NF)}' >> "$(spad-dir)/issues.md"

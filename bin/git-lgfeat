@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Logs the current branch untill the point where it diverged from main
+
+git log \
+  "$(git merge-base main @)..@"\
+  --oneline $@ --format="format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d"

@@ -5,7 +5,15 @@
 
 for i in "$@"
 do
-  nomacs $i >/dev/null 2>/dev/null
+  nomacs $i >/dev/null 2>/dev/null &
+  nomacs_pid=$!
+
+  sleep '0.3s'
+
+  wmctrl -a 'Alacritty'
+
   read new_name
   mv $i $new_name.${i##*.}
+  kill $nomacs_pid
+
 done

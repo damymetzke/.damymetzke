@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Usage: increment-name {postfix}
+# Will find the lowest possible incremental name.
+# So if you run `increment-name .txt`,
+# And the files 1.txt 2.txt 3.txt exist,
+# The script will print otu 4.txt.
+
+number=1
+fname="001$1"
+
+while [ -e "$fname" ]; do
+    printf -v fname "%03d$1" "$(( ++number ))"
+done
+
+echo $fname
