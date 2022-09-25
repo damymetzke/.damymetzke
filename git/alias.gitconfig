@@ -13,9 +13,9 @@ Date:      %C(#ffe74d)%aD%n\
 %C(#696a86)────────────────────────────────────────\""
 
     # Log only the first parent and show description, compatible with GitHub pull request workflows
-    lgpr = log --first-parent --oneline \
---format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d%n\
-        %C(#e8c030)%b\""
+    lgpr = !git log --first-parent --oneline --color=always \
+    --format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#e8c030)%b\""\
+    | sed '/^$/d'
 
     # Log only the first parent, useful for logging when writing features
     lgft = log --first-parent --oneline --format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d\""
