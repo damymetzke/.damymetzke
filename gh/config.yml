@@ -4,3 +4,7 @@ pager: less
 aliases:
     me: issue list --assignee=@me
     issue-pretty: '!gh-issue-pretty $1'
+    addme: issue edit $1 --add-assignee=@me
+    create-issue-list: '!gh-create-issue-list $1 $2'
+    itopr: '!gh-itopr $1'
+    parse-multiple-issues: '!gh-parse-multiple-issues'
