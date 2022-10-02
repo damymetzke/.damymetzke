@@ -162,6 +162,10 @@ function setupModes.run()
             layout = awful.layout.suit.tile,
             gap = 8,
         })
+    result:addGlobalTag("Whatsapp", "w", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
 
     return result
 end
