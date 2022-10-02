@@ -52,3 +52,8 @@ bind("rest_nvim:make_request", "n", "<leader>hr")
 
 -- telescope.nvim
 bind("telescope_nvim:open", "n", "<C-p>")
+
+-- Nvim DAP
+bind("debug:breakpoint", "n", "<leader>db")
+bind("debug:open", "n", "<leader>do")
+bind("debug:close", "n", "<leader>dc")

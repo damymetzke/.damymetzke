@@ -165,6 +165,17 @@ return require('packer').startup(function()
     config = require'config.rest_nvim',
   }
 
+  -- Debug Adapter Protocol
+   use {
+     "mfussenegger/nvim-dap",
+     config = require'config.nvim_dap',
+  }
+
+  use {
+    "rcarriga/nvim-dap-ui",
+    config = require'config.nvim_dap_ui',
+  }
+
   -- Finish bootstrap
   if packer_bootstrap then
     require('packer').sync()
