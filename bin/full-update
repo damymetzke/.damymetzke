@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Update all packages on this system
+
+cargo install-update -a
+
+flatpak update
+
+nvim-update
+
+yay
+
