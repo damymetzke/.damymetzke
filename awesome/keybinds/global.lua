@@ -39,7 +39,12 @@ local utilityKeys = gears.table.join(
         {description = "Toggle CapsLock", group = UTILITY_NAME}),
     awful.key( {"Shift" }, "Shift_L",
         function() awful.util.spawn("xdotool key Caps_Lock") end,
-        {description = "Toggle CapsLock", group = UTILITY_NAME})
+        {description = "Toggle CapsLock", group = UTILITY_NAME}),
+
+    -- Screenshots
+    awful.key( { }, "Print",
+        function() awful.util.spawn("screenshot") end,
+        {description = "Take screenshot", group = UTILITY_NAME})
     )
 
 local runKeys = gears.table.join(
