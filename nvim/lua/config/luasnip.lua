@@ -9,6 +9,54 @@ return function()
   local f = luasnip.function_node
   local fmt = require'luasnip.extras.fmt'.fmt
 
+  add("markdown", {
+    snippet(
+      {trig = "!!"},
+        fmt(
+        [[
+          <!-- {} -->
+        ]],
+        {
+          i(0),
+        }
+      )
+    ),
+    snippet(
+      {
+        trig = "code"
+      },
+      fmt(
+        [[
+          ```{}
+          {}
+          ```
+        ]],
+        {
+          i(1),
+          i(0),
+        }
+      )
+    ),
+    snippet(
+      {trig = "title"},
+      fmt(
+        [[
+          # {}
+
+          {}
+        ]],
+        {
+          f(
+            function(args, snip, user_arg_1) return vim.fn.expand("%:t") end,
+            {1},
+            { user_args = {""}}
+          ),
+          i(0),
+        }
+      )
+    ),
+  })
+
   add("java", {
     snippet(
       {trig="sout"},
