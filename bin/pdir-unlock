@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# This will take the file `./locked.7z.gpg` and unlock it.
+# The unlocked folder will be called `./unlocked/`.
+
+gpg -d locked.7z.gpg > locked.7z
+7z x locked.7z -ounlocked
+rm ./locked.7z

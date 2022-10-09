@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# This will take the folder `./unlocked/` and lock it.
+# It will then be stored as `./locked.7z.gpg`.
+
+7z a locked.7z ./unlocked/*
+gpg -c locked.7z
+rm ./locked.7z

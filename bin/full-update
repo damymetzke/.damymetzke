@@ -2,6 +2,8 @@
 
 # Update all packages on this system
 
+rustup update
+
 cargo install-update -a
 
 flatpak update

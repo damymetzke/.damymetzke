@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Get all notifications and sort them
+
+cat <(parse-notifications-gh) | sort
