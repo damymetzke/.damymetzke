@@ -2,6 +2,7 @@
 
 # Parse github notification in a generic format
 
+# parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .subject.url, date: .updated_at})')
 parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .subject.url, date: .updated_at})')
 
 dates=$(echo "$parsed" | jq '.[].date' -r)
@@ -10,7 +11,7 @@ titles=$(echo "$parsed" | jq '.[].title' -r)
 titles_base_64=""
 types=""
 
-if [[ $title -ne "" ]]; then
+if [[ ! -z "$titles" ]]; then
   while IFS= read -r title; do
     titles_base_64=$(printf "%s\n%s" "$titles_base_64" "$(echo "$title" | base64 -w0)")
     types=$(printf "%s\ngithub \e[30;107m\e[0m" "$types")

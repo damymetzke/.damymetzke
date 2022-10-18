@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Play a sound using the appropiate sound player.
+# Chooses player based on extension.
+
+if [ "${1: -4}" == ".mp3" ]
+then
+  mpg123 -q "$1"
+else
+  paplay "$1"
+fi
+

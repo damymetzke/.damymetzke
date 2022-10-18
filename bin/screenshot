@@ -6,3 +6,4 @@ mkdir -p ~/screenshots
 cd ~/screenshots
 
 scrot $(increment-name .png)
+playsound ~/Documents/bruh.mp3

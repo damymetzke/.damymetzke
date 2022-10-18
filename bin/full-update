@@ -2,13 +2,21 @@
 
 # Update all packages on this system
 
+echo "[[ rust toolchain ]]"
 rustup update
 
+echo "[[ cargo ]]"
 cargo install-update -a
 
+echo "[[ npm ]]"
+sudo npm -g update
+
+echo "[[ flatpak ]]"
 flatpak update
 
+echo "[[ neovim ]]"
 nvim-update
 
-yay
+echo "[[ pacman / AUR ]]"
+yay -Syu --rebuild neovim-nightly-bin
 

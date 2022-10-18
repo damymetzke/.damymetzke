@@ -3,3 +3,5 @@
 # Update neovim packages without opening the TUI
 
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+echo

@@ -1,0 +1,56 @@
+#!/bin/env node
+
+// Show all notifications in a human readable format
+
+const { exec } = require("node:child_process");
+
+function getNotifications() {
+  return new Promise(resolve => {
+    exec("all-notifications", {}, (_, stdout, stderr) => {
+      if (stderr.length !== 0) {
+        console.error(stderr);
+      }
+
+      resolve(stdout.split("\n").filter(row => !/^\s*$/.test(row)).map(row => row.split(/\s+/g)));
+    })
+  });
+}
+
+function getTimeAgo(date) {
+  const miliseconds = Date.now() - date;
+  if(miliseconds < 60000) {
+    return "Just now";
+  }
+
+  if(miliseconds < 120000) {
+    return "1 minute ago";
+  }
+
+  if(miliseconds < 3600000) {
+    return `${Math.floor(miliseconds / 60000)} minutes ago`;
+  }
+
+  if(miliseconds < 7200000) {
+    return "1 hour ago";
+  }
+
+  if(miliseconds < 86400000) {
+    return `${Math.floor(miliseconds / 7200000)} hours ago`;
+  }
+
+  if(miliseconds < 172800000) {
+    return "1 day ago";
+  }
+
+  return `${Math.floor(miliseconds / 86400000)} days ago`
+}
+
+(async function() {
+  const notifications = await getNotifications();
+
+  for (const [isoDate,, symbol,, titleBase64] of notifications) {
+    const date = new Date(isoDate);
+    const title = new Buffer.from(titleBase64, "base64").toString("utf8");
+    console.log(`${symbol} ${getTimeAgo(date)} ${title}`);
+  }
+})()
