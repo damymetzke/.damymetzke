@@ -103,6 +103,8 @@ return require('packer').startup(function()
     config = require'config.nvim_treesitter',
   }
 
+  use 'nvim-treesitter/playground'
+
   -- Java LSP support
   use {
     'mfussenegger/nvim-jdtls',
@@ -174,6 +176,12 @@ return require('packer').startup(function()
   use {
     "rcarriga/nvim-dap-ui",
     config = require'config.nvim_dap_ui',
+  }
+
+  -- Kangaroo
+  use {
+    "ggandor/leap.nvim",
+    config = require'config.leap_nvim',
   }
 
   -- Finish bootstrap

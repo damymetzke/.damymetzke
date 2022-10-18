@@ -4,7 +4,7 @@ return function()
 
   local pid = vim.fn.getpid()
   -- local omnisharp_bin = "/home/dmetzke/omnisharp/run"
-  local omnisharp_bin = "/home/dmetzke/installed/omnisharp/run"
+  local omnisharp_bin = "omnisharp"
   -- local omnisharp_bin = "/mnt/d/OmnisharpOlder/omnisharp.exe"
   -- Leader <space>
   vim.g.mapleader = " "

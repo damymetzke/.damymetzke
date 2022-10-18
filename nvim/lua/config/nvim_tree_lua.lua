@@ -19,8 +19,8 @@ return function()
       icons = {
         glyphs = {
           git = {
-            unstaged = "~",
-            untracked = "!",
+            -- unstaged = "~",
+            -- untracked = "!",
             renamed = "",
           }
         },
