@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Go through a list of images and open up nomacs for each of them.
 # Then you can give a name and the file will be renamed.

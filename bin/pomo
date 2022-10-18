@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Start a pomo timer.
 # You will be notified once after 25 minutes,

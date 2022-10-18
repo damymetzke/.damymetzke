@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Usage: for-each-document {command}.
 # Pipe each document into a new instance of the given command.

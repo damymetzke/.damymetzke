@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Create a GitHub issue, then collect it in a markdown file.
 # The markdown file will be `"$(spad-dir)/issues.md"`.

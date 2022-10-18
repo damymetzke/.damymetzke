@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Create a new file which:
 # - Has a shebang with a set executable

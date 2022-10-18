@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Extends gh
 # Displays gh issue with references to other issues replaced by their title.

@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # List content of the scratch pad directory.
 # The scratch pad directory is found at `~/scratch-pad/{hash}`.

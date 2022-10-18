@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Take a screenshot and place it in the `~/screenshots` directory.
 

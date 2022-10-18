@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Anything piped into this script will interprted as markdown.
 # The output will be stripped of any markdown syntax.

@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Logs the current branch untill the point where it diverged from main
 

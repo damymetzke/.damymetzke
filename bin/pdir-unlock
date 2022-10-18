@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # This will take the file `./locked.7z.gpg` and unlock it.
 # The unlocked folder will be called `./unlocked/`.

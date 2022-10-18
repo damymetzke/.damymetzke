@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Play a sound using the appropiate sound player.
 # Chooses player based on extension.

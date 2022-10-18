@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Extends mvn
 # Will call ./mvnw, if the script exists.

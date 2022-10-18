@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # Add a number to `~/documents/timer-store`.
 # This is meant to be a number of minutes.
