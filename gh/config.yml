@@ -8,3 +8,4 @@ aliases:
     create-issue-list: '!gh-create-issue-list $1 $2'
     itopr: '!gh-itopr $1'
     parse-multiple-issues: '!gh-parse-multiple-issues'
+    starred-web: '!gh-starred-web'

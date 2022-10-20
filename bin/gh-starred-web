@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+options=$(gh api /user/starred | jq '.[] | {full_name, html_url} | join(" ")' | tr -d '"')
+
+select option in $(echo "$options" | awk '{print $1}')
+do
+  xdg-open $(echo "$options" | grep -m 1 "^$option" | awk '{print $2}')
+  break
+done
