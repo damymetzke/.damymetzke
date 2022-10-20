@@ -6,6 +6,6 @@
 # - Is automatically opened by neovim
 # Usage: mkbin {path} {executable}
 
-printf "#!%s\n\n\n" "$2" > $1
+printf "#! /usr/bin/env %s\n\n\n" "$2" > $1
 chmod u+x $1
 nvim $1 +
