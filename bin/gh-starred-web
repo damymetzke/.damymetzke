@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-options=$(gh api /user/starred | jq '.[] | {full_name, html_url} | join(" ")' | tr -d '"')
+options=$(gh api /user/starred?per_page=100 | jq '.[] | {full_name, html_url} | join(" ")' | tr -d '"' | sort)
 
 select option in $(echo "$options" | awk '{print $1}')
 do
