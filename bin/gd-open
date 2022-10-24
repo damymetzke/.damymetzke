@@ -1,0 +1,19 @@
+#! /usr/bin/env bash
+
+mkdir -p ~/.local/share/damymetzke/gd-open-memory
+
+hash=$(pwd | sha1sum | awk '{ print $1 }')
+file="$HOME/.local/share/damymetzke/gd-open-memory/$hash"
+
+if [[ -f "$file" ]]
+then
+  "$HOME/godot/$(cat $file)/Godot_"* -e
+else
+
+  select option in $(ls ~/godot)
+  do
+    printf "$option" > $file
+    "$HOME/godot/$option/Godot_"* -e
+    break
+  done
+fi
