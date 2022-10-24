@@ -1,6 +1,17 @@
 #! /usr/bin/env bash
 
-options=$(gh api /user/starred?per_page=100 | jq '.[] | {full_name, html_url} | join(" ")' | tr -d '"' | sort)
+# Retrieve all starred repositories by authenticated user.
+# Then allow the client to select a repository.
+# Then open the repository using xdg-open,
+# which will likely be the default web browser.
+
+# GraphQL query to retrieve from starred repositories:
+# name with owner (e.g. damymetzke/.damymetzke)
+# url (e.g. https://github.com/damymetzke/.damymetzke)
+options=$(gh api graphql \
+  -f "query=query starred { viewer { starredRepositories { nodes { url nameWithOwner } } } }" \
+  -q '.data.viewer.starredRepositories.nodes[] | join(" ")' \
+  | sort)
 
 select option in $(echo "$options" | awk '{print $1}')
 do
