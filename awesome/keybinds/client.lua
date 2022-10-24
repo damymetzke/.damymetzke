@@ -28,6 +28,14 @@ local clientKeys = gears.table.join(
     -- Toggle floating
     awful.key({ MOD_PRIMARY, "Control" }, "f",  awful.client.floating.toggle                     ,
               {description = "Toggle floating", group = CLIENT_NAME}),
+    
+    -- Reset window
+    awful.key({ MOD_PRIMARY, "Shift" }, "f",  function(c)
+      c.fullscreen = false
+      c.floating = false
+      c.maximized = false
+    end,
+    {description = "Reset window properties", group = CLIENT_NAME}),
 
     -- Focus master
     awful.key({ MOD_PRIMARY, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
