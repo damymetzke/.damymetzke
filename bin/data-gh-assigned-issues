@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+
+# Get all issues assigned to the current authenticated user in the gh client.
+# Output format:
+# [issue url] [repository name] [num reactions] [title (base 64)]
+
+# GraphQL query to get:
+# - Url to the assigned issue
+# - Name of the repository of the assigned issue
+# - The number of reactions to the assigned issue
+# - The title of the assigned issue
+data=$(gh api graphql \
+  -f 'query=query{viewer{issues(filterBy:{assignee:"damymetzke"}first:5 states:OPEN orderBy:{field:UPDATED_AT,direction:DESC}){nodes{title url reactions{totalCount}repository{nameWithOwner}}}}}' \
+  -q '.data.viewer.issues.nodes | map({title: .title, url: .url, numReactions: .reactions.totalCount, repository: .repository.nameWithOwner})')
+
+titles=$(echo "$data" | jq '.[].title' -r)
+
+if [[ ! -z "$titles" ]]; then
+  plain_texts=$(echo "$data" | jq 'map({a: .url, b: .repository, c: .numReactions} | join(" ")) | join("\n")' -r)
+  titles_base_64=""
+
+  while IFS= read -r title; do
+    titles_base_64=$(printf "%s\n%s" "$titles_base_64" "$(echo "$title" | base64 -w0)")
+  done <<< "$titles"
+
+  titles_base_64=$(tail -n +2 <(echo "$titles_base_64"))
+
+  paste -d" " <(echo "$plain_texts") <(echo "$titles_base_64")
+fi
