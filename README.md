@@ -57,3 +57,16 @@ And the definition of the keys is done in `nvim/lua/setup/keybinds.lua`.
 This is done using the `bridge_wrap` utility.
 This utility only maps the key once *both* parts have been defined.
 
+# Bin
+
+The bin folder is filled with scripts.
+This folder is meant to be included with `$PATH`.
+Most scripts should have an explanation in the code.
+
+If the script is meant to expand the capabilities of a command it is prefixed as such.
+For example, `gh-starred-web` is meant to expand the capabilities of the `gh` command.
+And this is then also added as the alias `gh starred-web`.
+
+Scripts prefixed with `data-` will specifically output for other scripts.
+This will always be a set of space-separated values.
+If any of the fields may contain whitespace they are converted to base 64.
