@@ -1,0 +1,75 @@
+#! /usr/bin/env python3
+
+import sys
+import base64
+
+columnHeaders = sys.argv[1:]
+actions = []
+
+for i, header in enumerate(columnHeaders):
+    all = header.split(":")
+    columnHeaders[i] = all[0]
+    actions.append(all[1:])
+
+
+columnRows = []
+
+for i in range(len(sys.argv) - 1):
+    columnRows.append([])
+
+for line in sys.stdin:
+    for i, column in enumerate(line.replace("\n", "").split(" ")):
+        if "b64" in actions[i]:
+            columnRows[i].append(base64.b64decode(column).decode("utf-8").replace("\n", ""))
+        else:
+            columnRows[i].append(column)
+
+
+columnWidths = [];
+for i in range(len(sys.argv) - 1):
+    width = len(columnHeaders[i])
+    for row in columnRows[i]:
+        width = max(width, len(row))
+    columnWidths.append(width)
+
+for i, width in enumerate(columnWidths):
+    columnHeaders[i] = columnHeaders[i].ljust(width, " ")
+    for j, row in enumerate(columnRows[i]):
+        columnRows[i][j] = row.ljust(width, " ")
+
+rows = []
+for i in range(len(columnRows[0])):
+    row = []
+    for column in columnRows:
+        row.append(column[i])
+    rows.append(row)
+
+verticalSeparators = [];
+for width in columnWidths:
+    verticalSeparators.append("─" * width)
+
+# Top
+print("┌", end="")
+print("┬".join(verticalSeparators), end="")
+print("┐")
+
+# Headers
+print("│", end="")
+print("│".join(columnHeaders), end="")
+print("│")
+
+# Headers separator
+print("├", end="")
+print("┼".join(verticalSeparators), end="")
+print("┤")
+
+# Rows
+for row in rows:
+    print("│", end="")
+    print("│".join(row), end="")
+    print("│")
+
+# Bottom
+print("└", end="")
+print("┴".join(verticalSeparators), end="")
+print("┘")
