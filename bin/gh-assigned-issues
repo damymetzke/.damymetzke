@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+data-gh-assigned-issues \
+  | awk '{print $4 " " $2 " " $3 " " $1}' \
+  | tablep title:b64 repository reactions url
