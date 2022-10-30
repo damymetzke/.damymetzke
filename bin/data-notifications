@@ -2,4 +2,4 @@
 
 # Get all notifications and sort them
 
-cat <(parse-notifications-gh) | sort
+cat <(data-notifications-gh) | sort
