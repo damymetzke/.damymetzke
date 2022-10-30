@@ -1,5 +1,19 @@
 #! /usr/bin/env python3
 
+# A pretty printed table
+#
+# Usage:
+# Content should be streamed using stdin.
+# Each argument represents a column.
+# Columns are always space separated.
+# Each column is named in the final output.
+# Columns can have modifiers, these will be separated by ':'.
+# E.g. the argument `title:b64`, has the header `title`, with the `b64` modifier.
+#
+# Valid modifiers:
+# b64: The input is base64 encoded, this modifier will decode it.
+# pad: Add a single space before and after each value.
+
 import sys
 import base64
 
@@ -8,8 +22,11 @@ actions = []
 
 for i, header in enumerate(columnHeaders):
     all = header.split(":")
-    columnHeaders[i] = all[0]
     actions.append(all[1:])
+    if "pad" in actions[i]:
+        columnHeaders[i] = " " + all[0] + " "
+    else:
+        columnHeaders[i] = all[0]
 
 
 columnRows = []
@@ -19,10 +36,12 @@ for i in range(len(sys.argv) - 1):
 
 for line in sys.stdin:
     for i, column in enumerate(line.replace("\n", "").split(" ")):
+        result = column;
         if "b64" in actions[i]:
-            columnRows[i].append(base64.b64decode(column).decode("utf-8").replace("\n", ""))
-        else:
-            columnRows[i].append(column)
+            result = base64.b64decode(column).decode("utf-8").replace("\n", "")
+        if "pad" in actions[i]:
+            result = " " + result + " "
+        columnRows[i].append(result)
 
 
 columnWidths = [];
