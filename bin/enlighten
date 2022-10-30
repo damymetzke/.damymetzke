@@ -1,0 +1,8 @@
+#! /usr/bin/env python3
+
+import sys
+
+for line in sys.stdin:
+    print("\x1b[30;106m", end="")
+    print(line.replace("\n", ""), end="")
+    print("\x1b[0m")

@@ -3,7 +3,7 @@
 # Parse github notification in a generic format
 
 # parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .subject.url, date: .updated_at})')
-parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .subject.url, date: .updated_at})')
+parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .url, date: .updated_at})')
 
 dates=$(echo "$parsed" | jq '.[].date' -r)
 urls=$(echo "$parsed" | jq '.[].url' -r)
