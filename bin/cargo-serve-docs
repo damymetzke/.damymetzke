@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+# Serve the rust documentation for the current project
+
+cargo doc
+
+# http-server -p3001 "target/doc/$(basename $(pwd) | sed 's/-/_/g')"
+chromium "http://localhost:3001/$(basename $(pwd) | sed 's/-/_/g')/index.html"
+http-server -p3001 "target/doc/"

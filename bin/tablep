@@ -13,6 +13,7 @@
 # Valid modifiers:
 # b64: The input is base64 encoded, this modifier will decode it.
 # pad: Add a single space before and after each value.
+# center: Center align the text
 
 import sys
 import base64
@@ -23,10 +24,7 @@ actions = []
 for i, header in enumerate(columnHeaders):
     all = header.split(":")
     actions.append(all[1:])
-    if "pad" in actions[i]:
-        columnHeaders[i] = " " + all[0] + " "
-    else:
-        columnHeaders[i] = all[0]
+    columnHeaders[i] = all[0]
 
 
 columnRows = []
@@ -52,9 +50,12 @@ for i in range(len(sys.argv) - 1):
     columnWidths.append(width)
 
 for i, width in enumerate(columnWidths):
-    columnHeaders[i] = columnHeaders[i].ljust(width, " ")
+    columnHeaders[i] = columnHeaders[i].center(width, " ")
     for j, row in enumerate(columnRows[i]):
-        columnRows[i][j] = row.ljust(width, " ")
+        if "center" in actions[i]:
+            columnRows[i][j] = row.center(width, " ")
+        else:
+            columnRows[i][j] = row.ljust(width, " ")
 
 rows = []
 for i in range(len(columnRows[0])):

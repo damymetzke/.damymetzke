@@ -8,10 +8,7 @@
 # GraphQL query to retrieve from starred repositories:
 # name with owner (e.g. damymetzke/.damymetzke)
 # url (e.g. https://github.com/damymetzke/.damymetzke)
-options=$(gh api graphql \
-  -f "query=query starred { viewer { starredRepositories { nodes { url nameWithOwner } } } }" \
-  -q '.data.viewer.starredRepositories.nodes[] | join(" ")' \
-  | sort)
+options=$(data-gh-starred-repositories)
 
 select option in $(echo "$options" | awk '{print $1}')
 do

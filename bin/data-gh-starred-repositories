@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+
+gh api graphql \
+  -f "query=query starred { viewer { starredRepositories { nodes { url nameWithOwner } } } }" \
+  -q '.data.viewer.starredRepositories.nodes[] | join(" ")' \
+  | sort

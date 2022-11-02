@@ -6,7 +6,7 @@ const { exec } = require("node:child_process");
 
 function getNotifications() {
   return new Promise(resolve => {
-    exec("all-notifications", {}, (_, stdout, stderr) => {
+    exec("data-notifications", {}, (_, stdout, stderr) => {
       if (stderr.length !== 0) {
         console.error(stderr);
       }
