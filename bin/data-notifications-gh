@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 
-# Parse github notification in a generic format
+# Parse github notifications
+# Data:
+# [Date] [Glyph] [Url] [Title (b64)]
 
 # parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .subject.url, date: .updated_at})')
 parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .url, date: .updated_at})')

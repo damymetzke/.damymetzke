@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
-# Get all notifications and sort them
+# Combines all notification data and sorts by time
+# Data:
+# [Date] [Glyph] [Url] [Title (b64)]
 
 cat <(data-notifications-gh) | sort

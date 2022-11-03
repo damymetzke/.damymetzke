@@ -1,8 +1,8 @@
 #! /usr/bin/env bash
 
 # Get all issues assigned to the current authenticated user in the gh client.
-# Output format:
-# [issue url] [repository name] [num reactions] [title (base 64)]
+# Data:
+# [Issue url] [Repository name] [Number of reactions] [Title (b64)]
 
 # GraphQL query to get:
 # - Url to the assigned issue

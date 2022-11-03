@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+# Data:
+# [Url] [Repository name]
 
 gh api graphql \
   -f "query=query starred { viewer { starredRepositories { nodes { url nameWithOwner } } } }" \
