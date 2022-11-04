@@ -4,25 +4,5 @@
 # Data:
 # [Date] [Glyph] [Url] [Title (b64)]
 
-# parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .subject.url, date: .updated_at})')
-parsed=$(gh api /notifications | jq 'map({title: .subject.title, url: .url, date: .updated_at})')
-
-dates=$(echo "$parsed" | jq '.[].date' -r)
-urls=$(echo "$parsed" | jq '.[].url' -r)
-titles=$(echo "$parsed" | jq '.[].title' -r)
-titles_base_64=""
-types=""
-
-if [[ ! -z "$titles" ]]; then
-  while IFS= read -r title; do
-    titles_base_64=$(printf "%s\n%s" "$titles_base_64" "$(echo "$title" | base64 -w0)")
-    types=$(printf "%s\ngithub \e[30;107m\e[0m" "$types")
-  done <<< "$titles"
-
-  titles_base_64=$(tail -n +2 <(echo "$titles_base_64"))
-  types=$(tail -n +2 <(echo "$types"))
-
-  paste -d" " <(echo "$dates") <(echo "$types") <(echo "$urls") <(echo "$titles_base_64")
-fi
-
+gh api /notifications -q 'map({a: .updated_at, b: "github", c: "", d: .url, e: .subject.title | @base64} | join(" ")) | .[]'
 
