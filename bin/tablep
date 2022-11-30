@@ -15,8 +15,30 @@
 # pad: Add a single space before and after each value.
 # center: Center align the text
 
+import math
 import sys
 import base64
+from datetime import datetime
+
+def getTimeAgo(date): 
+    seconds = datetime.now().timestamp() - date.timestamp()
+    if(seconds < 60):
+        return "Just now"
+
+    if(seconds < 120):
+        return "1 minute ago"
+    if(seconds < 3600):
+        return "{} minutes ago".format(math.floor(seconds / 60))
+
+    if(seconds < 72000):
+        return "1 hour ago"
+    if(seconds < 86400):
+        return "{} hours ago".format(math.floor(seconds / 7200))
+
+    if(seconds < 172800):
+        return "1 day ago"
+
+    return "{} days ago".format(math.floor(seconds / 86400))
 
 columnHeaders = sys.argv[1:]
 actions = []
@@ -37,6 +59,9 @@ for line in sys.stdin:
         result = column;
         if "b64" in actions[i]:
             result = base64.b64decode(column).decode("utf-8").replace("\n", "")
+        elif "timeago" in actions[i]:
+            date = datetime.fromisoformat(column.replace("Z", "+00:00"))
+            result = getTimeAgo(date)
         if "pad" in actions[i]:
             result = " " + result + " "
         columnRows[i].append(result)

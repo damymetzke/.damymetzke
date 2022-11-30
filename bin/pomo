@@ -4,11 +4,16 @@
 # You will be notified once after 25 minutes,
 # and a second time after a total of 30 minuts.
 
+set-pomo-timer
+
 termdown -T "Working" 25m\
   && notify-send "25 minutes have passed, take a break if you can" -t 0\
   && espeak "25 minutes have passed, take a break if you can"\
+  && set-pomo-timer 0 \
   && termdown -T "Grace" 5m\
   && notify-send "30 minutes have passed, take a break now" -t 0\
   && espeak "30 minutes have passed, take a break now"
+
+set-pomo-timer 0
 
   

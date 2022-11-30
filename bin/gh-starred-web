@@ -8,10 +8,19 @@
 # GraphQL query to retrieve from starred repositories:
 # name with owner (e.g. damymetzke/.damymetzke)
 # url (e.g. https://github.com/damymetzke/.damymetzke)
-options=$(data-gh-starred-repositories)
+options=$(cache-data 1 data-gh-starred-repositories)
 
-select option in $(echo "$options" | awk '{print $1}')
-do
-  xdg-open $(echo "$options" | grep -m 1 "^$option" | awk '{print $2}')
-  break
-done
+#select option in $(echo "$options" | awk '{print $1}')
+#do
+#  xdg-open $(echo "$options" | grep -m 1 "^$option" | awk '{print $2}')
+#  break
+#done
+
+exec 3>&2
+exec 4>&0
+
+bbt-select abcd "Select a repository" $(echo "$options" | awk '{print $1}') 2>&3 0>&4
+option=$(cat ~/.cache/bbt/select/abcd)
+
+echo $option
+xdg-open $(echo "$options" | grep -m 1 "^$option" | awk '{print $2}')

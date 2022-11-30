@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+
+# Run a command, usually a data command, and cache the result
+# Usage:
+# cache-data [seconds] [command] [args...]
+# Seconds can be 0, in which case it will refresh the cache.
+# However it is recommended to use 1 instead;
+# this will provide light protection if a command is run in an infinite loop.
+
+dir_path="$HOME/.cache/damymetzke/cache-data/"
+file_name=$(echo "${@:2}" | sha1sum | awk '{print $1}')
+file_path="$dir_path""$file_name"
+
+mkdir -p "$dir_path"
+
+if test -f "$file_path"; then
+  file_seconds=$(date +%s -r $file_path)
+  now=$(date +%s)
+  seconds_passed=$((now - file_seconds))
+
+  if ((seconds_passed < $1))
+  then
+    cat $file_path
+    exit 0
+  fi
+
+fi
+
+"${@:2}" | tee $file_path

@@ -1,0 +1,27 @@
+#! /usr/bin/env python3
+
+import os
+import toml
+import json
+
+packages = os.popen(r"""cargo read-manifest | jq '.dependencies | map({a: .name, b: .req} | join(" ")) | join("\n")' -r""").read().splitlines()
+
+lock_path = json.loads(os.popen("cargo locate-project").read())["root"][0:-4] + "lock"
+lock_data = toml.loads(open(lock_path, "r").read())
+
+result = []
+for package in packages:
+    [name, specified_version] = package.split(" ")
+    result.append((name, specified_version))
+
+for lock_package in lock_data["package"]:
+    for i in range(0, len(result)):
+        name = result[i][0]
+        if name == lock_package["name"]:
+            result[i] = (name, result[i][1], lock_package["version"])
+            break
+result = map(lambda value: "{} {} {}".format(value[0], value[1], value[2]), result)
+result = "\n".join(result)
+print(result)
+            
+

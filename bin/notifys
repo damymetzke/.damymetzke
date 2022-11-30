@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+output=$(cache-data 1 data-notifications)
+printf '%s' "$output" | awk '{print $3 $2 " " $1 " " $5 " " $4 }' | tablep type date:timeago title:b64 url:pad

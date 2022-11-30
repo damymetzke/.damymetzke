@@ -4,4 +4,10 @@
 # Data:
 # [Date] [Glyph] [Url] [Title (b64)]
 
-cat <(data-notifications-gh) | sort
+# GH notifications are only allowed through their REST API.
+# To get web urls multiple requests are required.
+# Due to this cost the cache has been set to 1 minute.
+cat \
+  <(cache-data 60 data-notifications-gh) \
+  | sort
+

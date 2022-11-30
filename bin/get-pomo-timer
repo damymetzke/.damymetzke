@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+mkdir -p "$XDG_RUNTIME_DIR/damymetzke"
+touch "$XDG_RUNTIME_DIR/damymetzke/pomo"
+pomo_time=$(cat "$XDG_RUNTIME_DIR/damymetzke/pomo")
+
+if [ "$pomo_time" == "" ] 
+then
+  printf "off 0 0"
+  exit 0
+fi
+
+now=$(date +%s)
+if [ "$now" -ge "$pomo_time" ]
+then
+  printf "" > "$XDG_RUNTIME_DIR/damymetzke/pomo"
+  printf "off 0 0"
+  exit 0
+fi
+
+printf "on %s %s" "$pomo_time" "$((pomo_time - now))"

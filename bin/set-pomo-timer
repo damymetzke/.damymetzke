@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+now=$(date +%s)
+duration=${1:-1500}
+end_time=$((now + duration))
+
+mkdir -p "$XDG_RUNTIME_DIR/damymetzke"
+printf "$end_time" > "$XDG_RUNTIME_DIR/damymetzke/pomo"

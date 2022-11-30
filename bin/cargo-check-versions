@@ -1,0 +1,24 @@
+#! /usr/bin/env python3
+
+import os
+
+os.popen("git -C ~/repos/general/crates.io-index/ pull").read()
+
+current_packages = str(os.popen("cargo get-package-versions").read()).splitlines()
+
+result = [];
+for package in current_packages:
+    [name, specified, version] = package.split(" ")
+    latest = os.popen("cargo get-latest-package-version " + name).read()
+    if latest == version:
+        continue
+
+    result.append("{} {} {} {}".format(name, specified, version, latest))
+
+if len(result) == 0:
+    print("All dependencies are up to date!")
+    exit(0)
+
+result = "\n".join(result)
+result = os.popen("echo '{}' | tablep name 'specified' 'installed' 'latest'".format(result))
+print(result.read())
