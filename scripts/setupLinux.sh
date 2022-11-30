@@ -4,23 +4,20 @@
 source "bash/exports.sh"
 
 # Create directories if they don't exist
-mkdir -P $HOME/.config/git
-mkdir -P $HOME/.config/nvim
-mkdir -P $HOME/.config/awesome
-mkdir -P $HOME/.config/alacritty
+mkdir -p "$HOME/.config/awesome"
 
 # Link Bash profile
 echo "source $CUSTOM_USER_CONFIG/bash/index.sh" > $HOME/.profile
 
 # Link Git profile
-printf "[include]\n    path = \"$CUSTOM_USER_CONFIG/git/indexLinux.gitconfig\"\n" > $HOME/.profile/git/config
+printf "[include]\n    path = \"$CUSTOM_USER_CONFIG/git/indexLinux.gitconfig\"\n" > $HOME/.gitconfig
 
 # Link Neovim config
-echo "source $CUSTOM_USER_CONFIG/vim/index.vim" > $HOME/.config/nvim/init.vim
+ln -s "$CUSTOM_USER_CONFIG/nvim" "$HOME/.config/nvim"
 
 # Link Awesome config
-printf 'package.path = os.getenv("HOME") .. "/.damymetzke/awesome/?.lua;" .. package.path\nlocal index = require"index"\nindex.run()' > $HOME/.config/awesome/rc.lua
+printf 'package.path = os.getenv("HOME") .. "/.damymetzke/awesome/?.lua;" .. package.path\nrequire"index".run()' > $HOME/.config/awesome/rc.lua
 
 # Link Alacritty config
-printf 'import:\n  - "~/.damymetzke/alacritty/index.yml"' > $HOME/.config/alacritty/alacritty.yml
+ln -s "$CUSTOM_USER_CONFIG/alacritty" "$HOME/.config/alacritty"
 
