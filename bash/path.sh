@@ -8,6 +8,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Better Bash Toolkit
+if [ -d "$HOME/repos/maintained/better-bash-toolkit/bin" ] ; then
+    PATH="$HOME/repos/maintained/better-bash-toolkit/bin:$PATH"
+fi
+
 # Include snap and cargo
 export PATH="$PATH:/snap/bin:/home/dmetzke/.cargo/bin:/home/dmetzke/go/bin"
 
