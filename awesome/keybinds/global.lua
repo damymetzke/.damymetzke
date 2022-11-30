@@ -1,4 +1,5 @@
 local gears = require("gears")
+local wibox = require("wibox")
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
@@ -14,6 +15,15 @@ local UTILITY_NAME = "utilities"
 local RUN_NAME = "run"
 local LAYOUT_NAME = "layout"
 local TAG_NAME = "tags"
+
+-- pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print $5}'
+
+function get_volume()
+  fperc = assert(io.popen("pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1{print $5}'", "r"))
+  local perc = fperc:read("*a")
+  fperc:close()
+  return string.gsub(perc, "\n", "")
+end
 
 local utilityKeys = gears.table.join(
     -- Show help
@@ -44,7 +54,56 @@ local utilityKeys = gears.table.join(
     -- Screenshots
     awful.key( { }, "Print",
         function() awful.util.spawn("screenshot") end,
-        {description = "Take screenshot", group = UTILITY_NAME})
+        {description = "Take screenshot", group = UTILITY_NAME}),
+    
+    awful.key( { MOD_SECONDARY }, "q",
+        function()
+awful.popup {
+    widget = {
+        {
+            {
+                text   = "Volume: " .. get_volume(),
+                widget = wibox.widget.textbox
+            },
+            layout = wibox.layout.fixed.vertical,
+        },
+        margins = 5,
+        widget  = wibox.container.margin
+    },
+    bg = "#4eb19d",
+    border_color = '#4e8382',
+    border_width = 1,
+    placement    = function(d) awful.placement.top_left(d, {margins = 30}) end,
+    shape        = gears.shape.rect,
+    visible      = true,
+    ontop = true,
+}
+    end,
+        {description = "Test", group = UTILITY_NAME}),
+
+    -- Volume
+    awful.key( { MOD_SECONDARY }, "Up",
+      function()
+        awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ +2%")
+        awful.popup {
+          widget = {
+            {
+              {
+                text = get_volume(),
+                widget = wibox.widget.textbox,
+              },
+              layout = wibox.layout.fixed.vertical,
+            },
+          },
+          placement = awful.placement.top_left,
+          shape = gears.shape.rect,
+          visible = true,
+        }
+      end,
+        {description = "Volume up", group = UTILITY_NAME}),
+    awful.key( { MOD_SECONDARY }, "Down",
+        function() awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -2%") end,
+        {description = "Volume down", group = UTILITY_NAME})
     )
 
 local runKeys = gears.table.join(

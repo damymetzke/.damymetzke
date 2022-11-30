@@ -147,6 +147,97 @@ battery_widget_timer:connect_signal(
 
 battery_widget_timer:start()
 
+-- Create a notifications widget
+
+notifications_widget = wibox.widget.textbox()
+notifications_widget:set_text("[0 notifications]")
+
+notifications_widget_timer = timer({timeout = 3})
+notifications_widget_timer:connect_signal(
+  "timeout",
+  function()
+    fnotifications = assert(io.popen('bash -c "cache-data 300 data-notifications | wc -l"', "r"))
+    local notifications = fnotifications:read("*a"):gsub('\n', '')
+    if notifications == "1" then
+      notifications_widget:set_text("[1 notification]")
+    else
+      notifications_widget:set_text("[" .. notifications .. " notifications]")
+    end
+    fnotifications:close()
+  end
+)
+
+notifications_widget_timer:start()
+
+-- Create pomo widget
+
+pomo_widget = wibox.widget.textbox()
+pomo_widget:set_text("🍅 No pomo")
+
+current_pomo_time = nil
+
+pomo_widget_fast_timer = timer({timeout = 0.1})
+pomo_widget_fast_timer:connect_signal(
+  "timeout",
+  function()
+    if current_pomo_time == nil then
+      pomo_widget:set_text("🍅 No pomo")
+      return
+    end
+    local seconds_remaining = math.floor(current_pomo_time - os.time(os.date("*t")))
+
+    if seconds_remaining <= 0 then
+      pomo_widget:set_text("🍅 No pomo")
+      return
+    end
+
+    if seconds_remaining < 60 then
+      pomo_widget:set_text("🍅 " .. seconds_remaining .. "s")
+      return
+    end
+    local minutes_remaining = seconds_remaining // 60
+    pomo_widget:set_text("🍅 " .. minutes_remaining .. "m")
+  end
+)
+
+pomo_widget_timer = timer({timeout = 5})
+pomo_widget_timer:connect_signal(
+  "timeout",
+  function()
+    local fpomo = assert(io.popen('get-pomo-timer', "r"))
+    local pomo = fpomo:read("*a")
+    fpomo:close()
+    if pomo == "" then
+      current_pomo_time = nil
+      return
+    end
+
+    local state
+    local time
+    local i = 0
+    for word in string.gmatch(pomo, "[^%s]+") do
+      if i == 0 then
+        state = word
+      elseif i == 1 then
+        time = word
+      end
+      
+      i = i + 1
+    end
+
+
+    if state == "off" then
+      current_pomo_time = nil
+      return
+    end
+
+    current_pomo_time = time
+  end
+)
+
+pomo_widget_timer:start()
+pomo_widget_fast_timer:start()
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock(" %a %b %d ├───┤ %I:%M %p")
 
@@ -252,6 +343,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            pomo_widget,
+            notifications_widget,
             mykeyboardlayout,
             wibox.widget.systray(),
             battery_widget,
