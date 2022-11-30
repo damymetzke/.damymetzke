@@ -42,7 +42,11 @@ return function()
     settings = {
       ["rust-analyzer"] = {
         checkOnSave = {
-          command = "clippy"
+          command = "clippy",
+          features = "all",
+        },
+        diagnostics = {
+          disabled = {"inactive-code"},
         },
       }
     }
