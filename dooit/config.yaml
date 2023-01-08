@@ -86,8 +86,8 @@ keybindings:
   toggle_expand: z
   toggle_expand_parent: Z
   remove_node: x
-  add_sibling: a
-  add_child: A
+  add_sibling: o
+  add_child: a
   spawn_sort_menu: ctrl+s
   start_search: /
   select_node: l
