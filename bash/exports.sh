@@ -8,3 +8,7 @@ export WINIT_X11_SCALE_FACTOR=1
 export EDITOR=nvim
 export BROWSER="flatpak run com.brave.Browser"
 
+# Poetry breaks on my system because it tries to use KDE Wallet.
+# Even when I'm doing somthing that does not require a keyring
+# I'm not using KDE wallet, and I'm not intending to just do add dependencies.
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring

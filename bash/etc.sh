@@ -6,7 +6,7 @@ else
 fi
 
 # Let user know custom profile is loaded
-printf "\e[0;4;96mDamy Metzke\e[0m custom profile loaded!\n\n"
+printf "good $(part-of-day) Damy" | figlet -f "ANSI Shadow" -w 120 | xargs -0 -I {} printf '\033[0;36m%s\033[0m' "{}"
 
 cd $(cat ~/.local/share/damymetzke/stored)
 

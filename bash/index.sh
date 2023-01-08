@@ -13,4 +13,5 @@ source $CUSTOM_USER_CONFIG/bash/completions.sh
 source $CUSTOM_USER_CONFIG/bash/autoSsh.sh
 source $CUSTOM_USER_CONFIG/bash/etc.sh
 source $CUSTOM_USER_CONFIG/bash/tmux.sh
+source $CUSTOM_USER_CONFIG/bash/auto-venv.sh
 
