@@ -16,20 +16,20 @@ local theme = dofile(themes_path.."default/theme.lua")
 
 theme.font          = "Input Sans 10"
 
-theme.bg_normal     = "#4e8382"
-theme.bg_focus      = "#4eb19d"
-theme.bg_urgent     = "#cc241d"
+theme.bg_normal     = "#1e3a8a"
+theme.bg_focus      = "#1d4ed8"
+theme.bg_urgent     = "#f97316"
 theme.bg_minimize   = xrdb.color8
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#000000"
-theme.fg_focus      = "#000000"
+theme.fg_normal     = "#ffffff"
+theme.fg_focus      = "#fed7aa"
 theme.fg_urgent     = "#000000"
 theme.fg_minimize   = theme.bg_normal
 
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
-theme.border_normal = "#808736"
+theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.bg_focus
 theme.border_marked = xrdb.color10
 
