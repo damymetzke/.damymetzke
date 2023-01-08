@@ -1,10 +1,10 @@
 source $HOME/.damymetzke/bash/exports.sh
 source $CUSTOM_USER_CONFIG/bash/path.sh
 
-# include .bashrc if it exists
+# include local scripts if available
 if [ -n "$BASH_VERSION" ]; then
-    if [ -f "$HOME/.bashrc" ]; then
-      source "$HOME/.bashrc"
+    if [ -f "$CUSTOM_USER_CONFIG/git/local/index.bash" ]; then
+      source "$CUSTOM_USER_CONFIG/git/local/index.bash"
     fi
 fi
 
