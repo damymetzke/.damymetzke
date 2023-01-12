@@ -15,8 +15,6 @@ font:
   scale_with_dpi: false
 shell:
   program: /bin/bash
-  args:
-    - --login
   env:
     TERM: xterm-256color
     WINIT_X11_SCALE_FACTOR: "0"
