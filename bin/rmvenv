@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+mkdir "$(spad-dir)/venv" -p
+rm -r "$(spad-dir)/venv"
