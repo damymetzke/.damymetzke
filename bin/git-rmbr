@@ -1,0 +1,17 @@
+#! /usr/bin/env bash
+
+branch="$1"
+if [[ "$1" == "-" ]]
+then
+  branch="$(git rev-parse --abbrev-ref @{-1})"
+fi
+
+remote_branch="$(git branch --list "$branch" --format='%(refname:short)')"
+remote="$(git branch --list "$branch" --format='%(upstream:remotename)')"
+
+if [[ -n "$remote_branch" ]]
+then
+  git push "$remote" --delete "$remote_branch"
+fi
+
+git branch -d "$branch"

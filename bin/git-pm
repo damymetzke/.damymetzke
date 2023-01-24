@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+
+if command -v pre-commit > /dev/null
+then
+  if ! pre-commit run -a
+  then
+    echo "pre-commit failed"
+    exit 1
+  fi
+fi
+
+git switch main
+git pull
+git merge - --ff-only
+git push

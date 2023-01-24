@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+git fetch --all
+git merge origin/main -m "Merging changes from main branch into feature branch"
