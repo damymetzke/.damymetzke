@@ -2,7 +2,7 @@
 
 import os
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, TextIO, Tuple
 
 ROOT_DIR = os.path.join(
     Path().home(),
@@ -25,29 +25,37 @@ def add_to_project(category: str, value: List[str]):
     for item in value:
         projects[category].append(item)
 
+def parse_markdown_file(file: TextIO) -> Tuple[str, List[str]]:
+    category = ""
+    items: List[str] = []
+    for line in file:
+        content = line.strip()
+        if content[0:2] == "# ":
+            category = " {}".format(content[2:].strip())
+        if content[0:6] == "- [ ] ":
+            items.append(" {}".format(content[6:].strip()))
+        if content[0:6] == "- [x] ":
+            items.append(" {}".format(content[6:].strip()))
+
+    return category, items
+
+def parse_list_file(file_name: str, file: TextIO) -> Tuple[str, List[str]]:
+    items: List[str] = []
+    for line in file:
+        items.append(" {}".format(line.strip()))
+    title = file_name[:-9].replace("-", " ").capitalize()
+
+    return " {}".format(title), items
+
 for path in os.listdir(ROOT_DIR):
     if not os.path.isfile:
         continue
     if path[-3:] == ".md":
         with open(os.path.join(ROOT_DIR, path)) as file:
-            category = ""
-            items: List[str] = []
-            for line in file:
-                content = line.strip()
-                if content[0:2] == "# ":
-                    category = " {}".format(content[2:].strip())
-                if content[0:6] == "- [ ] ":
-                    items.append(" {}".format(content[6:].strip()))
-                if content[0:6] == "- [x] ":
-                    items.append(" {}".format(content[6:].strip()))
-            add_to_project(category, items)
+            add_to_project(*parse_markdown_file(file))
     if path[-9:] == ".list.txt":
         with open(os.path.join(ROOT_DIR, path)) as file:
-            items: List[str] = []
-            for line in file:
-                items.append(line.strip())
-            title = path[:-9].replace("-", " ").capitalize()
-            add_to_project(" {}".format(title), items)
+            add_to_project(*parse_list_file(path, file))
 
 for category in sorted(projects.keys()):
     print(category.replace("-", " "))
