@@ -17,26 +17,37 @@ ROOT_DIR = os.path.join(
 projects: Dict[str, List[str]] = {
 }
 
-def add_to_project(category: str, value: str):
+def add_to_project(category: str, value: List[str]):
     if category not in projects:
-        projects[category] = [value]
+        projects[category] = value
         return
-    projects[category].append(value)
+
+    for item in value:
+        projects[category].append(item)
 
 for path in os.listdir(ROOT_DIR):
     if not os.path.isfile:
         continue
     if path[-3:] == ".md":
         with open(os.path.join(ROOT_DIR, path)) as file:
+            category = ""
+            items: List[str] = []
             for line in file:
                 content = line.strip()
                 if content[0:2] == "# ":
-                    add_to_project("no-category", " {}".format(content[2:].strip()))
-                    break
+                    category = " {}".format(content[2:].strip())
+                if content[0:6] == "- [ ] ":
+                    items.append(" {}".format(content[6:].strip()))
+                if content[0:6] == "- [x] ":
+                    items.append(" {}".format(content[6:].strip()))
+            add_to_project(category, items)
     if path[-9:] == ".list.txt":
         with open(os.path.join(ROOT_DIR, path)) as file:
+            items: List[str] = []
             for line in file:
-                add_to_project(path[:-9], " {}".format(line.strip()))
+                items.append(line.strip())
+            title = path[:-9].replace("-", " ").capitalize()
+            add_to_project(" {}".format(title), items)
 
 for category in sorted(projects.keys()):
     print(category.replace("-", " "))
