@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+tmp="$2"
+echo $1 | sed 's/ /\n/g' | xargs -I{} eval "$2" | per-line-mprocs

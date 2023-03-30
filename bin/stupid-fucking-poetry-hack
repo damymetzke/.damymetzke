@@ -1,0 +1,48 @@
+#! /usr/bin/env bash
+
+# So this is a hack because the poetry tool for python projects is stupid.
+# Put simply, there are 3 ways to manage venvs using poetry:
+#
+# - Use the system poetry pushes (doesn't work well with monorepos)
+# - Install system wide or pipx (stupid idea)
+# - Use .venv (doesn't work well with monorepos?)
+#
+# As you can see, it doesn't work.
+# All I need is for it to install packages in the current activated venv.
+# But it *refuses* to do that.
+#
+# The solution?
+# This terrible hack.
+# Essentially it will do the following:
+#
+# 1. Verify that the CWD has a pyproject.toml.
+# 2. Do one of the following:
+#   2.1. Verify that there is no .venv folder or file.
+#   2.2. Verify that the .venv folder is a symlink, and remove it.
+# 3. Create a symlink from `./.venv` to the currently activated venv.
+#
+# Then I alias poetry, such that it runs this first.
+# And voila, I've allowed myself to reuse a venv using a stupid hack.
+#
+# Real talk I should not have to do this.
+# Standards are there to allow people to work together.
+# This "highly opinionated" crap directly impacts my ability to do things the way I want.
+# Which isn't the end of the world, but it is not required at all.
+# If you are going to do something like this at *least* make it trivial to opt out.
+# I can choose my workflow, but I cannot choose how projects are set up in all cases.
+# I should not have to compromise my workflow depending on how a project is set up.
+
+
+if [ ! -f pyproject.toml ]; then
+  exit 0
+fi
+
+if [ -e .venv ]; then
+  if [ -L .venv ]; then
+    rm .venv
+  else
+    exit 0
+  fi
+fi
+
+ln -s "$VIRTUAL_ENV" .venv

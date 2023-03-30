@@ -1,0 +1,24 @@
+#! /usr/bin/env python
+
+from os import popen, listdir
+from pathlib import Path
+import sys
+
+GIST_CACHE_DIR = f"{Path.home()}/.cache/damymetzke/gist-pull"
+
+result = popen("mkdir ~/.cache/damymetzke -p").read()
+result += popen(f"rm {GIST_CACHE_DIR} -rf").read()
+result += "\n"
+result += popen(f"git clone {sys.argv[1]} {GIST_CACHE_DIR}").read()
+
+for file in listdir(GIST_CACHE_DIR):
+    if file[0] != ".":
+        continue
+
+    if file in [".", "..", ".git"]:
+        continue
+
+    output_dir_name = file[1:].split('.')[0]
+
+    result += popen(f"mv {GIST_CACHE_DIR} ./{output_dir_name}").read()
+    break

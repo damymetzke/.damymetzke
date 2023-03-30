@@ -42,7 +42,13 @@ def parse_markdown_file(file: TextIO) -> Tuple[str, List[str]]:
 def parse_list_file(file_name: str, file: TextIO) -> Tuple[str, List[str]]:
     items: List[str] = []
     for line in file:
-        items.append(" {}".format(line.strip()))
+        content = line.strip()
+        if content[0:4] == "[ ] ":
+            items.append(" {}".format(content[4:]))
+        elif content[0:4] == "[x] ":
+            items.append(" {}".format(content[4:]))
+        else:
+            items.append(" {}".format(content))
     title = file_name[:-9].replace("-", " ").capitalize()
 
     return " {}".format(title), items

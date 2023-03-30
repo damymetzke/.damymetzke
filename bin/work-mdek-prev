@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+nvim "$HOME/repos/maintained/private-data/work/time-mdek/$(date --date="1 month ago" +%Y-%m).csv"

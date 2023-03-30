@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+nvim "$HOME/repos/maintained/private-data/work/time-mdek/$(date +%Y-%m).csv"

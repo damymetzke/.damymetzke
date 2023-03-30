@@ -1,0 +1,83 @@
+#! /usr/bin/env python
+
+import sys
+
+original_lines = [line for line in sys.stdin]
+lines = [line.strip() for line in original_lines]
+
+
+def bad_formatting(message):
+    print(f"<!-- GENERATED ERROR: {message} -->", file=sys.stderr)
+    print("".join(original_lines), end="")
+    exit(1)
+
+
+if len(lines) < 3:
+    bad_formatting(f"Expected at least 3 lines, got {len(lines)}")
+
+for line in lines:
+    if len(line) < 3 or line[0] != "|" or line[-1] != "|":
+        bad_formatting(
+            "Found incorrectly formatted line;\n"
+            + "It should start and end with '|';\n"
+            + "It should be at least 3 characters long;\n"
+            + f"LINE: {line}"
+        )
+
+worded_lines = [lines[0], *lines[2:]]
+separator = lines[1]
+
+separator_parts = [part.strip() for part in separator[1:-1].split("|")]
+separator_edges = []
+
+for part in separator_parts:
+    if len(part) < 3:
+        bad_formatting(3)
+
+    if part[0] not in ["-", ":"] or part[-1] not in ["-", ":"]:
+        bad_formatting(4)
+    if not all(char == "-" for char in part[1:-1]):
+        bad_formatting(5)
+
+    separator_edges.append(part[0] + part[-1])
+
+expected_num = len(separator[1:-1].split("|"))
+column_widths = [5] * expected_num
+
+
+def check_and_normalize_line(line):
+    parts = [part.strip() for part in line[1:-1].split("|")]
+    if len(parts) != expected_num:
+        bad_formatting(6)
+
+    for i in range(len(parts)):
+        column_widths[i] = max(column_widths[i], len(parts[i]) + 2)
+
+    return parts
+
+
+normalized_lines = list(map(check_and_normalize_line, worded_lines))
+
+
+def format_line(line):
+    inner = "|".join(
+        map(
+            lambda part, i: " " + part.ljust(column_widths[i] - 1, " "),
+            line,
+            range(len(line)),
+        )
+    )
+    return f"|{inner}|"
+
+
+formatted_lines = list(map(format_line, normalized_lines))
+
+
+def build_separator(values):
+    width, separator = values
+    return f" {separator[0]}{('-' * (width - 4))}{separator[1]} "
+
+
+print(formatted_lines[0])
+print(f"|{'|'.join(map(build_separator, zip(column_widths, separator_edges)))}|")
+print("\n".join(formatted_lines[1:]))

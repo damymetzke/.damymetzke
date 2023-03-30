@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+for (( i=1; i<= $(tput lines); i++ ))
+do echo ""; done
+
+for i in \
+  'Damy Metzke - 23' \
+  'Java JavaScript Python' \
+  'Cpp C# Rust PHP' \
+  'Cooking BJJ Games Coffee'
+do
+  echo "$i" | block-text | scroll-text .0085
+done
+

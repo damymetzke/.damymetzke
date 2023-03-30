@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+echo "PREVIOUS MONTH"
+
+cat "$HOME/repos/maintained/private-data/work/time-mdek/$(date --date="1 month ago" +%Y-%m).csv" \
+  | sed 's/,/ /g' \
+  | tablep date start end
+
+echo
+echo "CURRENT MONTH"
+
+cat "$HOME/repos/maintained/private-data/work/time-mdek/$(date +%Y-%m).csv" \
+  | sed 's/,/ /g' \
+  | tablep date start end

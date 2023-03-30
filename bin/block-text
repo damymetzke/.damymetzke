@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+figlet -f "ANSI Shadow" -w "$(tput cols)"

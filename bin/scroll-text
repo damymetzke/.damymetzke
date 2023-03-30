@@ -1,0 +1,23 @@
+#! /usr/bin/env python
+
+import time
+import sys
+
+
+def main():
+    text = [line.strip("\n") for line in sys.stdin]
+    max_length = max(len(line) for line in text)
+    text = [line.rjust(max_length) for line in text]
+
+    print(f"\033[{len(text)}S", end="")
+    print(f"\033[{len(text)}A", end="")
+    print("\033[s", end="")
+
+    for i in range(1, max_length + 1):
+        print("\033[u", end="")
+        for line in text:
+            print(line[-i:])
+        time.sleep(float(sys.argv[1]) if len(sys.argv) > 1 else .01)
+
+
+main()
