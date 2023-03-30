@@ -6,5 +6,10 @@
     ff = true
 [init]
     defaultBranch = main
+[commit]
+  gpgsign = true
+[diff]
+  tool = nvimdiff
 [merge]
-    ff = false
+  tool = nvimdiff
+  commit = no
