@@ -2,11 +2,13 @@ git_protocol: ssh
 prompt: enabled
 pager: less
 aliases:
-    me: issue list --assignee=@me
+    me: '!gh-me'
     issue-pretty: '!gh-issue-pretty $1'
-    addme: issue edit $1 --add-assignee=@me
+    gimme: issue edit $1 --add-assignee=@me
+    fkoff: issue edit $1 --remove-assignee=@me
     create-issue-list: '!gh-create-issue-list $1 $2'
     itopr: '!gh-itopr $1'
     parse-multiple-issues: '!gh-parse-multiple-issues'
     starred-web: '!gh-starred-web'
     assigned: '!gh-assigned'
+    pull-gist: '!gh-pull-gist "$@"'
