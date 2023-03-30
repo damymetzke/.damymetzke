@@ -3,3 +3,4 @@ vim.wo.colorcolumn = "120"
 
 -- Setup java language server
 require'share.jdtls'()
+require'lint'.try_lint()

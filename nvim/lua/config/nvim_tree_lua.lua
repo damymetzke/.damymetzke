@@ -4,6 +4,7 @@ return function()
   require("nvim-tree").setup({
     sort_by = "case_sensitive",
     view = {
+      side = "right",
       float = {
         enable = true,
       },

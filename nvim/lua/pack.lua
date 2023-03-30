@@ -184,6 +184,24 @@ return require('packer').startup(function()
     config = require'config.leap_nvim',
   }
 
+  -- Which key
+--  use {
+--    "folke/which-key.nvim",
+--    config = function()
+--      require("which-key").setup {
+--        -- your configuration comes here
+--        -- or leave it empty to use the default settings
+--        -- refer to the configuration section below
+--      }
+--    end
+--  }
+
+  -- Ale, primarily need this for Java development
+  use {
+    "dense-analysis/ale",
+    config = require'config.ale',
+  }
+
   -- Finish bootstrap
   if packer_bootstrap then
     require('packer').sync()

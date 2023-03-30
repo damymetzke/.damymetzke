@@ -97,6 +97,9 @@ vim.o.spelllang = "en_us"
 -- Hidden files in NERDTree
 vim.api.nvim_set_var("NERDTreeShowHidden", 1)
 
+-- Disable keybind timeout
+vim.o.timeout = false
+
 -- Reset spelling when new buffer is opened
 vim.api.nvim_create_augroup("spell_set", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
