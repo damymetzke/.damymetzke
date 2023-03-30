@@ -11,3 +11,6 @@ printf "good $(part-of-day) Damy" | figlet -f "ANSI Shadow" -w 120 | xargs -0 -I
 cd $(cat ~/.local/share/damymetzke/stored)
 
 source /usr/share/nvm/init-nvm.sh
+
+# Setup jenv
+eval "$(jenv init -)"

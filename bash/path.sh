@@ -18,3 +18,6 @@ export PATH="$PATH:/snap/bin:/home/dmetzke/.cargo/bin:/home/dmetzke/go/bin"
 
 # Include this bin directory
 export PATH="$PATH:$CUSTOM_USER_CONFIG/bin"
+
+# Include jenv
+export PATH="$HOME/.jenv/bin:$PATH"

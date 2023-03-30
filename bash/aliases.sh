@@ -15,6 +15,7 @@ alias sail='./vendor/bin/sail'
 alias nv='nvim'
 alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
 alias store='echo $(pwd) > ~/.local/share/damymetzke/stored'
+alias poetry='stupid-fucking-poetry-hack && poetry'
 
 gtspad() {
   pushd "$(spad-dir)"
@@ -22,10 +23,6 @@ gtspad() {
 
 # Automatically fix typos
 eval "$(thefuck --alias)"
-
-rep() {
-  cd $(repo -otext path $@)
-}
 
 custom_venv_prompt() {
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
