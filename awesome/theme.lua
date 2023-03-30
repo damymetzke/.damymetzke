@@ -125,7 +125,7 @@ local wallpaper_alt_fg = xrdb.color12
 if not is_dark_bg then
     wallpaper_bg, wallpaper_fg = wallpaper_fg, wallpaper_bg
 end
-theme.wallpaper = os.getenv("HOME") .. "/.local/share/damymetzke/wallpaper.png"
+theme.wallpaper = os.getenv("HOME") .. "/.local/share/damymetzke/wallpaper.jpg"
 --theme.wallpaper = function(s)
 --    return theme_assets.wallpaper(wallpaper_bg, wallpaper_fg, wallpaper_alt_fg, s)
 --end

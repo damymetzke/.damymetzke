@@ -135,8 +135,18 @@ local runKeys = gears.table.join(
 
     -- Run prompt
     awful.key({ MOD_PRIMARY }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = RUN_NAME})
+              {description = "run prompt", group = RUN_NAME}),
+
+    -- Run `grass cs`
+    awful.key({ MOD_PRIMARY }, "s", function ()
+        awful.spawn("alacritty -e grass cs", {
+          floating = true,
+          placement = awful.placement.centered
+          })
+      end,
+      {description = "Select a repository and create a session", group = RUN_NAME})
     )
+
 
 local layoutKeys = gears.table.join(
     -- Focus left

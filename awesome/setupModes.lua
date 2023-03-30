@@ -138,7 +138,7 @@ function setupModes.run()
             layout = awful.layout.suit.tile,
             gap = 8,
         })
-    result:addGlobalTag("Discord", "d", {
+    result:addGlobalTag("Dashboard", "d", {
             layout = awful.layout.suit.tile,
             gap = 8,
         })
