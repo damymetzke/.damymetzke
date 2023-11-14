@@ -9,5 +9,6 @@
 # Due to this cost the cache has been set to 1 minute.
 cat \
   <(cache-data 60 data-notifications-gh) \
+  <(cache-data 60 data-items-todoist) \
   | sort
 

@@ -66,6 +66,9 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod1"
 
+-- Start albert
+awful.spawn("albert")
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -156,13 +159,17 @@ notifications_widget_timer = timer({timeout = 3})
 notifications_widget_timer:connect_signal(
   "timeout",
   function()
-    fnotifications = assert(io.popen('bash -c "cache-data 300 data-notifications | wc -l"', "r"))
-    local notifications = fnotifications:read("*a"):gsub('\n', '')
-    if notifications == "1" then
-      notifications_widget:set_text("[1 notification]")
-    else
-      notifications_widget:set_text("[" .. notifications .. " notifications]")
-    end
+    -- TODO: Implement this asynchonously
+    -- Currently this will freeze the desktop if retrieval takes too long
+
+    -- fnotifications = assert(io.popen('bash -c "cache-data 300 data-notifications | wc -l"', "r"))
+    -- local notifications = fnotifications:read("*a"):gsub('\n', '')
+    -- if notifications == "1" then
+    --   notifications_widget:set_text("[1 notification]")
+    -- else
+    --   notifications_widget:set_text("[" .. notifications .. " notifications]")
+    -- end
+    notifications_widget:set_text("[Is broke]")
     fnotifications:close()
   end
 )
@@ -239,7 +246,7 @@ pomo_widget_timer:start()
 pomo_widget_fast_timer:start()
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %a %b %d ├───┤ %I:%M %p")
+mytextclock = wibox.widget.textclock(" %a w%V | %Y-%m-%d | %H:%M")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -329,7 +336,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s, height = 23 })
+    s.mywibox = awful.wibar({ position = "bottom", screen = s, height = 30 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {

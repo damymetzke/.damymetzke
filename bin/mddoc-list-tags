@@ -1,0 +1,28 @@
+#! /usr/bin/env python
+
+import sys
+import yaml
+
+files = sys.argv[1:]
+
+results = []
+
+for file_path in files:
+    try:
+        with open(file_path) as file:
+            results.append((file_path, next(yaml.safe_load_all(file))))
+    except:
+        pass
+
+for file, content in results:
+    if not isinstance(content, dict) or "tags" not in content:
+        continue
+
+    tags = content["tags"]
+
+    if not isinstance(tags, list) or len(tags) == 0:
+        continue
+
+    joined_tags = "+".join(tags)
+
+    print(f"{file} {joined_tags}")

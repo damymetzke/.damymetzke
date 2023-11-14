@@ -16,14 +16,15 @@ local theme = dofile(themes_path.."default/theme.lua")
 
 theme.font          = "Input Sans 10"
 
-theme.bg_normal     = "#1e3a8a"
-theme.bg_focus      = "#1d4ed8"
-theme.bg_urgent     = "#f97316"
+theme.bg_normal     = "#31363b"
+theme.bg_focus      = "#3daee9"
+theme.bg_urgent     = "#f67400"
+
 theme.bg_minimize   = xrdb.color8
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#ffffff"
-theme.fg_focus      = "#fed7aa"
+theme.fg_normal     = "#eff0f1"
+theme.fg_focus      = "#eff0f1"
 theme.fg_urgent     = "#000000"
 theme.fg_minimize   = theme.bg_normal
 
@@ -51,7 +52,7 @@ theme.tooltip_bg = theme.bg_normal
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = themes_path.."default/submenu.png"
-theme.menu_height = dpi(16)
+theme.menu_height = dpi(30)
 theme.menu_width  = dpi(100)
 
 -- You can add as many variables as

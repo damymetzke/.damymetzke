@@ -18,3 +18,11 @@ vim.api.nvim_create_user_command(
   end,
   { nargs = 0 }
 )
+
+vim.api.nvim_create_user_command(
+  "PyRun",
+  function(opts)
+    vim.api.nvim_command(string.format(':!python -c "exec(open(\'%%\').read()); %s()"', opts.fargs[1]))
+  end,
+  { nargs = 1 }
+)

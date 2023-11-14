@@ -127,5 +127,24 @@ return function()
         }
       )
     ),
+    -- Create quick test block
+    snippet(
+      "test",
+      fmt(
+        [[
+          #[cfg(test)]
+          mod test {{
+              #[test]
+              fn test_{}() {{
+                  {}
+              }}
+          }}
+        ]],
+        {
+          i(1),
+          i(0),
+        }
+      )
+    )
   })
 end

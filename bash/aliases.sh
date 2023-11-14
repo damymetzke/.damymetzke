@@ -15,7 +15,8 @@ alias sail='./vendor/bin/sail'
 alias nv='nvim'
 alias spawnT='NO_DEFAULT_SSH=1 alacritty &'
 alias store='echo $(pwd) > ~/.local/share/damymetzke/stored'
-alias poetry='stupid-fucking-poetry-hack && poetry'
+# alias poetry='stupid-fucking-poetry-hack && poetry'
+alias bunx='bun x'
 
 gtspad() {
   pushd "$(spad-dir)"

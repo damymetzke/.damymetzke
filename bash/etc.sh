@@ -14,3 +14,14 @@ source /usr/share/nvm/init-nvm.sh
 
 # Setup jenv
 eval "$(jenv init -)"
+
+# Setup pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Setup opam
+eval $(opam env)
+
+# Enable globstar
+shopt -s globstar

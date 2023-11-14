@@ -1,0 +1,13 @@
+#! /usr/bin/env python
+
+import base64
+import sys
+
+def map_part(part):
+    return base64.b64encode(part.encode("utf-8")).decode("utf-8")
+
+def map_line(line):
+    parts = line.rstrip("\n").split(",")
+    return " ".join(map(map_part, parts))
+
+print("\n".join(map(map_line, sys.stdin)))

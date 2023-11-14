@@ -20,6 +20,12 @@ return require('packer').startup(function()
     config = require'config.nvim_lspconfig',
   }
 
+  -- Rust tools
+  use {
+    'simrat39/rust-tools.nvim',
+    config = require'config.rust_tools_nvim',
+  }
+
   -- File explorer
 --  use {
 --    'scrooloose/NERDTree',

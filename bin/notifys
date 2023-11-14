@@ -1,4 +1,6 @@
 #! /usr/bin/env bash
 
 output=$(cache-data 1 data-notifications)
-printf '%s' "$output" | awk '{print $3 $2 " " $1 " " $5 " " $4 }' | tablep type date:timeago title:b64 url:pad
+type=$(printf "$output" | awk '{print $3 " " $2}' | sed 's/.*/echo "&" | base64/e')
+combined=$(awk 'BEGIN { FS=OFS="\t" } NR==FNR { a[NR]=$1; next } { print a[FNR],$0 }' <(echo "$type") <(echo "$output"))
+printf "$combined" | awk '{print $1 " " $2 " " $6 " " $5 }' | tablep type:b64 date:timeago title:b64 url:pad

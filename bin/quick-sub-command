@@ -1,0 +1,40 @@
+#! /usr/bin/env python
+
+import sys
+import os
+import subprocess
+
+if len(sys.argv) < 2:
+    print("Usage: quick-sub-command [command] ...", file=sys.stderr)
+    exit(1)
+
+command = sys.argv[1]
+
+if len(sys.argv) == 3:
+    subprocess.run([f"{command}-{sys.argv[2]}"])
+    exit(0)
+
+if len(sys.argv) > 3:
+    subprocess.run([f"{command}-{sys.argv[2]}", *sys.argv[3:]])
+    exit(0)
+
+path_env = os.getenv("PATH")
+if path_env is None:
+    print("Problem retrieving PATH", file=sys.stderr)
+    exit(2)
+
+path_dirs = path_env.split(os.pathsep)
+
+result = set()
+
+for path_dir in path_dirs:
+    try:
+        files = os.listdir(path_dir)
+        for file in files:
+            if file.startswith(f"{command}-"):
+                result.add(file)
+    except:
+        pass
+
+print(f"Usage: {command} [subcommand]\n\nsubcommands:", file=sys.stderr)
+print("\n".join(sorted(result)), file=sys.stderr)

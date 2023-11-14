@@ -43,7 +43,7 @@ commentItalic.italic = 1;
 vim.api.nvim_set_hl(0, "Comment", commentItalic)
 
 -- term gui colors
-vim.o.termguicolors = 1
+vim.o.termguicolors = true
 
 -- Indentation
 vim.o.tabstop = 2

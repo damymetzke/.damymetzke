@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+cache-data 300 todoist-cli s
+todoist --csv l --filter '(overdue | today)' |\
+  sed -r 's/\x1B\[(;?[0-9]{1,3})+[mGK]//g' |\
+  csv2b64 |\
+  awk '{print $3 " todoist 󰄱 " $1 " " $5}' |\
+  todoist-notify-filter

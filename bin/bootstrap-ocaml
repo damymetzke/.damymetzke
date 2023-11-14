@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <ocaml_script.ml>"
+  exit 1
+fi
+
+eval "$(opam env)"
+export OCAMLPATH="$(opam config var lib)/jojson"
+
+ocaml "$1"

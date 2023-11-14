@@ -2,11 +2,13 @@
 
 import os
 
-os.popen("git -C ~/repos/general/crates.io-index/ pull").read()
+# os.popen("git -C ~/repos/general/crates.io-index/ pull").read()
+os.popen("git -C ~/repos/general/crates.io-index/ fetch").read()
+os.popen("git -C ~/repos/general/crates.io-index/ reset --hard origin/master").read()
 
 current_packages = str(os.popen("cargo get-package-versions").read()).splitlines()
 
-result = [];
+result = []
 for package in current_packages:
     [name, specified, version] = package.split(" ")
     latest = os.popen("cargo get-latest-package-version " + name).read()

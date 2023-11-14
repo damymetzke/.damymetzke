@@ -2,7 +2,7 @@
     ### Logging
     # Simple graph log using 1 line
     lg = log --oneline \
-        --format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d\""
+        --format="\"format:%C(#ff9500)%G? %C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d\""
     graph = log --graph --oneline \
         --format="\"format:%C(#d596f3)%h %C(ul #fa4762)%aN%C(reset) %C(#dbffe8)%s%C(auto)%d\""
     # Advanced log with more information but uses more lines

@@ -134,10 +134,6 @@ function setupModes.run()
     result:addMode(presentationMode)
     result:addMode(documentMode)
 
-    result:addGlobalTag("Slack", "s", {
-            layout = awful.layout.suit.tile,
-            gap = 8,
-        })
     result:addGlobalTag("Dashboard", "d", {
             layout = awful.layout.suit.tile,
             gap = 8,
@@ -163,6 +159,18 @@ function setupModes.run()
             gap = 8,
         })
     result:addGlobalTag("Whatsapp", "w", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("To-Do", "t", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Social", "s", {
+            layout = awful.layout.suit.tile,
+            gap = 8,
+        })
+    result:addGlobalTag("Github", "g", {
             layout = awful.layout.suit.tile,
             gap = 8,
         })

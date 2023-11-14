@@ -3,12 +3,17 @@
 for (( i=1; i<= $(tput lines); i++ ))
 do echo ""; done
 
+printf "\033[1;36m"
+
 for i in \
   'Damy Metzke - 23' \
-  'Java JavaScript Python' \
-  'Cpp C# Rust PHP' \
-  'Cooking BJJ Games Coffee'
+  'Programming Languages:' \
+  '  Java JavaScript Python' \
+  '  Cpp C# Rust PHP' \
+  'Hobbies:' \
+  '  Cooking BJJ Games Coffee'
 do
   echo "$i" | block-text | scroll-text .0085
 done
 
+printf "\033[0m"

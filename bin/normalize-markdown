@@ -1,0 +1,130 @@
+#! /usr/bin/env python
+
+import sys
+from typing import Iterable, TextIO, Tuple
+
+WIDTH = 100
+
+
+def extract_paragraphs(input: TextIO) -> Iterable[str]:
+    memory = ""
+    previous = ""
+
+    while char := input.read(1):
+        if memory == "":
+            if char in [" ", "\t", "\r", "\n"]:
+                continue
+            memory += char
+            previous = char
+            continue
+
+        if previous == "\n" and char == "\n":
+            yield memory
+            memory = ""
+            previous = char
+            continue
+
+        previous = char
+        memory = memory + char
+
+    if memory != "":
+        if memory[-1] != "\n":
+            memory += "\n"
+        yield memory
+
+def automatic_lines(input: Iterable[str], width: int) -> Iterable[str]:
+    memory = ""
+    for word in input:
+        if len(memory) + len(word) >= width:
+            if memory == "":
+                yield word
+                continue
+            yield memory
+            memory = word
+            continue
+        memory = f"{memory} {word}"
+
+    if memory != "":
+        yield memory
+
+def iter_words(input: str) -> Iterable[str]:
+    return (word for word in input.split())
+
+def bullet_lines(input: str) -> Iterable[str]:
+    memory = ""
+    for line in input.split("\n"):
+        if line.startswith("- ") and memory != "":
+            yield memory
+            memory = line[2:]
+            continue
+
+        if line.startswith("- "):
+            memory = line[2:]
+            continue
+
+        memory += line
+
+    if memory != "":
+        yield memory
+
+def get_ordered_start(input: str) -> Tuple[bool, str]:
+    values = input.split(" ", 1)
+    if len(values) == 1:
+        return False, input
+
+    first_word, rest = values
+    if len(first_word) > 0 and first_word[-1] == "." and first_word[:-1].isdigit():
+        return True, rest
+
+    return False, input
+
+
+def ordered_lines(input: str) -> Iterable[str]:
+    memory = ""
+    for line in input.split("\n"):
+        is_new, content = get_ordered_start(line)
+
+        if is_new and memory != "":
+            yield memory
+            memory = content
+            continue
+
+        if is_new:
+            memory = content
+            continue
+
+        memory += content
+
+    if memory != "":
+        yield memory
+
+
+
+def output_paragraphs(input: Iterable[str]):
+    for paragraph in input:
+        if any(paragraph.startswith("#" * (i + 1) + " ") for i in range(6)):
+            words = iter_words(paragraph)
+            yield " ".join(words) + "\n"
+            continue
+
+        if paragraph.startswith("- "):
+            bullets = bullet_lines(paragraph)
+            formatted_bullets = ("-" + "\n  ".join(automatic_lines(iter_words(bullet), WIDTH - 2)) for bullet in bullets)
+            yield "\n".join(formatted_bullets) + "\n"
+            continue
+
+        first_word = paragraph.split(" ", maxsplit=1)[0]
+        if len(first_word) > 0 and first_word[-1] == "." and first_word[:-1].isdigit():
+            number = first_word[:-1]
+            ordered = ordered_lines(paragraph)
+            joined = (("\n  " + " " * len(number)).join(automatic_lines(iter_words(order), WIDTH - 2 - len(number))) for order in ordered)
+            formatted_ordered = (f"{number}.{join}" for join in joined)
+            yield "\n".join(formatted_ordered) + "\n"
+            continue
+
+
+        words = iter_words(paragraph)
+        wrapped = "\n".join(automatic_lines(words, WIDTH))
+        yield f"{wrapped[1:]}\n"
+
+print("\n".join(output_paragraphs(extract_paragraphs(sys.stdin))), end="")

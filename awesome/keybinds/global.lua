@@ -107,9 +107,11 @@ awful.popup {
     )
 
 local runKeys = gears.table.join(
-    -- Menu Bar
-    awful.key({ MOD_PRIMARY }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = RUN_NAME}),
+    -- Program select
+  --awful.key({ MOD_PRIMARY }, "p", function() menubar.show() end,
+  --          {description = "show the menubar", group = RUN_NAME}),
+    awful.key({ MOD_PRIMARY }, "p", function () awful.spawn("albert toggle") end,
+              {description = "open a tmux session in a new terminal", group = RUN_NAME}),
 
     -- Execute lua
     awful.key({ MOD_PRIMARY }, "x",

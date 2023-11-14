@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+cache-data 60 todoist-cli s
+todoist-cli "$@"

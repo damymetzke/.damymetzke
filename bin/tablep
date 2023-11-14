@@ -10,6 +10,9 @@
 # Columns can have modifiers, these will be separated by ':'.
 # E.g. the argument `title:b64`, has the header `title`, with the `b64` modifier.
 #
+# Example usage:
+# my-command-with-3-columns | tablep id title:b64 url:pad
+#
 # Valid modifiers:
 # b64: The input is base64 encoded, this modifier will decode it.
 # pad: Add a single space before and after each value.
@@ -79,6 +82,8 @@ for i, width in enumerate(columnWidths):
     for j, row in enumerate(columnRows[i]):
         if "center" in actions[i]:
             columnRows[i][j] = row.center(width, " ")
+        elif "right" in actions[i]:
+            columnRows[i][j] = row.rjust(width, " ")
         else:
             columnRows[i][j] = row.ljust(width, " ")
 

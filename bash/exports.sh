@@ -12,3 +12,6 @@ export BROWSER="flatpak run com.brave.Browser"
 # Even when I'm doing somthing that does not require a keyring
 # I'm not using KDE wallet, and I'm not intending to just do add dependencies.
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+
+# Standard directories
+export XDG_PRIVATE_DIR="$HOME/repos/maintained/private-data"

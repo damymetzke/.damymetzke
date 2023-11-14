@@ -37,21 +37,6 @@ return function()
     on_attach = on_attach,
   }
 
-  lspc.rust_analyzer.setup{
-    on_attach = on_attach,
-    settings = {
-      ["rust-analyzer"] = {
-        checkOnSave = {
-          command = "clippy",
-          features = "all",
-        },
-        diagnostics = {
-          disabled = {"inactive-code"},
-        },
-      }
-    }
-  }
-
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -77,6 +62,10 @@ return function()
   }
 
   lspc.taplo.setup{
+    on_attach = on_attach,
+  }
+
+  lspc.gdscript.setup{
     on_attach = on_attach,
   }
 

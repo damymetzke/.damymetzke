@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+commands=
+
+# printf "cargo watch -s \"bash -c 'clear; cargo clippy'\"
+# cargo watch -s \"bash -c 'clear; cargo doc'\"
+# cargo watch -s \"bash -c 'clear; cargo test'\"" | per-line-mprocs
+
+
+BROWSER=chromium cargo doc --open >/dev/null 2>/dev/null &
+printf "bacon clippy\nbacon doc\nbacon test" | per-line-mprocs
